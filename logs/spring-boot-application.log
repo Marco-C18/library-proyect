@@ -1,0 +1,153 @@
+2025-09-24 18:31:01.440  INFO 24160 --- [restartedMain] c.l.l.LibraryProyectApplication          : Starting LibraryProyectApplication using Java 17.0.1 on DESKTOP-B39S0JJ with PID 24160 (E:\ArchivosRecuperacion_Part2\CERTUS\SEXTO_CICLO\ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION\library-proyect\target\classes started by HOME in E:\ArchivosRecuperacion_Part2\CERTUS\SEXTO_CICLO\ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION\library-proyect)
+2025-09-24 18:31:01.441 DEBUG 24160 --- [restartedMain] c.l.l.LibraryProyectApplication          : Running with Spring Boot v2.6.3, Spring v5.3.15
+2025-09-24 18:31:01.442  INFO 24160 --- [restartedMain] c.l.l.LibraryProyectApplication          : No active profile set, falling back to default profiles: default
+2025-09-24 18:31:01.449 DEBUG 24160 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.library.library_proyect.LibraryProyectApplication
+2025-09-24 18:31:01.478 DEBUG 24160 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : Matching URLs for reloading : [file:/E:/ArchivosRecuperacion_Part2/CERTUS/SEXTO_CICLO/ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION/library-proyect/target/classes/]
+2025-09-24 18:31:01.479 DEBUG 24160 --- [restartedMain] o.s.b.d.settings.DevToolsSettings        : Included patterns for restart : []
+2025-09-24 18:31:01.479 DEBUG 24160 --- [restartedMain] o.s.b.d.settings.DevToolsSettings        : Excluded patterns for restart : [/spring-boot-starter-[\w-]+/, /spring-boot/(bin|build|out)/, /spring-boot-starter/(bin|build|out)/, /spring-boot-devtools/(bin|build|out)/, /spring-boot-actuator/(bin|build|out)/, /spring-boot-autoconfigure/(bin|build|out)/]
+2025-09-24 18:31:01.479  INFO 24160 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-24 18:31:01.479  INFO 24160 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-24 18:31:01.479 DEBUG 24160 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@8d6309b
+2025-09-24 18:31:01.492 DEBUG 24160 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
+2025-09-24 18:31:01.499 DEBUG 24160 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory'
+2025-09-24 18:31:01.538 DEBUG 24160 --- [restartedMain] o.s.c.a.ClassPathBeanDefinitionScanner   : Identified candidate component class: file [E:\ArchivosRecuperacion_Part2\CERTUS\SEXTO_CICLO\ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION\library-proyect\target\classes\com\library\library_proyect\controller\CatalogoController.class]
+2025-09-24 18:31:01.539 DEBUG 24160 --- [restartedMain] o.s.c.a.ClassPathBeanDefinitionScanner   : Identified candidate component class: file [E:\ArchivosRecuperacion_Part2\CERTUS\SEXTO_CICLO\ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION\library-proyect\target\classes\com\library\library_proyect\controller\HomeController.class]
+2025-09-24 18:31:01.798  INFO 24160 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-24 18:31:01.804 DEBUG 24160 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.AutoConfigurationPackages'
+2025-09-24 18:31:01.804 DEBUG 24160 --- [restartedMain] o.s.b.a.AutoConfigurationPackages        : @EnableAutoConfiguration was declared on a class in the package 'com.library.library_proyect'. Automatic @Repository and @Entity scanning is enabled.
+2025-09-24 18:31:01.805 DEBUG 24160 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Scanning for JPA repositories in packages com.library.library_proyect.
+2025-09-24 18:31:01.809  INFO 24160 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 0 JPA repository interfaces.
+2025-09-24 18:31:01.890 DEBUG 24160 --- [restartedMain] o.s.c.a.ConfigurationClassUtils          : Failed to introspect @Bean methods on class [org.springframework.data.jpa.repository.support.DefaultJpaContext]: java.lang.IllegalStateException: Failed to introspect annotated methods on class org.springframework.data.jpa.repository.support.DefaultJpaContext
+2025-09-24 18:31:01.929 DEBUG 24160 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'propertySourcesPlaceholderConfigurer'
+2025-09-24 18:31:01.933 DEBUG 24160 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'emBeanDefinitionRegistrarPostProcessor'
+2025-09-24 18:31:01.933 DEBUG 24160 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.boot.sql.init.dependency.DatabaseInitializationDependencyConfigurer$DependsOnDatabaseInitializationPostProcessor'
+2025-09-24 18:31:01.947 ERROR 24160 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.NoClassDefFoundError: javax/persistence/EntityManagerFactory
+	at org.springframework.data.jpa.util.BeanDefinitionUtils.<clinit>(BeanDefinitionUtils.java:57) ~[spring-data-jpa-2.6.1.jar:2.6.1]
+	at org.springframework.data.jpa.repository.support.EntityManagerBeanDefinitionRegistrarPostProcessor.postProcessBeanFactory(EntityManagerBeanDefinitionRegistrarPostProcessor.java:72) ~[spring-data-jpa-2.6.1.jar:2.6.1]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:325) ~[spring-context-5.3.15.jar:5.3.15]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:191) ~[spring-context-5.3.15.jar:5.3.15]
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:746) ~[spring-context-5.3.15.jar:5.3.15]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:564) ~[spring-context-5.3.15.jar:5.3.15]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:414) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:302) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292) ~[spring-boot-2.6.3.jar:2.6.3]
+	at com.library.library_proyect.LibraryProyectApplication.main(LibraryProyectApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.6.3.jar:2.6.3]
+Caused by: java.lang.ClassNotFoundException: javax.persistence.EntityManagerFactory
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520) ~[na:na]
+	... 18 common frames omitted
+
+2025-09-24 18:31:01.949 DEBUG 24160 --- [restartedMain] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@8d6309b, started on Wed Sep 24 18:31:01 PET 2025
+2025-09-24 18:34:38.033  INFO 27708 --- [restartedMain] c.l.l.LibraryProyectApplication          : Starting LibraryProyectApplication using Java 17.0.1 on DESKTOP-B39S0JJ with PID 27708 (E:\ArchivosRecuperacion_Part2\CERTUS\SEXTO_CICLO\ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION\library-proyect\target\classes started by HOME in E:\ArchivosRecuperacion_Part2\CERTUS\SEXTO_CICLO\ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION\library-proyect)
+2025-09-24 18:34:38.033 DEBUG 27708 --- [restartedMain] c.l.l.LibraryProyectApplication          : Running with Spring Boot v2.6.3, Spring v5.3.15
+2025-09-24 18:34:38.034  INFO 27708 --- [restartedMain] c.l.l.LibraryProyectApplication          : No active profile set, falling back to default profiles: default
+2025-09-24 18:34:38.034 DEBUG 27708 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.library.library_proyect.LibraryProyectApplication
+2025-09-24 18:34:38.062 DEBUG 27708 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : Matching URLs for reloading : [file:/E:/ArchivosRecuperacion_Part2/CERTUS/SEXTO_CICLO/ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION/library-proyect/target/classes/]
+2025-09-24 18:34:38.062 DEBUG 27708 --- [restartedMain] o.s.b.d.settings.DevToolsSettings        : Included patterns for restart : []
+2025-09-24 18:34:38.062 DEBUG 27708 --- [restartedMain] o.s.b.d.settings.DevToolsSettings        : Excluded patterns for restart : [/spring-boot-starter-[\w-]+/, /spring-boot/(bin|build|out)/, /spring-boot-starter/(bin|build|out)/, /spring-boot-devtools/(bin|build|out)/, /spring-boot-actuator/(bin|build|out)/, /spring-boot-autoconfigure/(bin|build|out)/]
+2025-09-24 18:34:38.063  INFO 27708 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-24 18:34:38.063  INFO 27708 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-24 18:34:38.063 DEBUG 27708 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1e115a4e
+2025-09-24 18:34:38.075 DEBUG 27708 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
+2025-09-24 18:34:38.083 DEBUG 27708 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory'
+2025-09-24 18:34:38.120 DEBUG 27708 --- [restartedMain] o.s.c.a.ClassPathBeanDefinitionScanner   : Identified candidate component class: file [E:\ArchivosRecuperacion_Part2\CERTUS\SEXTO_CICLO\ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION\library-proyect\target\classes\com\library\library_proyect\controller\CatalogoController.class]
+2025-09-24 18:34:38.121 DEBUG 27708 --- [restartedMain] o.s.c.a.ClassPathBeanDefinitionScanner   : Identified candidate component class: file [E:\ArchivosRecuperacion_Part2\CERTUS\SEXTO_CICLO\ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION\library-proyect\target\classes\com\library\library_proyect\controller\HomeController.class]
+2025-09-24 18:34:38.373  INFO 27708 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-24 18:34:38.379 DEBUG 27708 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.AutoConfigurationPackages'
+2025-09-24 18:34:38.379 DEBUG 27708 --- [restartedMain] o.s.b.a.AutoConfigurationPackages        : @EnableAutoConfiguration was declared on a class in the package 'com.library.library_proyect'. Automatic @Repository and @Entity scanning is enabled.
+2025-09-24 18:34:38.380 DEBUG 27708 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Scanning for JPA repositories in packages com.library.library_proyect.
+2025-09-24 18:34:38.384  INFO 27708 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 0 JPA repository interfaces.
+2025-09-24 18:34:38.457 DEBUG 27708 --- [restartedMain] o.s.c.a.ConfigurationClassUtils          : Failed to introspect @Bean methods on class [org.springframework.data.jpa.repository.support.DefaultJpaContext]: java.lang.IllegalStateException: Failed to introspect annotated methods on class org.springframework.data.jpa.repository.support.DefaultJpaContext
+2025-09-24 18:34:38.498 DEBUG 27708 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'propertySourcesPlaceholderConfigurer'
+2025-09-24 18:34:38.502 DEBUG 27708 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'emBeanDefinitionRegistrarPostProcessor'
+2025-09-24 18:34:38.502 DEBUG 27708 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.boot.sql.init.dependency.DatabaseInitializationDependencyConfigurer$DependsOnDatabaseInitializationPostProcessor'
+2025-09-24 18:34:38.515 ERROR 27708 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.NoClassDefFoundError: javax/persistence/EntityManagerFactory
+	at org.springframework.data.jpa.util.BeanDefinitionUtils.<clinit>(BeanDefinitionUtils.java:57) ~[spring-data-jpa-2.6.1.jar:2.6.1]
+	at org.springframework.data.jpa.repository.support.EntityManagerBeanDefinitionRegistrarPostProcessor.postProcessBeanFactory(EntityManagerBeanDefinitionRegistrarPostProcessor.java:72) ~[spring-data-jpa-2.6.1.jar:2.6.1]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:325) ~[spring-context-5.3.15.jar:5.3.15]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:191) ~[spring-context-5.3.15.jar:5.3.15]
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:746) ~[spring-context-5.3.15.jar:5.3.15]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:564) ~[spring-context-5.3.15.jar:5.3.15]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:414) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:302) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292) ~[spring-boot-2.6.3.jar:2.6.3]
+	at com.library.library_proyect.LibraryProyectApplication.main(LibraryProyectApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.6.3.jar:2.6.3]
+Caused by: java.lang.ClassNotFoundException: javax.persistence.EntityManagerFactory
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520) ~[na:na]
+	... 18 common frames omitted
+
+2025-09-24 18:34:38.516 DEBUG 27708 --- [restartedMain] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1e115a4e, started on Wed Sep 24 18:34:38 PET 2025
+2025-09-24 18:34:52.914  INFO 9828 --- [restartedMain] c.l.l.LibraryProyectApplication          : Starting LibraryProyectApplication using Java 17.0.1 on DESKTOP-B39S0JJ with PID 9828 (E:\ArchivosRecuperacion_Part2\CERTUS\SEXTO_CICLO\ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION\library-proyect\target\classes started by HOME in E:\ArchivosRecuperacion_Part2\CERTUS\SEXTO_CICLO\ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION\library-proyect)
+2025-09-24 18:34:52.915 DEBUG 9828 --- [restartedMain] c.l.l.LibraryProyectApplication          : Running with Spring Boot v2.6.3, Spring v5.3.15
+2025-09-24 18:34:52.915  INFO 9828 --- [restartedMain] c.l.l.LibraryProyectApplication          : No active profile set, falling back to default profiles: default
+2025-09-24 18:34:52.915 DEBUG 9828 --- [restartedMain] o.s.boot.SpringApplication               : Loading source class com.library.library_proyect.LibraryProyectApplication
+2025-09-24 18:34:52.946 DEBUG 9828 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : Matching URLs for reloading : [file:/E:/ArchivosRecuperacion_Part2/CERTUS/SEXTO_CICLO/ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION/library-proyect/target/classes/]
+2025-09-24 18:34:52.946 DEBUG 9828 --- [restartedMain] o.s.b.d.settings.DevToolsSettings        : Included patterns for restart : []
+2025-09-24 18:34:52.946 DEBUG 9828 --- [restartedMain] o.s.b.d.settings.DevToolsSettings        : Excluded patterns for restart : [/spring-boot-starter-[\w-]+/, /spring-boot/(bin|build|out)/, /spring-boot-starter/(bin|build|out)/, /spring-boot-devtools/(bin|build|out)/, /spring-boot-actuator/(bin|build|out)/, /spring-boot-autoconfigure/(bin|build|out)/]
+2025-09-24 18:34:52.946  INFO 9828 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-24 18:34:52.946  INFO 9828 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-24 18:34:52.947 DEBUG 9828 --- [restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6cd73475
+2025-09-24 18:34:52.960 DEBUG 9828 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
+2025-09-24 18:34:52.969 DEBUG 9828 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory'
+2025-09-24 18:34:53.010 DEBUG 9828 --- [restartedMain] o.s.c.a.ClassPathBeanDefinitionScanner   : Identified candidate component class: file [E:\ArchivosRecuperacion_Part2\CERTUS\SEXTO_CICLO\ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION\library-proyect\target\classes\com\library\library_proyect\controller\CatalogoController.class]
+2025-09-24 18:34:53.010 DEBUG 9828 --- [restartedMain] o.s.c.a.ClassPathBeanDefinitionScanner   : Identified candidate component class: file [E:\ArchivosRecuperacion_Part2\CERTUS\SEXTO_CICLO\ARQUITECTURA_TECNOLOGIAS_DE_INFORMACION\library-proyect\target\classes\com\library\library_proyect\controller\HomeController.class]
+2025-09-24 18:34:53.257  INFO 9828 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-24 18:34:53.262 DEBUG 9828 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.AutoConfigurationPackages'
+2025-09-24 18:34:53.262 DEBUG 9828 --- [restartedMain] o.s.b.a.AutoConfigurationPackages        : @EnableAutoConfiguration was declared on a class in the package 'com.library.library_proyect'. Automatic @Repository and @Entity scanning is enabled.
+2025-09-24 18:34:53.264 DEBUG 9828 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Scanning for JPA repositories in packages com.library.library_proyect.
+2025-09-24 18:34:53.268  INFO 9828 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 0 JPA repository interfaces.
+2025-09-24 18:34:53.335 DEBUG 9828 --- [restartedMain] o.s.c.a.ConfigurationClassUtils          : Failed to introspect @Bean methods on class [org.springframework.data.jpa.repository.support.DefaultJpaContext]: java.lang.IllegalStateException: Failed to introspect annotated methods on class org.springframework.data.jpa.repository.support.DefaultJpaContext
+2025-09-24 18:34:53.374 DEBUG 9828 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'propertySourcesPlaceholderConfigurer'
+2025-09-24 18:34:53.377 DEBUG 9828 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'emBeanDefinitionRegistrarPostProcessor'
+2025-09-24 18:34:53.378 DEBUG 9828 --- [restartedMain] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.boot.sql.init.dependency.DatabaseInitializationDependencyConfigurer$DependsOnDatabaseInitializationPostProcessor'
+2025-09-24 18:34:53.391 ERROR 9828 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.NoClassDefFoundError: javax/persistence/EntityManagerFactory
+	at org.springframework.data.jpa.util.BeanDefinitionUtils.<clinit>(BeanDefinitionUtils.java:57) ~[spring-data-jpa-2.6.1.jar:2.6.1]
+	at org.springframework.data.jpa.repository.support.EntityManagerBeanDefinitionRegistrarPostProcessor.postProcessBeanFactory(EntityManagerBeanDefinitionRegistrarPostProcessor.java:72) ~[spring-data-jpa-2.6.1.jar:2.6.1]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:325) ~[spring-context-5.3.15.jar:5.3.15]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:191) ~[spring-context-5.3.15.jar:5.3.15]
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:746) ~[spring-context-5.3.15.jar:5.3.15]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:564) ~[spring-context-5.3.15.jar:5.3.15]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:414) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:302) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303) ~[spring-boot-2.6.3.jar:2.6.3]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292) ~[spring-boot-2.6.3.jar:2.6.3]
+	at com.library.library_proyect.LibraryProyectApplication.main(LibraryProyectApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.6.3.jar:2.6.3]
+Caused by: java.lang.ClassNotFoundException: javax.persistence.EntityManagerFactory
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520) ~[na:na]
+	... 18 common frames omitted
+
+2025-09-24 18:34:53.393 DEBUG 9828 --- [restartedMain] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6cd73475, started on Wed Sep 24 18:34:52 PET 2025
