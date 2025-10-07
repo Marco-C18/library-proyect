@@ -1,0 +1,829 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Navbar Styles */
+.navbar {
+    padding: 1rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.navbar-brand {
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.biblio-text {
+    color: #007bff;
+}
+
+.tech-text {
+    color: #212529;
+}
+
+.notification-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+.notification-icon i {
+    font-size: 1.25rem;
+    color: #6c757d;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 10px;
+    height: 10px;
+    background-color: #007bff;
+    border-radius: 50%;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+}
+
+.user-profile span {
+    font-weight: 500;
+    color: #212529;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: #e3f2fd;
+    min-height: calc(100vh - 73px);
+    padding: 2rem 1rem;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 0.875rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #6c757d;
+    transition: all 0.3s ease;
+}
+
+.menu-item i {
+    font-size: 1.25rem;
+    margin-right: 0.75rem;
+    width: 24px;
+}
+
+.menu-item span {
+    font-size: 0.95rem;
+}
+
+.menu-item:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #007bff;
+}
+
+.menu-item.active {
+    background-color: #ffffff;
+    color: #007bff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Content Styles */
+.main-content {
+    padding: 2rem 3rem;
+}
+
+.content-header h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    color: #212529;
+}
+
+.content-header h2 strong {
+    font-weight: 700;
+}
+
+.content-header p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Stats Cards */
+.stats-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #f1f3f5;
+}
+
+.stats-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stats-icon {
+    font-size: 1.5rem;
+    color: #495057;
+    margin-bottom: 0.25rem;
+}
+
+.stats-info h3 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: #212529;
+}
+
+.stats-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 400;
+}
+
+/* Quick Actions */
+.quick-actions-section {
+    margin-top: 2rem;
+}
+
+.quick-actions-section h4 {
+    font-weight: 600;
+    color: #212529;
+}
+
+.quick-action-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #007bff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    gap: 0.75rem;
+}
+
+.quick-action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+    color: #0056b3;
+}
+
+.quick-action-card i {
+    font-size: 2.5rem;
+}
+
+.quick-action-card span {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Notifications Section */
+.notifications-section {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.notifications-section h4 {
+    font-weight: 600;
+    color: #212529;
+}
+
+.notification-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid #f1f3f5;
+    transition: background-color 0.3s ease;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.notification-item:hover {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.notification-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.notification-icon-wrapper.warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.notification-icon-wrapper.success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-title {
+    font-weight: 600;
+    margin: 0 0 0.25rem 0;
+    color: #212529;
+}
+
+.notification-text {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.notification-time {
+    font-size: 0.75rem;
+    color: #adb5bd;
+}
+
+/* Section Content (Base para todas las secciones) */
+.section-content {
+    background-color: transparent;
+}
+
+/* ============================================ */
+/* PRÉSTAMOS ACTIVOS */
+/* ============================================ */
+.table-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    color: #6c757d;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.header-libro {
+    text-align: left;
+}
+
+.header-prestamo {
+    text-align: center;
+}
+
+.header-devolucion {
+    text-align: center;
+}
+
+.loan-card {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 1rem;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.loan-card:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+}
+
+.loan-book-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.loan-book-cover {
+    width: 60px;
+    height: 90px;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.loan-book-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.loan-book-title {
+    font-weight: 600;
+    color: #212529;
+    font-size: 0.95rem;
+}
+
+.loan-book-author {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+.loan-book-year {
+    color: #adb5bd;
+    font-size: 0.85rem;
+}
+
+.loan-date,
+.loan-return-date {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #212529;
+    font-weight: 500;
+}
+
+/* ============================================ */
+/* SOLICITUD DE PRÉSTAMO */
+/* ============================================ */
+.table-header-request {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    color: #6c757d;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.header-libro-request {
+    text-align: left;
+}
+
+.header-estado {
+    text-align: right;
+}
+
+.request-card {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr;
+    gap: 1rem;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.request-card:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+}
+
+.request-book-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.request-book-cover {
+    width: 60px;
+    height: 90px;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.request-book-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.request-book-title {
+    font-weight: 600;
+    color: #212529;
+    font-size: 0.95rem;
+}
+
+.request-book-author {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+.request-book-year {
+    color: #adb5bd;
+    font-size: 0.85rem;
+}
+
+.request-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.status-badge {
+    padding: 0.5rem 1.25rem;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #495057;
+    font-weight: 500;
+}
+
+.btn-cancel {
+    padding: 0.5rem 1.5rem;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+/* ============================================ */
+/* CONFIRMACIÓN DE PRÉSTAMO */
+/* ============================================ */
+.table-header-confirmation {
+    display: grid;
+    grid-template-columns: 2fr 0.8fr 1fr 1fr;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    color: #6c757d;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.header-libro-confirmation {
+    text-align: left;
+}
+
+.header-estado-confirmation {
+    text-align: center;
+}
+
+.header-devolucion-confirmation {
+    text-align: center;
+}
+
+.confirmation-card {
+    display: grid;
+    grid-template-columns: 2fr 0.8fr 1fr 1fr;
+    gap: 1rem;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.confirmation-card:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+}
+
+.confirmation-book-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.confirmation-book-cover {
+    width: 60px;
+    height: 90px;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-book-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.confirmation-book-title {
+    font-weight: 600;
+    color: #212529;
+    font-size: 0.95rem;
+}
+
+.confirmation-book-author {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+.confirmation-book-year {
+    color: #adb5bd;
+    font-size: 0.85rem;
+}
+
+.confirmation-status {
+    display: flex;
+    justify-content: center;
+}
+
+.status-icon-approved {
+    font-size: 2rem;
+    color: #28a745;
+}
+
+.confirmation-date {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #212529;
+    font-weight: 500;
+}
+
+.confirmation-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-cancel-confirmation {
+    padding: 0.5rem 1.5rem;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel-confirmation:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+/* ============================================ */
+/* HISTORIAL DE PRÉSTAMO */
+/* ============================================ */
+.table-header-history {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    color: #6c757d;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.header-libro-history {
+    text-align: left;
+}
+
+.header-estado-history {
+    text-align: center;
+}
+
+.header-devolucion-history {
+    text-align: center;
+}
+
+.history-card {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 1rem;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.history-card:hover {
+    background-color: #e9ecef;
+    transform: translateX(5px);
+}
+
+.history-book-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.history-book-cover {
+    width: 60px;
+    height: 90px;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.history-book-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.history-book-title {
+    font-weight: 600;
+    color: #212529;
+    font-size: 0.95rem;
+}
+
+.history-book-author {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+.history-book-year {
+    color: #adb5bd;
+    font-size: 0.85rem;
+}
+
+.history-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.status-text-returned {
+    padding: 0.4rem 1rem;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #495057;
+    font-weight: 500;
+}
+
+.status-text-reading {
+    padding: 0.4rem 1rem;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #495057;
+    font-weight: 500;
+}
+
+.status-text-pending {
+    padding: 0.4rem 1rem;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #495057;
+    font-weight: 500;
+}
+
+.status-icon-returned {
+    font-size: 1.5rem;
+    color: #28a745;
+}
+
+.status-icon-pending {
+    font-size: 1.5rem;
+    color: #dc3545;
+}
+
+.history-date {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #212529;
+    font-weight: 500;
+}
+
+/* ============================================ */
+/* RESPONSIVE STYLES */
+/* ============================================ */
+@media (max-width: 768px) {
+    .sidebar {
+        min-height: auto;
+        padding: 1rem;
+    }
+
+    .main-content {
+        padding: 1.5rem;
+    }
+
+    .menu-item span {
+        font-size: 0.875rem;
+    }
+
+    .stats-card {
+        padding: 1rem;
+    }
+
+    .stats-icon {
+        font-size: 1.25rem;
+    }
+
+    .stats-info h3 {
+        font-size: 1.5rem;
+    }
+
+    /* Préstamos Activos - Mobile */
+    .table-header {
+        display: none;
+    }
+
+    .loan-card {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .loan-date,
+    .loan-return-date {
+        text-align: left;
+        padding-left: 76px;
+    }
+
+    /* Solicitud - Mobile */
+    .table-header-request {
+        display: none;
+    }
+
+    .request-card {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .request-actions {
+        justify-content: flex-start;
+        padding-left: 76px;
+    }
+
+    /* Confirmación - Mobile */
+    .table-header-confirmation {
+        display: none;
+    }
+
+    .confirmation-card {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .confirmation-status,
+    .confirmation-date {
+        text-align: left;
+        padding-left: 76px;
+        justify-content: flex-start;
+    }
+
+    .confirmation-actions {
+        justify-content: flex-start;
+        padding-left: 76px;
+    }
+
+    /* Historial - Mobile */
+    .table-header-history {
+        display: none;
+    }
+
+    .history-card {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .history-status,
+    .history-date {
+        text-align: left;
+        padding-left: 76px;
+        justify-content: flex-start;
+    }
+}
