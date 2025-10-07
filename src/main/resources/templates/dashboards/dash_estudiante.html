@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioTech - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/dashboards/dash_estudiante.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-light bg-white shadow-sm">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="/estudiante/dashboard/inicio">
+                <span class="biblio-text">Biblio</span><span class="tech-text">Tech</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <div class="notification-icon me-3">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge"></span>
+                </div>
+                <div class="user-profile">
+                    <img src="/img/perfil.jpg" alt="Diego" class="rounded-circle">
+                    <span class="ms-2">Marco</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar">
+                <div class="sidebar-menu">
+                    <a href="/estudiante/dashboard/inicio" class="menu-item" th:classappend="${seccion == 'inicio'} ? 'active' : ''">
+                        <i class="fas fa-home"></i>
+                        <span>Inicio</span>
+                    </a>
+                    <a href="/estudiante/dashboard/prestamos-activos" class="menu-item" th:classappend="${seccion == 'prestamos-activos'} ? 'active' : ''">
+                        <i class="fas fa-book"></i>
+                        <span>Prestamos activos</span>
+                    </a>
+                    <a href="/estudiante/dashboard/solicitud-prestamo" class="menu-item" th:classappend="${seccion == 'solicitud-prestamo'} ? 'active' : ''">
+                        <i class="far fa-file-alt"></i>
+                        <span>Solicitud de préstamo</span>
+                    </a>
+                    <a href="/estudiante/dashboard/confirmacion-prestamo" class="menu-item" th:classappend="${seccion == 'confirmacion-prestamo'} ? 'active' : ''">
+                        <i class="far fa-envelope"></i>
+                        <span>Confirmación de préstamo</span>
+                    </a>
+                    <a href="/estudiante/dashboard/historial-prestamo" class="menu-item" th:classappend="${seccion == 'historial-prestamo'} ? 'active' : ''">
+                        <i class="fas fa-history"></i>
+                        <span>Historial de préstamo</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10 main-content">
+                
+                <!-- CONTENIDO: INICIO -->
+                <div th:if="${seccion == 'inicio'}">
+                    <div class="content-header">
+                        <h2>Hola, <strong>Marco</strong></h2>
+                        <p class="text-muted">Bienvenido a tu biblioteca digital</p>
+                    </div>
+
+                    <!-- Cards de Resumen -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="stats-card">
+                                <i class="fas fa-book-open stats-icon"></i>
+                                <div class="stats-info">
+                                    <h3>3</h3>
+                                    <p>Préstamos Activos</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3">
+                            <div class="stats-card">
+                                <i class="fas fa-file-alt stats-icon"></i>
+                                <div class="stats-info">
+                                    <h3>2</h3>
+                                    <p>Solicitudes Pendientes</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3">
+                            <div class="stats-card">
+                                <i class="fas fa-history stats-icon"></i>
+                                <div class="stats-info">
+                                    <h3>15</h3>
+                                    <p>Libros Leídos</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3">
+                            <div class="stats-card">
+                                <i class="fas fa-calendar-alt stats-icon"></i>
+                                <div class="stats-info">
+                                    <h3>1</h3>
+                                    <p>Próximo a Vencer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección de Acciones Rápidas -->
+                    <div class="quick-actions-section">
+                        <h4 class="mb-3">Acciones Rápidas</h4>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <a href="/estudiante/dashboard/prestamos-activos" class="quick-action-card">
+                                    <i class="fas fa-book"></i>
+                                    <span>Ver Préstamos Activos</span>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="/estudiante/dashboard/solicitud-prestamo" class="quick-action-card">
+                                    <i class="fas fa-plus-circle"></i>
+                                    <span>Nueva Solicitud</span>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="/estudiante/dashboard/historial-prestamo" class="quick-action-card">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Ver Historial</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Últimas Notificaciones -->
+                    <div class="notifications-section mt-4">
+                        <h4 class="mb-3">Notificaciones Recientes</h4>
+                        <div class="notification-item">
+                            <div class="notification-icon-wrapper warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="notification-content">
+                                <p class="notification-title">Devolución Próxima</p>
+                                <p class="notification-text">El libro "Cien años de soledad" debe devolverse en 3 días</p>
+                                <span class="notification-time">Hace 2 horas</span>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notification-icon-wrapper success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="notification-content">
+                                <p class="notification-title">Solicitud Aprobada</p>
+                                <p class="notification-text">Tu solicitud para "El Principito" ha sido aprobada</p>
+                                <span class="notification-time">Hace 1 día</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTENIDO: PRÉSTAMOS ACTIVOS -->
+                <div th:if="${seccion == 'prestamos-activos'}">
+                    <div class="content-header">
+                        <h2>Hola, <strong>Marco</strong></h2>
+                        <p class="text-muted">Estos son tus prestamos activos:</p>
+                    </div>
+
+                    <div class="section-content">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="table-header">
+                                    <div class="header-libro">Libro</div>
+                                    <div class="header-prestamo">Préstamo</div>
+                                    <div class="header-devolucion">Devolución</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Préstamo 1 -->
+                        <div class="loan-card mb-3">
+                            <div class="loan-book-info">
+                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años de soledad" class="loan-book-cover">
+                                <div class="loan-book-details">
+                                    <div class="loan-book-title">Cien años de soledad</div>
+                                    <div class="loan-book-author">Gabriel García Marquez</div>
+                                    <div class="loan-book-year">1967</div>
+                                </div>
+                            </div>
+                            <div class="loan-date">19/08/2025</div>
+                            <div class="loan-return-date">19/09/2025</div>
+                        </div>
+
+                        <!-- Préstamo 2 -->
+                        <div class="loan-card mb-3">
+                            <div class="loan-book-info">
+                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años de soledad" class="loan-book-cover">
+                                <div class="loan-book-details">
+                                    <div class="loan-book-title">Cien años de soledad</div>
+                                    <div class="loan-book-author">Gabriel García Marquez</div>
+                                    <div class="loan-book-year">1967</div>
+                                </div>
+                            </div>
+                            <div class="loan-date">19/08/2025</div>
+                            <div class="loan-return-date">19/09/2025</div>
+                        </div>
+
+                        <!-- Préstamo 3 -->
+                        <div class="loan-card">
+                            <div class="loan-book-info">
+                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años de soledad" class="loan-book-cover">
+                                <div class="loan-book-details">
+                                    <div class="loan-book-title">Cien años de soledad</div>
+                                    <div class="loan-book-author">Gabriel García Marquez</div>
+                                    <div class="loan-book-year">1967</div>
+                                </div>
+                            </div>
+                            <div class="loan-date">19/08/2025</div>
+                            <div class="loan-return-date">19/09/2025</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTENIDO: SOLICITUD DE PRÉSTAMO -->
+                <div th:if="${seccion == 'solicitud-prestamo'}">
+                    <div class="content-header">
+                        <h2>Hola, <strong>Marco</strong></h2>
+                        <p class="text-muted">Estas son tus solicitudes de préstamo:</p>
+                    </div>
+
+                    <div class="section-content">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="table-header-request">
+                                    <div class="header-libro-request">Libro</div>
+                                    <div class="header-estado">Estado</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Solicitud 1 -->
+                        <div class="request-card mb-3">
+                            <div class="request-book-info">
+                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años de soledad" class="request-book-cover">
+                                <div class="request-book-details">
+                                    <div class="request-book-title">Cien años de soledad</div>
+                                    <div class="request-book-author">Gabriel García Marquez</div>
+                                    <div class="request-book-year">1967</div>
+                                </div>
+                            </div>
+                            <div class="request-actions">
+                                <span class="status-badge">Enviado</span>
+                                <button class="btn-cancel">Cancelar</button>
+                            </div>
+                        </div>
+
+                        <!-- Solicitud 2 -->
+                        <div class="request-card">
+                            <div class="request-book-info">
+                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años de soledad" class="request-book-cover">
+                                <div class="request-book-details">
+                                    <div class="request-book-title">Cien años de soledad</div>
+                                    <div class="request-book-author">Gabriel García Marquez</div>
+                                    <div class="request-book-year">1967</div>
+                                </div>
+                            </div>
+                            <div class="request-actions">
+                                <span class="status-badge">Enviado</span>
+                                <button class="btn-cancel">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTENIDO: CONFIRMACIÓN DE PRÉSTAMO -->
+                <div th:if="${seccion == 'confirmacion-prestamo'}">
+                    <div class="content-header">
+                        <h2>Hola, <strong>Marco</strong></h2>
+                        <p class="text-muted">Estas son tus confirmaciones de préstamo:</p>
+                    </div>
+
+                    <div class="section-content">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="table-header-confirmation">
+                                    <div class="header-libro-confirmation">Libro</div>
+                                    <div class="header-estado-confirmation">Estado</div>
+                                    <div class="header-devolucion-confirmation">Devolución</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Confirmación 1 -->
+                        <div class="confirmation-card mb-3">
+                            <div class="confirmation-book-info">
+                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años de soledad" class="confirmation-book-cover">
+                                <div class="confirmation-book-details">
+                                    <div class="confirmation-book-title">Cien años de soledad</div>
+                                    <div class="confirmation-book-author">Gabriel García Marquez</div>
+                                    <div class="confirmation-book-year">1967</div>
+                                </div>
+                            </div>
+                            <div class="confirmation-status">
+                                <i class="fas fa-check-circle status-icon-approved"></i>
+                            </div>
+                            <div class="confirmation-date">19/09/2025</div>
+                            <div class="confirmation-actions">
+                                <button class="btn-cancel-confirmation">Cancelar</button>
+                            </div>
+                        </div>
+
+                        <!-- Confirmación 2 -->
+                        <div class="confirmation-card">
+                            <div class="confirmation-book-info">
+                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años de soledad" class="confirmation-book-cover">
+                                <div class="confirmation-book-details">
+                                    <div class="confirmation-book-title">Cien años de soledad</div>
+                                    <div class="confirmation-book-author">Gabriel García Marquez</div>
+                                    <div class="confirmation-book-year">1967</div>
+                                </div>
+                            </div>
+                            <div class="confirmation-status">
+                                <i class="fas fa-check-circle status-icon-approved"></i>
+                            </div>
+                            <div class="confirmation-date">19/09/2025</div>
+                            <div class="confirmation-actions">
+                                <button class="btn-cancel-confirmation">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTENIDO: HISTORIAL DE PRÉSTAMO -->
+                <div th:if="${seccion == 'historial-prestamo'}">
+                    <div class="content-header">
+                        <h2>Hola, <strong>Marco</strong></h2>
+                        <p class="text-muted">Estos son tus últimos libros prestados:</p>
+                    </div>
+
+                    <div class="section-content">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="table-header-history">
+                                    <div class="header-libro-history">Libro</div>
+                                    <div class="header-estado-history">Estado</div>
+                                    <div class="header-devolucion-history">Devolución</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Historia 1 - Devuelto -->
+                        <div class="history-card mb-3">
+                            <div class="history-book-info">
+                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años de soledad" class="history-book-cover">
+                                <div class="history-book-details">
+                                    <div class="history-book-title">Cien años de soledad</div>
+                                    <div class="history-book-author">Gabriel García Marquez</div>
+                                    <div class="history-book-year">1967</div>
+                                </div>
+                            </div>
+                            <div class="history-status">
+                                <span class="status-text-returned">Devuelto</span>
+                                <i class="fas fa-check-circle status-icon-returned"></i>
+                            </div>
+                            <div class="history-date">18/09/2025</div>
+                        </div>
+
+                        <!-- Historia 2 - En lectura -->
+                        <div class="history-card mb-3">
+                            <div class="history-book-info">
+                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años de soledad" class="history-book-cover">
+                                <div class="history-book-details">
+                                    <div class="history-book-title">Cien años de soledad</div>
+                                    <div class="history-book-author">Gabriel García Marquez</div>
+                                    <div class="history-book-year">1967</div>
+                                </div>
+                            </div>
+                            <div class="history-status">
+                                <span class="status-text-reading">En lectura</span>
+                            </div>
+                            <div class="history-date">18/10/2025</div>
+                        </div>
+
+                        <!-- Historia 3 - Devolver (con alerta) -->
+                        <div class="history-card">
+                            <div class="history-book-info">
+                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años de soledad" class="history-book-cover">
+                                <div class="history-book-details">
+                                    <div class="history-book-title">Cien años de soledad</div>
+                                    <div class="history-book-author">Gabriel García Marquez</div>
+                                    <div class="history-book-year">1967</div>
+                                </div>
+                            </div>
+                            <div class="history-status">
+                                <span class="status-text-pending">Devolver</span>
+                                <i class="fas fa-exclamation-triangle status-icon-pending"></i>
+                            </div>
+                            <div class="history-date">18/10/2025</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
