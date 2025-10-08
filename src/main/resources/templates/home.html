@@ -1,19 +1,222 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-
+    <title>BiblioTech - Inicio</title>
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
+    <!-- <div th:replace="fragments/navbar :: navbar"></div> -->
+    <nav id="navbar" th:fragment="navbar">
+        <div class="logo">
+            <span>Biblio</span><span>Tech</span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a th:href="@{/}" class="active">Inicio</a></li>
+            <li><a th:href="@{/catalogo}">Catálogo</a></li>
+            <li><a th:href="@{/estudiante/dashboard/inicio}">DashBoard</a></li>
+        </ul>
+        <div class="user-section">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <span>Diego</span>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
 
-    <h1>Welcome to the Library</h1>
-    <p>Cambios desde otra rama a main</p>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Encuentra y alquila<br>tus libros de estudio<br>fácilmente</h1>
+            <a href="/catalogo"><button class="cta-button">Ver Catálogo</button></a>
 
+        </div>
+        <div class="hero-image">
+            <div class="hero-overlay">
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <h2>Categorías</h2>
+        <div class="category-grid">
+            <div class="category-item">
+                <div class="category-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Literatura</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>Matemáticas</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-icon">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <h3>Historia</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h3>Ciencias</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h3>Idiomas</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Informática</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Books -->
+    <section class="featured-books">
+        <h2>Libros Destacados</h2>
+        <div class="books-grid">
+            <div class="book-card">
+                <div class="book-cover">
+                    <div class="book-cover-text">
+                        <p>GEN ARSB</p>
+                        <p>Y</p>
+                        <p>GEALDEL</p>
+                    </div>
+                </div>
+                <h3>Cien años de soledad</h3>
+                <p>Gabriel García Marquez</p>
+                <button class="book-button">Ver más</button>
+            </div>
+            <div class="book-card">
+                <div class="book-cover">
+                    <div class="book-cover-text">
+                        <p>GEN ARSB</p>
+                        <p>Y</p>
+                        <p>GEALDEL</p>
+                    </div>
+                </div>
+                <h3>Cien años de soledad</h3>
+                <p>Gabriel García Marquez</p>
+                <button class="book-button">Ver más</button>
+            </div>
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="/img/cien_años.jpg" alt="">
+                </div>
+                <h3>Cien años de soledad</h3>
+                <p>Gabriel García Marquez</p>
+                <button class="book-button">Ver más</button>
+            </div>
+            <div class="book-card">
+                <div class="book-cover">
+                    <div class="book-cover-text">
+                        <p>GEN ARSB</p>
+                        <p>Y</p>
+                        <p>GEALDEL</p>
+                    </div>
+                </div>
+                <h3>Cien años de soledad</h3>
+                <p>Gabriel García Marquez</p>
+                <button class="book-button">Ver más</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <h2>¿Cómo funciona?</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Busca tu<br>libro</h3>
+            </div>
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h3>Haz tu reserva<br>online</h3>
+            </div>
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <h3>Recógelo en<br>la biblioteca</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2>Opiniones de estudiantes</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="testimonial-info">
+                        <h4>Piero Cotrina</h4>
+                        <p>Administración</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"La biblioteca ofrece una excelente selección de libros y el proceso de
+                    alquiler es muy facil, ¡Totalmente recomendado!"</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="testimonial-info">
+                        <h4>Piero Cotrina</h4>
+                        <p>Administración</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"La biblioteca ofrece una excelente selección de libros y el proceso de
+                    alquiler es muy facil, ¡Totalmente recomendado!"</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="testimonial-info">
+                        <h4>Piero Cotrina</h4>
+                        <p>Administración</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"La biblioteca ofrece una excelente selección de libros y el proceso de
+                    alquiler es muy facil, ¡Totalmente recomendado!"</p>
+            </div>
+        </div>
+    </section>
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+    <!-- Footer será cargado aquí -->
+    <div id="footer-container"></div>
+
+    <script src="js/home.js"></script>
 </body>
 
 </html>
