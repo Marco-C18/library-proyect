@@ -1,0 +1,24 @@
+<nav id="navbar" th:fragment="navbar">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <div class="logo">
+        <span>Biblio</span><span>Tech</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+        <li><a th:href="@{/}" class="active">Inicio</a></li>
+        <li><a th:href="@{/catalogo}">Catálogo</a></li>
+        <li><a th:href="@{/estudiante/dashboard/inicio}">DashBoard</a></li>
+    </ul>
+    <div class="user-section">
+        <div class="user-avatar">
+            <i class="fas fa-user"></i>
+        </div>
+        <span>Diego</span>
+    </div>
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>
