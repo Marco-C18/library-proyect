@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,71 +11,49 @@
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/dashboards/dash_bibliotecario.css">
 </head>
+
 <body>
-    <!-- NAVBAR -->
-    <nav id="navbar">
-        <div class="logo">
-            <span>Biblio</span><span>Tech</span>
-        </div>
-        <ul class="nav-links" id="navLinks">
-            <li><a th:href="@{/}" >Inicio</a></li>
-            <li><a th:href="@{/catalogo}" >Catálogo</a></li>
-            <li><a th:href="@{/estudiante/dashboard/inicio}">DashBoard</a></li>
-            <li><a th:href="@{/bibliotecario/dashboard/inicio}" class="active">DashBoard Bibliotecario</a></li>
-        </ul>
-        <div class="user-section">
-            <div class="notification-icon me-3">
-                <i class="fas fa-bell"></i>
-                <span class="notification-badge"></span>
-            </div>
-            <div class="user-avatar">
-                <i class="fas fa-user"></i>
-            </div>
-            <span>Diego</span>
-        </div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
+    <!-- <div th:replace="fragments/navbar :: navbar"></div> -->
 
     <div class="container-fluid">
         <div class="row">
             <!-- SIDEBAR -->
             <div class="col-md-3 col-lg-2 sidebar">
                 <div class="sidebar-menu">
-                    <a th:href="@{/bibliotecario/dashboard/inicio}" class="menu-item" th:classappend="${seccion == 'inicio'} ? 'active' : ''">
+                    <a th:href="@{/bibliotecario/dashboard/inicio}" class="menu-item"
+                        th:classappend="${seccion == 'inicio'} ? 'active' : ''">
                         <i class="fas fa-home"></i>
                         <span>Dashboard</span>
                     </a>
 
-                    <a th:href="@{/bibliotecario/dashboard/libros}" class="menu-item" th:classappend="${seccion == 'libros'} ? 'active' : ''">
+                    <a th:href="@{/bibliotecario/dashboard/libros}" class="menu-item"
+                        th:classappend="${seccion == 'libros'} ? 'active' : ''">
                         <i class="fas fa-book"></i>
                         <span>Gestión de libros</span>
                     </a>
 
-                    <a th:href="@{/bibliotecario/dashboard/categorias}" class="menu-item" th:classappend="${seccion == 'categorias'} ? 'active' : ''">
+                    <a th:href="@{/bibliotecario/dashboard/categorias}" class="menu-item"
+                        th:classappend="${seccion == 'categorias'} ? 'active' : ''">
                         <i class="fas fa-th-large"></i>
                         <span>Gestión de categorías</span>
                     </a>
 
-                    <a th:href="@{/bibliotecario/dashboard/reportes}" class="menu-item" th:classappend="${seccion == 'reportes'} ? 'active' : ''">
+                    <a th:href="@{/bibliotecario/dashboard/reportes}" class="menu-item"
+                        th:classappend="${seccion == 'reportes'} ? 'active' : ''">
                         <i class="fas fa-exclamation-triangle"></i>
                         <span>Reportes</span>
                     </a>
 
-                    <a th:href="@{/bibliotecario/dashboard/aprobaciones}" class="menu-item" th:classappend="${seccion == 'aprobaciones'} ? 'active' : ''">
+                    <a th:href="@{/bibliotecario/dashboard/aprobaciones}" class="menu-item"
+                        th:classappend="${seccion == 'aprobaciones'} ? 'active' : ''">
                         <i class="fas fa-award"></i>
                         <span>Aprobaciones</span>
                     </a>
                 </div>
             </div>
 
-            <!-- MAIN CONTENT -->
             <div class="col-md-9 col-lg-10 main-content">
 
-                <!--SECCION: DASHBOARD -->
                 <div th:if="${seccion == 'inicio'}" class="bibliotecario">
                     <div class="content-header">
                         <h1 class="fw-bold display-6">Dashboard bibliotecario</h1>
@@ -108,11 +87,12 @@
                         <div class="fw-semibold text-secondary text-center">Estado</div>
                         <div class="fw-semibold text-secondary text-center">Devolución</div>
                     </div>
-                    
+
                     <div class="prestamos-lista">
                         <div class="prestamo-item">
                             <div class="prestamo-info">
-                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años" class="img-fluid rounded">
+                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años"
+                                    class="img-fluid rounded">
                                 <div class="prestamo-detalles">
                                     <h5>Cien años de soledad</h5>
                                     <p>Gabriel García Márquez</p>
@@ -125,7 +105,8 @@
 
                         <div class="prestamo-item">
                             <div class="prestamo-info">
-                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años" class="img-fluid rounded">
+                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años"
+                                    class="img-fluid rounded">
                                 <div class="prestamo-detalles">
                                     <h5>Cien años de soledad</h5>
                                     <p>Gabriel García Márquez</p>
@@ -138,7 +119,8 @@
 
                         <div class="prestamo-item">
                             <div class="prestamo-info">
-                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años" class="img-fluid rounded">
+                                <img src="https://via.placeholder.com/60x90/4a7c59/ffffff?text=100" alt="Cien años"
+                                    class="img-fluid rounded">
                                 <div class="prestamo-detalles">
                                     <h5>Cien años de soledad</h5>
                                     <p>Gabriel García Márquez</p>
@@ -151,7 +133,6 @@
                     </div>
                 </div>
 
-                <!--SECCION: GESTION DE LIBROS -->
                 <div th:if="${seccion == 'libros'}" class="gestion-libros">
                     <h2 class="fw-bold mb-4">Gestión de libros</h2>
                     <button class="btn-agregar-libro mb-4">Agregar libro</button>
@@ -210,7 +191,6 @@
                     </div>
                 </div>
 
-                <!--SECCION: GESTIÓN DE CATEGORÍAS -->
                 <div th:if="${seccion == 'categorias'}" class="gestion-categorias">
                     <h2 class="fw-bold mb-4">Gestión de Categorías</h2>
                     <button class="btn-agregar-categoria mb-4">Agregar categoría</button>
@@ -221,7 +201,6 @@
                         <div></div>
                     </div>
 
-                    <!-- LISTA DE CATEGORÍAS -->
                     <div class="categorias-lista mt-2">
                         <div class="categoria-item">
                             <div class="categoria-nombre">Literatura</div>
@@ -243,24 +222,22 @@
                     </div>
                 </div>
 
-                <!--SECCION: REPORTES -->
                 <div th:if="${seccion == 'reportes'}" class="reportes-section">
                     <div class="content-header">
                         <h2 class="fw-bold">Reportes</h2>
                     </div>
 
-                    <!-- Filtros -->
                     <div class="reportes-filtros d-flex gap-3 mb-4">
                         <button class="btn-filtro activo" id="btn-vencidos">Vencidos</button>
                         <button class="btn-filtro verde" id="btn-por-vencer">Por vencer</button>
                         <button class="btn-filtro azul" id="btn-vence-hoy">Vence hoy</button>
                     </div>
 
-                    <!-- Lista de reportes -->
                     <div class="reporte-lista">
                         <div class="reporte-item d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center gap-3">
-                                <img src="https://covers.openlibrary.org/b/id/8231856-L.jpg" alt="Portada" class="reporte-img">
+                                <img src="https://covers.openlibrary.org/b/id/8231856-L.jpg" alt="Portada"
+                                    class="reporte-img">
                                 <div>
                                     <div class="fw-bold">Cien años de soledad</div>
                                     <div class="text-muted small">Gabriel García Márquez</div>
@@ -275,7 +252,8 @@
 
                         <div class="reporte-item d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center gap-3">
-                                <img src="https://covers.openlibrary.org/b/id/8231856-L.jpg" alt="Portada" class="reporte-img">
+                                <img src="https://covers.openlibrary.org/b/id/8231856-L.jpg" alt="Portada"
+                                    class="reporte-img">
                                 <div>
                                     <div class="fw-bold">Cien años de soledad</div>
                                     <div class="text-muted small">Gabriel García Márquez</div>
@@ -290,7 +268,6 @@
                     </div>
                 </div>
 
-                <!-- SECCION: APROBACIONES -->
                 <div th:if="${seccion == 'aprobaciones'}" class="aprobaciones-section">
                     <div class="content-header">
                         <h2 class="fw-bold">Aprobaciones</h2>
@@ -301,7 +278,6 @@
                         <span class="fw-semibold">Aprobación</span>
                     </div>
 
-                    <!-- Lista de Aprobaciones -->
                     <div class="aprobaciones-lista">
                         <div class="aprobacion-item">
                             <div class="aprobacion-info">
@@ -368,10 +344,11 @@
                         </div>
                     </div>
                 </div>
-            </div> <!-- main-content -->
+            </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

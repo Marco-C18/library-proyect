@@ -7,11 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-
 @Entity
 @Table(name = "Libros")
 public class Libros {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idLibro")
@@ -38,8 +37,6 @@ public class Libros {
     @Column(name = "imagen")
     private String imagen;
 
-
-    //getters and setters
     public Long getIdLibro() {
         return idLibro;
     }
@@ -103,6 +100,5 @@ public class Libros {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    
 
 }

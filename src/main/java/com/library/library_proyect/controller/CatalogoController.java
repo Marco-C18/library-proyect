@@ -16,11 +16,13 @@ public class CatalogoController {
     @Autowired
     private CatalogoService catalogoService;
 
-    
     @GetMapping("/catalogo")
-    public String catalogo(Model model){
+    public String catalogo(Model model) {
         List<Libros> libros = catalogoService.obtenerLibros();
         model.addAttribute("libros", libros);
+
+        model.addAttribute("activePage", "catalogo");
+
         return "catalogo";
     }
 }

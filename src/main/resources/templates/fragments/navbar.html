@@ -6,9 +6,20 @@
         <span>Biblio</span><span>Tech</span>
     </div>
     <ul class="nav-links" id="navLinks">
-        <li><a th:href="@{/}" class="active">Inicio</a></li>
-        <li><a th:href="@{/catalogo}">Catálogo</a></li>
-        <li><a th:href="@{/estudiante/dashboard/inicio}">DashBoard</a></li>
+        <li>
+            <a th:href="@{/}" th:classappend="${activePage == 'home'} ? ' active' : ''">Inicio</a>
+        </li>
+        <li>
+            <a th:href="@{/catalogo}" th:classappend="${activePage == 'catalogo'} ? ' active' : ''">Catálogo</a>
+        </li>
+        <li>
+            <a th:href="@{/estudiante/dashboard/inicio}"
+                th:classappend="${activePage == 'dashboardEstudiante'} ? ' active' : ''">DashBoard</a>
+        </li>
+        <!-- <li>
+            <a th:href="@{/bibliotecario/dashboard/inicio}"
+                th:classappend="${activePage == 'dashboardBibliotecario'} ? ' active' : ''">DashBoard Bibliotecario</a>
+        </li> -->
     </ul>
     <div class="user-section">
         <div class="user-avatar">
