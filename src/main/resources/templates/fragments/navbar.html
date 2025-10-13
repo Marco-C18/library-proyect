@@ -1,5 +1,8 @@
 <nav id="navbar" th:fragment="navbar">
     <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <script src="/js/noti.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <div class="logo">
@@ -21,7 +24,18 @@
                 th:classappend="${activePage == 'dashboardBibliotecario'} ? ' active' : ''">DashBoard Bibliotecario</a>
         </li> -->
     </ul>
+
     <div class="user-section">
+        <div class="notification-icon me-3 position-relative">
+            <i class="fas fa-bell" id="notificationBell"></i>
+            <span class="notification-badge"></span>
+
+            <!-- Dropdown de notificaciones -->
+            <div class="notification-dropdown shadow" id="notificationDropdown">
+                <h6 class="px-3 pt-2">Notificaciones</h6>
+                <div id="notificationList" class="notification-list"></div>
+            </div>
+        </div>
         <div class="user-avatar">
             <i class="fas fa-user"></i>
         </div>
