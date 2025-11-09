@@ -155,7 +155,7 @@
                 <!-- CONTENIDO: PRÉSTAMOS ACTIVOS -->
                 <div th:if="${seccion == 'prestamos-activos'}">
                     <div class="content-header">
-                        <h2>Hola, <strong>Marco</strong></h2>
+                        <h2>Hola, <strong th:text="${session.usuarioNombre}"></strong></h2>
                         <p class="text-muted">Estos son tus prestamos activos:</p>
                     </div>
 
@@ -217,7 +217,7 @@
                 <!-- CONTENIDO: SOLICITUD DE PRÉSTAMO -->
                 <div th:if="${seccion == 'solicitud-prestamo'}">
                     <div class="content-header">
-                        <h2>Hola, <strong>Marco</strong></h2>
+                        <h2>Hola, <strong th:text="${session.usuarioNombre}"></strong></h2>
                         <p class="text-muted">Estas son tus solicitudes de préstamo:</p>
                     </div>
 
@@ -270,7 +270,7 @@
                 <!-- CONTENIDO: CONFIRMACIÓN DE PRÉSTAMO -->
                 <div th:if="${seccion == 'confirmacion-prestamo'}">
                     <div class="content-header">
-                        <h2>Hola, <strong>Marco</strong></h2>
+                        <h2>Hola, <strong th:text="${session.usuarioNombre}"></strong></h2>
                         <p class="text-muted">Estas son tus confirmaciones de préstamo:</p>
                     </div>
 
@@ -330,7 +330,7 @@
                 <!-- CONTENIDO: HISTORIAL DE PRÉSTAMO -->
                 <div th:if="${seccion == 'historial-prestamo'}">
                     <div class="content-header">
-                        <h2>Hola, <strong>Marco</strong></h2>
+                        <h2>Hola, <strong th:text="${session.usuarioNombre}"></strong></h2>
                         <p class="text-muted">Estos son tus últimos libros prestados:</p>
                     </div>
 
