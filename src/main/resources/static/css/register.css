@@ -6,56 +6,30 @@
 }
 
 body {
-  background-color: #7bbaff;
-  height: 100vh;
+  background-color: #6fb0f6;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.btn-flotante {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #007bff;
-  color: white;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  z-index: 1000;
-  text-decoration: none;
-}
-
-.btn-flotante:hover {
-  background-color: #0056b3;
-  transform: scale(1.1);
-}
-
-.btn-flotante img {
-  width: 28px;
-  height: 28px;
-  filter: invert(1);
+  padding: 20px 0;
 }
 
 .card-container {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  height: 75%;
+  min-height: 700px;
   width: 90%;
+  max-width: 1050px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 20px 0;
 }
 
 .visual-card {
-  height: 100%;
   width: 40%;
-  max-width: 300px;
   background-color: #1e88fa;
-  border-radius: 12px 0 0 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,149 +39,348 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* object-position: center; */
-
-  border-radius: 12px 0 0 12px;
 }
 
 .form-card {
-  height: 100%;
   width: 60%;
-  max-width: 500px;
   background: #fff;
-  padding: 2rem;
-  border-radius: 0 12px 12px 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-
+  padding: 2.5rem 3rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  overflow-y: auto;
 }
 
 .Title {
-  font-size: 40px;
-  font-weight: bold;
+  font-size: 2rem;
+  font-weight: 700;
   text-align: center;
   color: #1e88fa;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
 }
 
-.google {
+/* Alertas */
+.alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alert-error {
+  background-color: #fee;
+  color: #c33;
+  border-left: 4px solid #c33;
+}
+
+.alert i {
+  font-size: 16px;
+}
+
+/* Selector de tipo de usuario */
+.tipo-usuario-container {
+  margin-bottom: 0.5rem;
+}
+
+.tipo-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.tipo-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.tipo-buttons input[type="radio"] {
+  display: none;
+}
+
+.tipo-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.google i {
-  color: #1e88fa;
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-  font-size: 20px;
-  border-radius: 100%;
-  padding: 10px;
+  padding: 16px 12px;
+  border: 2px solid #e8e8e8;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  background-color: #fafafa;
+  transition: all 0.3s ease;
+  gap: 8px;
 }
 
-.google i:hover {
-  background-color: #e0e0e0;
+.tipo-btn i {
+  font-size: 28px;
+  color: #888;
+  transition: all 0.3s ease;
 }
 
-.google .label {
-  font-size: 16px;
-  color: #333;
+.tipo-btn span {
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.tipo-btn:hover {
+  border-color: #1e88fa;
+  background-color: #e8f4fd;
+}
+
+.tipo-btn:hover i {
+  color: #1e88fa;
+  transform: scale(1.1);
+}
+
+input[type="radio"]:checked + .tipo-btn {
+  border-color: #1e88fa;
+  background: linear-gradient(135deg, rgba(30, 136, 250, 0.1) 0%, rgba(123, 186, 255, 0.15) 100%);
+}
+
+input[type="radio"]:checked + .tipo-btn i {
+  color: #1e88fa;
+}
+
+input[type="radio"]:checked + .tipo-btn span {
+  color: #1e88fa;
+}
+
+/* Formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
 .input-group {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input-group.half {
+  width: 100%;
 }
 
 .input-icon {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .input-icon i {
   position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+  left: 14px;
   color: #888;
+  font-size: 15px;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.input-icon .toggle-password {
+  left: auto;
+  right: 14px;
+  cursor: pointer;
+  pointer-events: all;
+  color: #999;
+}
+
+.input-icon .toggle-password:hover {
+  color: #1e88fa;
 }
 
 .input-icon input {
-  height: 40px;
   width: 100%;
-  padding: 10px 10px 10px 35px;
-  border: 1px solid #eef3f3;
-  border-radius: 6px;
+  height: 48px;
+  padding: 10px 45px 10px 45px;
+  border: 2px solid #e8e8e8;
+  border-radius: 10px;
   outline: none;
-  background-color: #eef3f3;
-  transition: 0.3s ease;
+  background-color: #fafafa;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
 .input-icon input:focus {
-  height: 60px;
+  border-color: #1e88fa;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(30, 136, 250, 0.1);
+}
+
+.input-icon input:focus + i,
+.input-icon input:not(:placeholder-shown) + i {
+  color: #1e88fa;
+}
+
+.input-icon input.error {
+  border-color: #e74c3c;
+  background-color: #fff5f5;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-left: 4px;
+  min-height: 16px;
+  display: block;
 }
 
 .button-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-top: 0.5rem;
 }
 
 .button-container button {
+  width: 100%;
   height: 50px;
-  width: 180px;
-  background: #007bff;
+  background: linear-gradient(135deg, #1e88fa 0%, #0056b3 100%);
   border: none;
   color: white;
-  border-radius: 30px;
+  border-radius: 12px;
   cursor: pointer;
-  font-size: 1.1rem;
-  transition: 0.3s ease;
-  font-weight: bold;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 136, 250, 0.3);
 }
 
 .button-container button:hover {
-  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 136, 250, 0.4);
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+}
+
+.button-container button:active {
+  transform: translateY(0);
 }
 
 .iniciar-sesion {
-  margin-top: 15px;
-  display: flex;
-  height: 50px;
-  color: #0056b3;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  color: #666;
   font-size: 14px;
+  margin-top: 0.5rem;
 }
 
 .iniciar-sesion a {
+  color: #1e88fa;
   text-decoration: none;
-  color: #0056b3;
-  font-weight: bold;
+  font-weight: 600;
   margin-left: 5px;
-  border: 2px solid #0056b3;
-  padding: 10px 15px;
-  border-radius: 20px;
+  transition: color 0.3s ease;
+}
+
+.iniciar-sesion a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Scrollbar personalizada */
+.form-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.form-card::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.form-card::-webkit-scrollbar-thumb {
+  background: #1e88fa;
+  border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .card-container {
+    width: 95%;
+    min-height: auto;
+  }
+
+  .form-card {
+    padding: 2rem 2rem;
+  }
 }
 
 @media (max-width: 768px) {
+  .card-container {
+    flex-direction: column;
+  }
+
   .visual-card {
     display: none;
   }
 
   .form-card {
     width: 100%;
-    border-radius: 12px;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
   }
 
-  .card-container {
-    width: 100%;
-    height: auto;
-    padding: 1rem;
+  .Title {
+    font-size: 1.8rem;
+  }
+
+  .input-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .Title {
+    font-size: 1.6rem;
+  }
+
+  .tipo-btn {
+    padding: 14px 10px;
+  }
+
+  .tipo-btn i {
+    font-size: 24px;
+  }
+
+  .tipo-btn span {
+    font-size: 13px;
+  }
+
+  .input-icon input {
+    height: 46px;
+    font-size: 14px;
+  }
+
+  .button-container button {
+    height: 48px;
+    font-size: 1rem;
   }
 }

@@ -1,63 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Iniciar Sesión - Sistema de Biblioteca</title>
 
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
 </head>
 
 <body>
-
-    <a href="/" class="btn-flotante" title="Volver al inicio">
-        <i class="fa-solid fa-house"></i>
-    </a>
-
 
     <section class="card-container">
 
         <section class="form-card">
 
             <p class="Title">Iniciar Sesión</p>
-            <section class="google">
-                <i class="fa-brands fa-google"></i>
-                <p class="label">Usa tu gmail para registrarte</p>
-            </section>
 
-            <form action="" method="">
+            <!-- Mensajes de error y éxito -->
+            <div th:if="${error}" class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i>
+                <span th:text="${error}"></span>
+            </div>
+
+            <div th:if="${success}" class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                <span th:text="${success}"></span>
+            </div>
+
+            <form action="/login" method="POST" id="loginForm" novalidate>
+                
                 <div class="input-group">
                     <div class="input-icon">
                         <i class="fa-solid fa-envelope"></i>
-                        <input type="email" id="emailUsuario" name="emailUsuario" placeholder="Email" required />
+                        <input type="email" id="correo" name="correo" placeholder="Correo electrónico" required />
                     </div>
+                    <span class="error-message" id="correoError"></span>
                 </div>
 
                 <div class="input-group">
                     <div class="input-icon">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" id="contraseñaUsuario" name="contraseñaUsuario" placeholder="Contraseña"
-                            required />
+                        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required />
+                        <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
                     </div>
+                    <span class="error-message" id="contrasenaError"></span>
                 </div>
 
                 <div class="button-container">
-                    <a href="">¿Olvidaste tu contraseña?</a>
+                    <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
                     <button type="submit">ACCEDER</button>
                 </div>
 
                 <div class="iniciar-sesion">
-                    <p>O crea una cuenta <a href="registro">Registrarse</a></p>
+                    <p>¿No tienes cuenta? <a href="/registro">Regístrate aquí</a></p>
                 </div>
             </form>
         </section>
+
         <section class="visual-card">
-            <img src="/img/forms/login.jpg" alt="img">
+            <img src="/img/forms/login.jpg" alt="Sistema de Biblioteca">
         </section>
+
     </section>
+
+    <script src="/js/login.js"></script>
 
 </body>
 

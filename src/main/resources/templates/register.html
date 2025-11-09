@@ -1,57 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Registro - Sistema de Biblioteca</title>
 
-    <!-- <link rel="stylesheet" href="home.css"> -->
     <link rel="stylesheet" href="/css/register.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
 </head>
 
 <body>
 
-    <a href="/" class="btn-flotante" title="Volver al inicio">
-        <i class="fa-solid fa-house"></i>
-    </a>
-
-
     <section class="card-container">
+
         <section class="visual-card">
-            <img src="/img/forms/register.jpg" alt="img">
+            <img src="/img/forms/register.jpg" alt="Sistema de Biblioteca">
         </section>
+
         <section class="form-card">
 
             <p class="Title">Crear cuenta</p>
-            <section class="google">
-                <i class="fa-brands fa-google"></i>
-                <p class="label">Usa tu gmail para registrarte</p>
-            </section>
 
-            <form action="" method="">
-                <div class="input-group">
-                    <div class="input-icon">
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Nombre" required />
+            <!-- Mensajes de error y éxito -->
+            <div th:if="${error}" class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i>
+                <span th:text="${error}"></span>
+            </div>
+
+            <form action="/registro" method="POST" id="registerForm" novalidate>
+                
+                <!-- Selector de tipo de usuario -->
+                <div class="tipo-usuario-container">
+                    <label class="tipo-label">Tipo de usuario:</label>
+                    <div class="tipo-buttons">
+                        <input type="radio" id="estudiante" name="tipoUsuario" value="ESTUDIANTE" required checked>
+                        <label for="estudiante" class="tipo-btn">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Estudiante</span>
+                        </label>
+                        
+                        <input type="radio" id="bibliotecario" name="tipoUsuario" value="BIBLIOTECARIO" required>
+                        <label for="bibliotecario" class="tipo-btn">
+                            <i class="fas fa-book-reader"></i>
+                            <span>Bibliotecario</span>
+                        </label>
+                    </div>
+                    <span class="error-message" id="tipoUsuarioError"></span>
+                </div>
+
+                <!-- Nombre y Apellido en una fila -->
+                <div class="input-row">
+                    <div class="input-group half">
+                        <div class="input-icon">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required />
+                        </div>
+                        <span class="error-message" id="nombreError"></span>
+                    </div>
+
+                    <div class="input-group half">
+                        <div class="input-icon">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" id="apellido" name="apellido" placeholder="Apellido" required />
+                        </div>
+                        <span class="error-message" id="apellidoError"></span>
                     </div>
                 </div>
 
+                <!-- Correo -->
                 <div class="input-group">
                     <div class="input-icon">
                         <i class="fa-solid fa-envelope"></i>
-                        <input type="email" id="emailUsuario" name="emailUsuario" placeholder="Email" required />
+                        <input type="email" id="correo" name="correo" placeholder="Correo electrónico" required />
                     </div>
+                    <span class="error-message" id="correoError"></span>
                 </div>
 
+                <!-- Teléfono -->
+                <div class="input-group">
+                    <div class="input-icon">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Teléfono (9 dígitos)" required 
+                               pattern="[0-9]{9,15}" maxlength="15" />
+                    </div>
+                    <span class="error-message" id="telefonoError"></span>
+                </div>
+
+                <!-- Contraseña -->
                 <div class="input-group">
                     <div class="input-icon">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" id="contraseñaUsuario" name="contraseñaUsuario" placeholder="Contraseña"
-                            required />
+                        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required />
+                        <i class="fa-solid fa-eye toggle-password" id="togglePassword1"></i>
                     </div>
+                    <span class="error-message" id="contrasenaError"></span>
+                </div>
+
+                <!-- Confirmar Contraseña -->
+                <div class="input-group">
+                    <div class="input-icon">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="confirmarContrasena" name="confirmarContrasena" 
+                               placeholder="Confirmar contraseña" required />
+                        <i class="fa-solid fa-eye toggle-password" id="togglePassword2"></i>
+                    </div>
+                    <span class="error-message" id="confirmarContrasenaError"></span>
                 </div>
 
                 <div class="button-container">
@@ -59,11 +113,14 @@
                 </div>
 
                 <div class="iniciar-sesion">
-                    <p>¿Ya tienes una cuenta? <a href="login">Iniciar sesión</a></p>
+                    <p>¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
                 </div>
             </form>
         </section>
+
     </section>
+
+    <script src="/js/register.js"></script>
 
 </body>
 
