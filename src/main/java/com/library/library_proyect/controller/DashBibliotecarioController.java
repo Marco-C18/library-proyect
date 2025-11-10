@@ -17,6 +17,9 @@ public class DashBibliotecarioController {
         }
         
         model.addAttribute("seccion", seccion);
+
+        System.out.println("📗 Entrando a DashBibliotecarioController /{seccion}");
+
         return "dashboards/dash_bibliotecario";
     }
     
