@@ -18,7 +18,8 @@
         <div class="content-wrapper">
 
             <div class="book-details-container">
-                <img th:src="${detalleLibro.imagen}" class="book-cover-detail" th:alt="${detalleLibro.titulo}">
+                <img th:src="@{/img/libros/{imagen}(imagen=${detalleLibro.imagen})}" class="book-cover-detail"
+                    th:alt="${detalleLibro.titulo}">
 
                 <div class="book-info-detail">
                     <h1 th:text="${detalleLibro.titulo}"></h1>
@@ -42,8 +43,8 @@
                     <div class="col-6 col-md-4 col-lg-3" th:each="sugerido : ${sugeridos}">
                         <a th:href="@{/detalleLibro/{id}(id=${sugerido.idLibro})}">
                             <div class="book-card-sugerencia">
-                                <img th:src="${sugerido.imagen}" class="img-fluid book-cover-sugerido mb-2"
-                                    th:alt="${sugerido.titulo}">
+                                <img th:src="@{/img/libros/{imagen}(imagen=${sugerido.imagen})}"
+                                    class="img-fluid book-cover-sugerido mb-2" th:alt="${sugerido.titulo}">
                             </div>
                         </a>
                     </div>

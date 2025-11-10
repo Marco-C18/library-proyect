@@ -95,7 +95,7 @@
                     <div class="prestamos-lista">
                         <div class="prestamo-item">
                             <div class="prestamo-info">
-                                <img th:src="@{/img/cien_años.jpg}" alt=" Cien años" class="img-fluid rounded">
+                                <img th:src="@{/img/libros/cien_años.jpg}" alt=" Cien años" class="img-fluid rounded">
                                 <div class="prestamo-detalles">
                                     <h5>Cien años de soledad</h5>
                                     <p>Gabriel García Márquez</p>
@@ -108,7 +108,7 @@
 
                         <div class="prestamo-item">
                             <div class="prestamo-info">
-                                <img th:src="@{/img/cien_años.jpg}" alt=" Cien años" class="img-fluid rounded">
+                                <img th:src="@{/img/libros/cien_años.jpg}" alt=" Cien años" class="img-fluid rounded">
                                 <div class="prestamo-detalles">
                                     <h5>Cien años de soledad</h5>
                                     <p>Gabriel García Márquez</p>
@@ -121,7 +121,7 @@
 
                         <div class="prestamo-item">
                             <div class="prestamo-info">
-                                <img th:src="@{/img/cien_años.jpg}" alt=" Cien años" class="img-fluid rounded">
+                                <img th:src="@{/img/libros/cien_años.jpg}" alt=" Cien años" class="img-fluid rounded">
                                 <div class="prestamo-detalles">
                                     <h5>Cien años de soledad</h5>
                                     <p>Gabriel García Márquez</p>
@@ -143,7 +143,7 @@
                     <div class="libros-lista">
                         <div class="libro-item">
                             <div class="libro-info">
-                                <img src="https://covers.openlibrary.org/b/id/8231856-L.jpg" alt="Portada">
+                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada">
                                 <div class="libro-detalles">
                                     <h5>Cien años de soledad</h5>
                                     <p>Gabriel Garcia Marquez</p>
@@ -160,7 +160,7 @@
 
                         <div class="libro-item">
                             <div class="libro-info">
-                                <img src="https://covers.openlibrary.org/b/id/8231856-L.jpg" alt="Portada">
+                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada">
                                 <div class="libro-detalles">
                                     <h5>Cien años de soledad</h5>
                                     <p>Gabriel Garcia Marquez</p>
@@ -177,7 +177,7 @@
 
                         <div class="libro-item">
                             <div class="libro-info">
-                                <img src="https://covers.openlibrary.org/b/id/8231856-L.jpg" alt="Portada">
+                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada">
                                 <div class="libro-detalles">
                                     <h5>Cien años de soledad</h5>
                                     <p>Gabriel Garcia Marquez</p>
@@ -196,74 +196,78 @@
 
                 <!-- modelo para agregar un libro -->
                 <th:block th:if="${libro != null}">
-                    <div class="modal fade" id="agregarLibroModal" tabindex="-1" aria-labelledby="agregarLibroModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="agregarLibroModal" tabindex="-1"
+                        aria-labelledby="agregarLibroModalLabel" aria-hidden="true">
 
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="agregarLibroModalLabel">Agregar Nuevo Libro</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="agregarLibroModalLabel">Agregar Nuevo Libro</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
 
-                            <form th:action="@{/bibliotecario/dashboard/libros/guardar}" th:object="${libro}"
-                                method="post">
-                                <div class="modal-body">
+                                <form th:action="@{/bibliotecario/dashboard/libros/guardar}" th:object="${libro}"
+                                    method="post" enctype="multipart/form-data">
+                                    <div class="modal-body">
 
-                                    <div class="mb-3">
-                                        <label for="titulo" class="form-label">Título</label>
-                                        <input type="text" class="form-control" id="titulo" th:field="*{titulo}"
-                                            required>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="autor" class="form-label">Autor</label>
-                                            <input type="text" class="form-control" id="autor" th:field="*{autor}"
+                                        <div class="mb-3">
+                                            <label for="titulo" class="form-label">Título</label>
+                                            <input type="text" class="form-control" id="titulo" th:field="*{titulo}"
                                                 required>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="anio" class="form-label">Año de Publicación</label>
-                                            <input type="number" class="form-control" id="anio" th:field="*{anio}">
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="autor" class="form-label">Autor</label>
+                                                <input type="text" class="form-control" id="autor" th:field="*{autor}"
+                                                    required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="anio" class="form-label">Año de Publicación</label>
+                                                <input type="number" class="form-control" id="anio" th:field="*{anio}">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="categoria" class="form-label">Categoría</label>
-                                            <input type="text" class="form-control" id="categoria"
-                                                th:field="*{categoria}" required>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="categoria" class="form-label">Categoría</label>
+                                                <input type="text" class="form-control" id="categoria"
+                                                    th:field="*{categoria}" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="paginas" class="form-label">Número de Páginas</label>
+                                                <input type="number" class="form-control" id="paginas"
+                                                    th:field="*{paginas}">
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="paginas" class="form-label">Número de Páginas</label>
-                                            <input type="number" class="form-control" id="paginas"
-                                                th:field="*{paginas}">
+
+                                        <div class="mb-3">
+                                            <label for="descripcion" class="form-label">Descripción</label>
+                                            <textarea class="form-control" id="descripcion" rows="3"
+                                                th:field="*{descripcion}"></textarea>
                                         </div>
+
+                                        <div class="mb-3">
+                                            <label for="imagen" class="form-label">URL de Imagen/Portada</label>
+                                            <!-- <input type="text" class="form-control" id="imagen" th:field="*{imagen}"> -->
+                                            <input type="file" class="form-control" id="imagen" th:field="*{file}"
+                                                accept="image/*">
+
+                                        </div>
+
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="descripcion" class="form-label">Descripción</label>
-                                        <textarea class="form-control" id="descripcion" rows="3"
-                                            th:field="*{descripcion}"></textarea>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar Libro</button>
                                     </div>
+                                </form>
 
-                                    <div class="mb-3">
-                                        <label for="imagen" class="form-label">URL de Imagen/Portada</label>
-                                        <input type="text" class="form-control" id="imagen" th:field="*{imagen}">
-                                    </div>
-
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Guardar Libro</button>
-                                </div>
-                            </form>
-
+                            </div>
                         </div>
                     </div>
-                </div>
                 </th:block>
 
                 <div th:if="${seccion == 'categorias'}" class="gestion-categorias">
@@ -311,7 +315,7 @@
                     <div class="reporte-lista">
                         <div class="reporte-item d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center gap-3">
-                                <img src="https://covers.openlibrary.org/b/id/8231856-L.jpg" alt="Portada"
+                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada"
                                     class="reporte-img">
                                 <div>
                                     <div class="fw-bold">Cien años de soledad</div>
@@ -327,7 +331,7 @@
 
                         <div class="reporte-item d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center gap-3">
-                                <img src="https://covers.openlibrary.org/b/id/8231856-L.jpg" alt="Portada"
+                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada"
                                     class="reporte-img">
                                 <div>
                                     <div class="fw-bold">Cien años de soledad</div>
@@ -356,7 +360,7 @@
                     <div class="aprobaciones-lista">
                         <div class="aprobacion-item">
                             <div class="aprobacion-info">
-                                <img src="https://covers.openlibrary.org/b/id/8231856-L.jpg" alt="Portada del libro">
+                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada del libro">
                                 <div>
                                     <h5>Cien años de soledad</h5>
                                     <p>Gabriel Garcia Marquez</p>
@@ -372,7 +376,7 @@
 
                         <div class="aprobacion-item">
                             <div class="aprobacion-info">
-                                <img src="https://covers.openlibrary.org/b/id/8231856-L.jpg" alt="Portada del libro">
+                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada del libro">
                                 <div>
                                     <h5>Cien años de soledad</h5>
                                     <p>Gabriel Garcia Marquez</p>
@@ -388,7 +392,7 @@
 
                         <div class="aprobacion-item">
                             <div class="aprobacion-info">
-                                <img src="https://covers.openlibrary.org/b/id/8231856-L.jpg" alt="Portada del libro">
+                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada del libro">
                                 <div>
                                     <h5>Cien años de soledad</h5>
                                     <p>Gabriel Garcia Marquez</p>
@@ -404,7 +408,7 @@
 
                         <div class="aprobacion-item">
                             <div class="aprobacion-info">
-                                <img src="https://covers.openlibrary.org/b/id/8231856-L.jpg" alt="Portada del libro">
+                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada del libro">
                                 <div>
                                     <h5>Cien años de soledad</h5>
                                     <p>Gabriel Garcia Marquez</p>

@@ -1,13 +1,12 @@
 package com.library.library_proyect.controller;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.library.library_proyect.model.Libros;
 import com.library.library_proyect.services.CatalogoService;
@@ -19,7 +18,6 @@ public class DashBibliotecarioController {
     @Autowired
     private CatalogoService catalogoService;
 
-    // SOLUCIÓN ROBUSTA: Garantiza que 'libro' siempre esté en el Model
     @ModelAttribute("libro")
     public Libros setupLibroForm() {
         return new Libros();
@@ -37,7 +35,7 @@ public class DashBibliotecarioController {
 
         return "dashboards/dash_bibliotecario";
     }
-    
+
     @GetMapping
     public String dashboardDefault() {
         return "redirect:/bibliotecario/dashboard/inicio";
@@ -48,20 +46,38 @@ public class DashBibliotecarioController {
     @PostMapping("/libros/guardar")
     public String guardarNuevoLibro(@ModelAttribute("libro") Libros libro) {
         try {
+            MultipartFile file = libro.getFile();
+            if (file != null && !file.isEmpty()) {
+                String uploadsDir = new File("src/main/resources/static/img/libros/").getAbsolutePath() + "/";
+                File uploadsFolder = new File(uploadsDir);
+                if (!uploadsFolder.exists()) {
+                    uploadsFolder.mkdirs();
+                }
+
+                String originalFilename = file.getOriginalFilename();
+                String uniqueFilename = System.currentTimeMillis() + "_" + originalFilename;
+                String filePath = uploadsDir + uniqueFilename;
+
+                // Guardar archivo físicamente
+                file.transferTo(new File(filePath));
+
+                // Guardar nombre en la BD
+                libro.setImagen(uniqueFilename);
+            }
+
             catalogoService.guardarLibro(libro);
             return "redirect:/bibliotecario/dashboard/libros?success=true";
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("Error al guardar el libro: " + e.getMessage());
             return "redirect:/bibliotecario/dashboard/libros?error=true";
         }
     }
 
     private boolean esSeccionValida(String seccion) {
         return seccion.equals("inicio")
-            || seccion.equals("libros")
-            || seccion.equals("categorias")
-            || seccion.equals("reportes")
-            || seccion.equals("aprobaciones");
+                || seccion.equals("libros")
+                || seccion.equals("categorias")
+                || seccion.equals("reportes")
+                || seccion.equals("aprobaciones");
     }
 }

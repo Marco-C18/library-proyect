@@ -1,11 +1,7 @@
 package com.library.library_proyect.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import org.springframework.web.multipart.MultipartFile;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Libros")
@@ -36,6 +32,9 @@ public class Libros {
 
     @Column(name = "imagen")
     private String imagen;
+
+    @Transient
+    private MultipartFile file;
 
     public Long getIdLibro() {
         return idLibro;
@@ -99,6 +98,14 @@ public class Libros {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
 
 }

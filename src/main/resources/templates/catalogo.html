@@ -71,8 +71,8 @@
                     <div class="row g-4">
                         <div class="col-6 col-md-4 col-lg-4" th:each="libro : ${libros}">
                             <div class="book-card position-relative">
-                                <img th:src="${libro.imagen}" class="img-fluid book-cover mb-2"
-                                    alt="Cien años de soledad">
+                                <img th:src="@{/img/libros/{imagen}(imagen=${libro.imagen})}"
+                                    class="img-fluid book-cover mb-2" alt="libros">
                                 <div class="book-info text-center">
                                     <h5 class="book-title" th:text="${libro.titulo}"></h5>
                                     <p class="book-author" th:text="${libro.autor}"></p>
