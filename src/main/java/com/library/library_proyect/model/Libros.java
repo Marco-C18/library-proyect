@@ -31,7 +31,7 @@ public class Libros {
     @Column(name = "paginas", length = 45)
     private Integer paginas;
 
-    @Column(name = "descripcion", length = 245)
+    @Column(name = "descripcion", length = 1024)
     private String descripcion;
 
     @Column(name = "imagen")
