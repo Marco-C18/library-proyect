@@ -15,6 +15,11 @@ public class CatalogoService {
     @Autowired
     CatalogoRepository catalogoRepository;
 
+    //Método para guardar
+    public Libros guardarLibro(Libros libro) {
+        return catalogoRepository.save(libro);
+    }
+
     public List<Libros> obtenerLibros() {
         return catalogoRepository.findAll();
     }
