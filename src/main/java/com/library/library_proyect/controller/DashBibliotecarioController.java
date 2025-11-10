@@ -48,6 +48,7 @@ public class DashBibliotecarioController {
             catalogoService.guardarLibro(libro);
             return "redirect:/bibliotecario/dashboard/libros?success=true";
         } catch (Exception e) {
+            e.printStackTrace();
             System.err.println("Error al guardar el libro: " + e.getMessage());
             return "redirect:/bibliotecario/dashboard/libros?error=true";
         }
