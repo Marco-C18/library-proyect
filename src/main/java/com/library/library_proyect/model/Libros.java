@@ -21,8 +21,9 @@ public class Libros {
     @Column(name = "anio", length = 45)
     private Integer anio;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "categoria", length = 45)
-    private String categoria;
+    private CategoriaLibro categoria;
 
     @Column(name = "paginas", length = 45)
     private Integer paginas;
@@ -68,12 +69,12 @@ public class Libros {
         this.anio = anio;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public CategoriaLibro getCategoria() {
+    return categoria;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCategoria(CategoriaLibro categoria) {
+    this.categoria = categoria;
     }
 
     public Integer getPaginas() {

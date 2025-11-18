@@ -232,8 +232,14 @@
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label for="categoria" class="form-label">Categoría</label>
-                                                <input type="text" class="form-control" id="categoria"
-                                                    th:field="*{categoria}" required>
+                                                <select class="form-select" id="categoria" th:field="*{categoria}"
+                                                    required>
+                                                    <option value="">Seleccionar categoría</option>
+                                                    <option
+                                                        th:each="cat : ${T(com.library.library_proyect.model.CategoriaLibro).values()}"
+                                                        th:value="${cat}" th:text="${cat.displayName}">
+                                                    </option>
+                                                </select>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="paginas" class="form-label">Número de Páginas</label>
@@ -315,8 +321,7 @@
                     <div class="reporte-lista">
                         <div class="reporte-item d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center gap-3">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada"
-                                    class="reporte-img">
+                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada" class="reporte-img">
                                 <div>
                                     <div class="fw-bold">Cien años de soledad</div>
                                     <div class="text-muted small">Gabriel García Márquez</div>
@@ -331,8 +336,7 @@
 
                         <div class="reporte-item d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center gap-3">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada"
-                                    class="reporte-img">
+                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada" class="reporte-img">
                                 <div>
                                     <div class="fw-bold">Cien años de soledad</div>
                                     <div class="text-muted small">Gabriel García Márquez</div>

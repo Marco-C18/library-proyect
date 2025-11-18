@@ -91,19 +91,21 @@ body {
   margin-top: 1.5rem;
 }
 
-.prestamo-button {
-  background-color: #007bff;
-  border-color: #007bff;
+.btn-prestamo-button {
+  background-color: #2196f3;
   color: white;
   font-size: 1.2rem;
   padding: 0.75rem 2.5rem;
-  border-radius: 50px;
   margin-top: 2rem;
   transition: background-color 0.3s;
+  border: none;
+  border-radius: 40px;
 }
 
-.prestamo-button:hover {
-  background-color: #0056b3;
+.btn-prestamo-button:hover {
+  background-color: transparent;
+  border: 2px solid #2196f3;
+  color:#2196f3;
 }
 
 /* --- Sección de Sugerencias --- */

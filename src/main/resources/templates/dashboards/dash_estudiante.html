@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div th:replace="fragments/navbar :: navbar"></div>
+    <!-- <div th:replace="fragments/navbar :: navbar"></div> -->
 
     <div class="container-fluid">
         <div class="row">
@@ -27,22 +27,22 @@
                     <a href="/estudiante/dashboard/prestamos-activos" class="menu-item"
                         th:classappend="${seccion == 'prestamos-activos'} ? 'active' : ''">
                         <i class="fas fa-book"></i>
-                        <span>Prestamos activos</span>
+                        <span>Préstamos activos</span>
                     </a>
                     <a href="/estudiante/dashboard/solicitud-prestamo" class="menu-item"
                         th:classappend="${seccion == 'solicitud-prestamo'} ? 'active' : ''">
                         <i class="far fa-file-alt"></i>
-                        <span>Solicitud de préstamo</span>
+                        <span>Solicitud de préstamos</span>
                     </a>
                     <a href="/estudiante/dashboard/confirmacion-prestamo" class="menu-item"
                         th:classappend="${seccion == 'confirmacion-prestamo'} ? 'active' : ''">
                         <i class="far fa-envelope"></i>
-                        <span>Confirmación de préstamo</span>
+                        <span>Confirmación de préstamos</span>
                     </a>
                     <a href="/estudiante/dashboard/historial-prestamo" class="menu-item"
                         th:classappend="${seccion == 'historial-prestamo'} ? 'active' : ''">
                         <i class="fas fa-history"></i>
-                        <span>Historial de préstamo</span>
+                        <span>Historial de préstamos</span>
                     </a>
                     <a th:href="@{/}" class="menu-item">
                         <i class="fas fa-home"></i>
@@ -57,7 +57,7 @@
                 <!-- CONTENIDO: INICIO -->
                 <div th:if="${seccion == 'inicio'}">
                     <div class="content-header">
-                        <h2>Hola, <strong>Diego</strong></h2>
+                        <h2>Hola, <strong th:text="${session.usuarioNombre}"></strong></h2>
                         <p class="text-muted">Bienvenido a tu biblioteca digital</p>
                     </div>
 
@@ -116,8 +116,8 @@
                             </div>
                             <div class="col-md-4">
                                 <a href="/estudiante/dashboard/solicitud-prestamo" class="quick-action-card">
-                                    <i class="fas fa-plus-circle"></i>
-                                    <span>Nueva Solicitud</span>
+                                    <i class="fas fa-file-alt"></i>
+                                    <span>Ver Solicitudes</span>
                                 </a>
                             </div>
                             <div class="col-md-4">

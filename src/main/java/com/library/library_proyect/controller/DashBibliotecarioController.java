@@ -1,6 +1,8 @@
 package com.library.library_proyect.controller;
 
 import java.io.File;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.library.library_proyect.model.CategoriaLibro;
 import com.library.library_proyect.model.Libros;
 import com.library.library_proyect.services.CatalogoService;
 
@@ -41,7 +44,16 @@ public class DashBibliotecarioController {
         return "redirect:/bibliotecario/dashboard/inicio";
     }
 
-    // --- El método GET /libros/agregar y su lógica se eliminó ---
+    // ✨ NUEVO MÉTODO: Endpoint para obtener las categorías disponibles
+    @GetMapping("/categorias-disponibles")
+    @ResponseBody
+    public Map<String, String> getCategoriasDisponibles() {
+        Map<String, String> categorias = new LinkedHashMap<>();
+        for (CategoriaLibro cat : CategoriaLibro.values()) {
+            categorias.put(cat.name(), cat.getDisplayName());
+        }
+        return categorias;
+    }
 
     @PostMapping("/libros/guardar")
     public String guardarNuevoLibro(@ModelAttribute("libro") Libros libro) {
