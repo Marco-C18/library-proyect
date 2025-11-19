@@ -357,72 +357,50 @@
                     </div>
 
                     <div class="aprobaciones-encabezado">
+                        <span class="fw-semibold">Libro</span>
+                        <span class="fw-semibold">Estudiante</span>
                         <span class="fw-semibold">Devolución</span>
                         <span class="fw-semibold">Aprobación</span>
                     </div>
 
+                    <!-- Mensaje si no hay solicitudes pendientes -->
+                    <div th:if="${prestamos == null or prestamos.isEmpty()}" class="alert alert-info mt-3">
+                        No hay solicitudes pendientes de aprobación.
+                    </div>
+
                     <div class="aprobaciones-lista">
-                        <div class="aprobacion-item">
+                        <div th:each="prestamo : ${prestamos}" class="aprobacion-item">
                             <div class="aprobacion-info">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada del libro">
+                                <img th:src="@{'/img/libros/' + ${prestamo.libro.imagen}}"
+                                    th:alt="${prestamo.libro.titulo}">
                                 <div>
-                                    <h5>Cien años de soledad</h5>
-                                    <p>Gabriel Garcia Marquez</p>
-                                    <span>1967</span>
+                                    <h5 th:text="${prestamo.libro.titulo}">Título</h5>
+                                    <p th:text="${prestamo.libro.autor}">Autor</p>
+                                    <span th:text="${prestamo.libro.anio}">Año</span>
                                 </div>
                             </div>
-                            <div class="aprobacion-devolucion">18/10/2025</div>
+                            <div class="aprobacion-estudiante">
+                                <span th:text="${prestamo.usuario.nombre}">Estudiante</span>
+                            </div>
+                            <div class="aprobacion-devolucion"
+                                th:text="${#temporals.format(prestamo.fechaDevolucion, 'dd/MM/yyyy')}">
+                                Fecha
+                            </div>
                             <div class="aprobacion-botones">
-                                <button class="btn-aprobar"><i class="fa-solid fa-check"></i></button>
-                                <button class="btn-rechazar"><i class="fa-solid fa-xmark"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="aprobacion-item">
-                            <div class="aprobacion-info">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada del libro">
-                                <div>
-                                    <h5>Cien años de soledad</h5>
-                                    <p>Gabriel Garcia Marquez</p>
-                                    <span>1967</span>
-                                </div>
-                            </div>
-                            <div class="aprobacion-devolucion">18/10/2025</div>
-                            <div class="aprobacion-botones">
-                                <button class="btn-aprobar"><i class="fa-solid fa-check"></i></button>
-                                <button class="btn-rechazar"><i class="fa-solid fa-xmark"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="aprobacion-item">
-                            <div class="aprobacion-info">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada del libro">
-                                <div>
-                                    <h5>Cien años de soledad</h5>
-                                    <p>Gabriel Garcia Marquez</p>
-                                    <span>1967</span>
-                                </div>
-                            </div>
-                            <div class="aprobacion-devolucion">18/10/2025</div>
-                            <div class="aprobacion-botones">
-                                <button class="btn-aprobar"><i class="fa-solid fa-check"></i></button>
-                                <button class="btn-rechazar"><i class="fa-solid fa-xmark"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="aprobacion-item">
-                            <div class="aprobacion-info">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Portada del libro">
-                                <div>
-                                    <h5>Cien años de soledad</h5>
-                                    <p>Gabriel Garcia Marquez</p>
-                                    <span>1967</span>
-                                </div>
-                            </div>
-                            <div class="aprobacion-devolucion">18/10/2025</div>
-                            <div class="aprobacion-botones">
-                                <button class="btn-aprobar"><i class="fa-solid fa-check"></i></button>
-                                <button class="btn-rechazar"><i class="fa-solid fa-xmark"></i></button>
+                                <form th:action="@{/bibliotecario/dashboard/aprobar/{id}(id=${prestamo.idPrestamo})}"
+                                    method="post" style="display:inline;">
+                                    <button type="submit" class="btn-aprobar"
+                                        onclick="return confirm('¿Aprobar este préstamo?')">
+                                        <i class="fa-solid fa-check"></i>
+                                    </button>
+                                </form>
+                                <form th:action="@{/bibliotecario/dashboard/rechazar/{id}(id=${prestamo.idPrestamo})}"
+                                    method="post" style="display:inline;">
+                                    <button type="submit" class="btn-rechazar"
+                                        onclick="return confirm('¿Rechazar este préstamo?')">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>

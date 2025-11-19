@@ -67,7 +67,7 @@
                             <div class="stats-card">
                                 <i class="fas fa-book-open stats-icon"></i>
                                 <div class="stats-info">
-                                    <h3>3</h3>
+                                    <h3 th:text="${cantidadPrestamosActivos ?: 0}">0</h3>
                                     <p>Préstamos Activos</p>
                                 </div>
                             </div>
@@ -77,13 +77,13 @@
                             <div class="stats-card">
                                 <i class="fas fa-file-alt stats-icon"></i>
                                 <div class="stats-info">
-                                    <h3>2</h3>
+                                    <h3 th:text="${cantidadSolicitudesPendientes ?: 0}">0</h3>
                                     <p>Solicitudes Pendientes</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6 col-lg-3">
+                        <!-- <div class="col-md-6 col-lg-3">
                             <div class="stats-card">
                                 <i class="fas fa-history stats-icon"></i>
                                 <div class="stats-info">
@@ -91,13 +91,13 @@
                                     <p>Libros Leídos</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="col-md-6 col-lg-3">
                             <div class="stats-card">
                                 <i class="fas fa-calendar-alt stats-icon"></i>
                                 <div class="stats-info">
-                                    <h3>1</h3>
+                                    <h3 th:text="${cantidadProximosAVencer ?: 0}">0</h3>
                                     <p>Próximo a Vencer</p>
                                 </div>
                             </div>
@@ -132,25 +132,49 @@
                     <!-- Últimas Notificaciones -->
                     <div class="notifications-section mt-4">
                         <h4 class="mb-3">Notificaciones Recientes</h4>
-                        <div class="notification-item">
+
+                        <!-- Mensaje si no hay notificaciones -->
+                        <div th:if="${(notificacionesProximoVencer == null or notificacionesProximoVencer.isEmpty()) 
+                  and (notificacionesAprobadas == null or notificacionesAprobadas.isEmpty())}"
+                            class="alert alert-info">
+                            No tienes notificaciones recientes.
+                        </div>
+
+                        <!-- Notificaciones de devolución próxima -->
+                        <div th:each="prestamo : ${notificacionesProximoVencer}" class="notification-item">
                             <div class="notification-icon-wrapper warning">
                                 <i class="fas fa-exclamation-triangle"></i>
                             </div>
                             <div class="notification-content">
                                 <p class="notification-title">Devolución Próxima</p>
-                                <p class="notification-text">El libro "Cien años de soledad" debe devolverse en 3 días
+                                <p class="notification-text">
+                                    El libro "<span th:text="${prestamo.libro.titulo}"></span>" debe devolverse en
+                                    <span
+                                        th:with="diasRestantes=${T(java.time.temporal.ChronoUnit).DAYS.between(T(java.time.LocalDate).now(), prestamo.fechaDevolucion)}"
+                                        th:text="${diasRestantes == 0 ? 'hoy' : (diasRestantes == 1 ? '1 día' : diasRestantes + ' días')}">
+                                    </span>
                                 </p>
-                                <span class="notification-time">Hace 2 horas</span>
+                                <span class="notification-time"
+                                    th:text="'Vence el ' + ${#temporals.format(prestamo.fechaDevolucion, 'dd/MM/yyyy')}">
+                                </span>
                             </div>
                         </div>
-                        <div class="notification-item">
+
+                        <!-- Notificaciones de solicitudes aprobadas -->
+                        <div th:each="prestamo : ${notificacionesAprobadas}" class="notification-item">
                             <div class="notification-icon-wrapper success">
                                 <i class="fas fa-check-circle"></i>
                             </div>
                             <div class="notification-content">
                                 <p class="notification-title">Solicitud Aprobada</p>
-                                <p class="notification-text">Tu solicitud para "El Principito" ha sido aprobada</p>
-                                <span class="notification-time">Hace 1 día</span>
+                                <p class="notification-text">
+                                    Tu solicitud para "<span th:text="${prestamo.libro.titulo}"></span>" ha sido
+                                    aprobada, ya puedes recoger el libro en la biblioteca.
+                                </p>
+                                <span class="notification-time"
+                                    th:with="diasPasados=${T(java.time.temporal.ChronoUnit).DAYS.between(prestamo.fechaAprobacion, T(java.time.LocalDate).now())}"
+                                    th:text="${diasPasados == 0 ? 'Hoy' : (diasPasados == 1 ? 'Hace 1 día' : 'Hace ' + diasPasados + ' días')}">
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -174,49 +198,30 @@
                             </div>
                         </div>
 
-                        <!-- Préstamo 1 -->
-                        <div class="loan-card mb-3">
-                            <div class="loan-book-info">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Cien años de soledad"
-                                    class="loan-book-cover">
-                                <div class="loan-book-details">
-                                    <div class="loan-book-title">Cien años de soledad</div>
-                                    <div class="loan-book-author">Gabriel García Marquez</div>
-                                    <div class="loan-book-year">1967</div>
-                                </div>
-                            </div>
-                            <div class="loan-date">19/08/2025</div>
-                            <div class="loan-return-date">19/09/2025</div>
+                        <!-- Mensaje si no hay préstamos -->
+                        <div th:if="${prestamosActivos == null or prestamosActivos.isEmpty()}" class="alert alert-info">
+                            No tienes préstamos activos en este momento.
                         </div>
 
-                        <!-- Préstamo 2 -->
-                        <div class="loan-card mb-3">
+                        <!-- Lista de préstamos -->
+                        <div th:each="prestamo : ${prestamosActivos}" class="loan-card mb-3">
                             <div class="loan-book-info">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Cien años de soledad"
-                                    class="loan-book-cover">
+                                <img th:src="@{'/img/libros/' + ${prestamo.libro.imagen}}"
+                                    th:alt="${prestamo.libro.titulo}" class="loan-book-cover">
                                 <div class="loan-book-details">
-                                    <div class="loan-book-title">Cien años de soledad</div>
-                                    <div class="loan-book-author">Gabriel García Marquez</div>
-                                    <div class="loan-book-year">1967</div>
+                                    <div class="loan-book-title" th:text="${prestamo.libro.titulo}">Título</div>
+                                    <div class="loan-book-author" th:text="${prestamo.libro.autor}">Autor</div>
+                                    <div class="loan-book-year" th:text="${prestamo.libro.anio}">Año</div>
                                 </div>
                             </div>
-                            <div class="loan-date">19/08/2025</div>
-                            <div class="loan-return-date">19/09/2025</div>
-                        </div>
-
-                        <!-- Préstamo 3 -->
-                        <div class="loan-card">
-                            <div class="loan-book-info">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Cien años de soledad"
-                                    class="loan-book-cover">
-                                <div class="loan-book-details">
-                                    <div class="loan-book-title">Cien años de soledad</div>
-                                    <div class="loan-book-author">Gabriel García Marquez</div>
-                                    <div class="loan-book-year">1967</div>
-                                </div>
+                            <div class="loan-date"
+                                th:text="${#temporals.format(prestamo.fechaAprobacion, 'dd/MM/yyyy')}">
+                                Fecha
                             </div>
-                            <div class="loan-date">19/08/2025</div>
-                            <div class="loan-return-date">19/09/2025</div>
+                            <div class="loan-return-date"
+                                th:text="${#temporals.format(prestamo.fechaDevolucion, 'dd/MM/yyyy')}">
+                                Devolución
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -238,37 +243,31 @@
                             </div>
                         </div>
 
-                        <!-- Solicitud 1 -->
-                        <div class="request-card mb-3">
-                            <div class="request-book-info">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Cien años de soledad"
-                                    class="request-book-cover">
-                                <div class="request-book-details">
-                                    <div class="request-book-title">Cien años de soledad</div>
-                                    <div class="request-book-author">Gabriel García Marquez</div>
-                                    <div class="request-book-year">1967</div>
-                                </div>
-                            </div>
-                            <div class="request-actions">
-                                <span class="status-badge">Enviado</span>
-                                <button class="btn-cancel">Cancelar</button>
-                            </div>
+                        <!-- Mensaje si no hay solicitudes -->
+                        <div th:if="${solicitudes == null or solicitudes.isEmpty()}" class="alert alert-info">
+                            No tienes solicitudes pendientes en este momento.
                         </div>
 
-                        <!-- Solicitud 2 -->
-                        <div class="request-card">
+                        <!-- Lista de solicitudes -->
+                        <div th:each="prestamo : ${solicitudes}" class="request-card mb-3">
                             <div class="request-book-info">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Cien años de soledad"
-                                    class="request-book-cover">
+                                <img th:src="@{'/img/libros/' + ${prestamo.libro.imagen}}"
+                                    th:alt="${prestamo.libro.titulo}" class="request-book-cover">
                                 <div class="request-book-details">
-                                    <div class="request-book-title">Cien años de soledad</div>
-                                    <div class="request-book-author">Gabriel García Marquez</div>
-                                    <div class="request-book-year">1967</div>
+                                    <div class="request-book-title" th:text="${prestamo.libro.titulo}">Título</div>
+                                    <div class="request-book-author" th:text="${prestamo.libro.autor}">Autor</div>
+                                    <div class="request-book-year" th:text="${prestamo.libro.anio}">Año</div>
                                 </div>
                             </div>
                             <div class="request-actions">
                                 <span class="status-badge">Enviado</span>
-                                <button class="btn-cancel">Cancelar</button>
+                                <form th:action="@{/prestamos/cancelar/{id}(id=${prestamo.idPrestamo})}" method="post"
+                                    style="display:inline;" th:id="'formCancelar' + ${prestamo.idPrestamo}">
+                                    <button type="button" class="btn-cancel"
+                                        th:onclick="'mostrarConfirmacionCancelar(' + ${prestamo.idPrestamo} + ')'">
+                                        Cancelar
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -292,43 +291,42 @@
                             </div>
                         </div>
 
-                        <!-- Confirmación 1 -->
-                        <div class="confirmation-card mb-3">
-                            <div class="confirmation-book-info">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Cien años de soledad"
-                                    class="confirmation-book-cover">
-                                <div class="confirmation-book-details">
-                                    <div class="confirmation-book-title">Cien años de soledad</div>
-                                    <div class="confirmation-book-author">Gabriel García Marquez</div>
-                                    <div class="confirmation-book-year">1967</div>
-                                </div>
-                            </div>
-                            <div class="confirmation-status">
-                                <i class="fas fa-check-circle status-icon-approved"></i>
-                            </div>
-                            <div class="confirmation-date">19/09/2025</div>
-                            <div class="confirmation-actions">
-                                <button class="btn-cancel-confirmation">Cancelar</button>
-                            </div>
+                        <!-- Mensaje si no hay confirmaciones -->
+                        <div th:if="${confirmaciones == null or confirmaciones.isEmpty()}" class="alert alert-info">
+                            No tienes confirmaciones en este momento.
                         </div>
 
-                        <!-- Confirmación 2 -->
-                        <div class="confirmation-card">
+                        <!-- Lista de confirmaciones -->
+                        <div th:each="prestamo : ${confirmaciones}" class="confirmation-card mb-3">
                             <div class="confirmation-book-info">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Cien años de soledad"
-                                    class="confirmation-book-cover">
+                                <img th:src="@{'/img/libros/' + ${prestamo.libro.imagen}}"
+                                    th:alt="${prestamo.libro.titulo}" class="confirmation-book-cover">
                                 <div class="confirmation-book-details">
-                                    <div class="confirmation-book-title">Cien años de soledad</div>
-                                    <div class="confirmation-book-author">Gabriel García Marquez</div>
-                                    <div class="confirmation-book-year">1967</div>
+                                    <div class="confirmation-book-title" th:text="${prestamo.libro.titulo}">Título</div>
+                                    <div class="confirmation-book-author" th:text="${prestamo.libro.autor}">Autor</div>
+                                    <div class="confirmation-book-year" th:text="${prestamo.libro.anio}">Año</div>
                                 </div>
                             </div>
                             <div class="confirmation-status">
-                                <i class="fas fa-check-circle status-icon-approved"></i>
+                                <i th:if="${prestamo.estado.name() == 'APROBADO'}"
+                                    class="fas fa-check-circle status-icon-approved"></i>
+                                <i th:if="${prestamo.estado.name() == 'RECHAZADO'}" style="color: #dc3545;"></i>
+                                <span th:if="${prestamo.estado.name() == 'RECHAZADO'}"
+                                    style="color: #dc3545; font-weight: 600;">Rechazado</span>
                             </div>
-                            <div class="confirmation-date">19/09/2025</div>
-                            <div class="confirmation-actions">
-                                <button class="btn-cancel-confirmation">Cancelar</button>
+                            <div class="confirmation-date"
+                                th:text="${#temporals.format(prestamo.fechaDevolucion, 'dd/MM/yyyy')}">
+                                Fecha
+                            </div>
+                            <div class="confirmation-actions" th:if="${prestamo.estado.name() == 'APROBADO'}">
+                                <form th:action="@{/prestamos/cancelar-confirmacion/{id}(id=${prestamo.idPrestamo})}"
+                                    method="post" style="display:inline;"
+                                    th:id="'formCancelarConf' + ${prestamo.idPrestamo}">
+                                    <button type="button" class="btn-cancel-confirmation"
+                                        th:onclick="'mostrarConfirmacionCancelarConfirmacion(' + ${prestamo.idPrestamo} + ')'">
+                                        Cancelar
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -352,66 +350,143 @@
                             </div>
                         </div>
 
-                        <!-- Historia 1 - Devuelto -->
-                        <div class="history-card mb-3">
-                            <div class="history-book-info">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Cien años de soledad"
-                                    class="history-book-cover">
-                                <div class="history-book-details">
-                                    <div class="history-book-title">Cien años de soledad</div>
-                                    <div class="history-book-author">Gabriel García Marquez</div>
-                                    <div class="history-book-year">1967</div>
-                                </div>
-                            </div>
-                            <div class="history-status">
-                                <span class="status-text-returned">Devuelto</span>
-                                <i class="fas fa-check-circle status-icon-returned"></i>
-                            </div>
-                            <div class="history-date">18/09/2025</div>
+                        <!-- Mensaje si no hay historial -->
+                        <div th:if="${historial == null or historial.isEmpty()}" class="alert alert-info">
+                            No tienes historial de préstamos.
                         </div>
 
-                        <!-- Historia 2 - En lectura -->
-                        <div class="history-card mb-3">
+                        <!-- Lista de historial -->
+                        <div th:each="prestamo : ${historial}" class="history-card mb-3">
                             <div class="history-book-info">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Cien años de soledad"
-                                    class="history-book-cover">
+                                <img th:src="@{'/img/libros/' + ${prestamo.libro.imagen}}"
+                                    th:alt="${prestamo.libro.titulo}" class="history-book-cover">
                                 <div class="history-book-details">
-                                    <div class="history-book-title">Cien años de soledad</div>
-                                    <div class="history-book-author">Gabriel García Marquez</div>
-                                    <div class="history-book-year">1967</div>
+                                    <div class="history-book-title" th:text="${prestamo.libro.titulo}">Título</div>
+                                    <div class="history-book-author" th:text="${prestamo.libro.autor}">Autor</div>
+                                    <div class="history-book-year" th:text="${prestamo.libro.anio}">Año</div>
                                 </div>
                             </div>
                             <div class="history-status">
-                                <span class="status-text-reading">En lectura</span>
+                                <!-- DEVUELTO -->
+                                <th:block th:if="${prestamo.estado.name() == 'DEVUELTO'}">
+                                    <span class="status-text-returned">Devuelto</span>
+                                    <i class="fas fa-check-circle status-icon-returned"></i>
+                                </th:block>
+                                <!-- EN LECTURA (APROBADO) -->
+                                <th:block th:if="${prestamo.estado.name() == 'APROBADO'}">
+                                    <span class="status-text-reading">En lectura</span>
+                                </th:block>
+                                <!-- PENDIENTE -->
+                                <th:block th:if="${prestamo.estado.name() == 'PENDIENTE'}">
+                                    <span class="status-text-pending">Pendiente</span>
+                                </th:block>
+                                <!-- RECHAZADO -->
+                                <th:block th:if="${prestamo.estado.name() == 'RECHAZADO'}">
+                                    <span class="status-text-rejected" style="color: #dc3545;">Rechazado</span>
+                                </th:block>
                             </div>
-                            <div class="history-date">18/10/2025</div>
-                        </div>
-
-                        <!-- Historia 3 - Devolver (con alerta) -->
-                        <div class="history-card">
-                            <div class="history-book-info">
-                                <img th:src="@{/img/libros/cien_años.jpg}" alt="Cien años de soledad"
-                                    class="history-book-cover">
-                                <div class="history-book-details">
-                                    <div class="history-book-title">Cien años de soledad</div>
-                                    <div class="history-book-author">Gabriel García Marquez</div>
-                                    <div class="history-book-year">1967</div>
-                                </div>
+                            <div class="history-date">
+                                <span th:if="${prestamo.fechaDevolucionReal != null}"
+                                    th:text="${#temporals.format(prestamo.fechaDevolucionReal, 'dd/MM/yyyy')}">
+                                </span>
+                                <span th:if="${prestamo.fechaDevolucionReal == null}"
+                                    th:text="${#temporals.format(prestamo.fechaDevolucion, 'dd/MM/yyyy')}">
+                                </span>
                             </div>
-                            <div class="history-status">
-                                <span class="status-text-pending">Devolver</span>
-                                <i class="fas fa-exclamation-triangle status-icon-pending"></i>
-                            </div>
-                            <div class="history-date">18/10/2025</div>
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
+
+        <!-- Modal de confirmación para cancelar solicitud -->
+        <div class="modal fade modal-confirm" id="confirmCancelarSolicitud" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="icon-box warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h4>¿Cancelar solicitud?</h4>
+                        <p>Esta acción no se puede deshacer. La solicitud de préstamo será eliminada.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancel-modal" data-bs-dismiss="modal">
+                            No, mantener
+                        </button>
+                        <button type="button" class="btn btn-danger-modal" id="btnConfirmarCancelar">
+                            Sí, cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de confirmación para cancelar confirmación -->
+        <div class="modal fade modal-confirm" id="confirmCancelarConfirmacion" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="icon-box danger">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <h4>¿Cancelar préstamo aprobado?</h4>
+                        <p>Este préstamo ya fue aprobado. ¿Estás seguro de cancelarlo?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancel-modal" data-bs-dismiss="modal">
+                            No, mantener
+                        </button>
+                        <button type="button" class="btn btn-danger-modal" id="btnConfirmarCancelarConfirmacion">
+                            Sí, cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let idPrestamoACancelar = null;
+        let idPrestamoConfACancelar = null;
+
+        // Mostrar modal de confirmación para cancelar solicitud
+        function mostrarConfirmacionCancelar(idPrestamo) {
+            idPrestamoACancelar = idPrestamo;
+            const modal = new bootstrap.Modal(document.getElementById('confirmCancelarSolicitud'));
+            modal.show();
+        }
+
+        // Confirmar cancelación de solicitud
+        document.getElementById('btnConfirmarCancelar').addEventListener('click', function () {
+            if (idPrestamoACancelar) {
+                document.getElementById('formCancelar' + idPrestamoACancelar).submit();
+            }
+        });
+
+        // Mostrar modal de confirmación para cancelar confirmación
+        function mostrarConfirmacionCancelarConfirmacion(idPrestamo) {
+            idPrestamoConfACancelar = idPrestamo;
+            const modal = new bootstrap.Modal(document.getElementById('confirmCancelarConfirmacion'));
+            modal.show();
+        }
+
+        // Confirmar cancelación de confirmación
+        document.getElementById('btnConfirmarCancelarConfirmacion').addEventListener('click', function () {
+            if (idPrestamoConfACancelar) {
+                document.getElementById('formCancelarConf' + idPrestamoConfACancelar).submit();
+            }
+        });
+    </script>
 </body>
 
 </html>

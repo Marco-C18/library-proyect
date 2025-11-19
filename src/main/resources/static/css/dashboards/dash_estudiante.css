@@ -887,3 +887,112 @@ body {
         justify-content: flex-start;
     }
 }
+
+/* Modal de confirmación personalizado */
+.modal-confirm {
+    text-align: center;
+}
+
+.modal-confirm .modal-content {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-confirm .modal-header {
+    border-bottom: none;
+    padding: 30px 30px 10px;
+    position: relative;
+}
+
+.modal-confirm .modal-header .btn-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.modal-confirm .modal-body {
+    padding: 20px 40px 30px;
+}
+
+.modal-confirm .icon-box {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+.modal-confirm .icon-box.warning {
+    background: red;
+    color: white;
+}
+
+.modal-confirm .icon-box.danger {
+    background: red;
+    color: white;
+}
+
+.modal-confirm h4 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.modal-confirm p {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+.modal-confirm .modal-footer {
+    border-top: none;
+    padding: 10px 40px 30px;
+    justify-content: center;
+    gap: 10px;
+}
+
+.modal-confirm .btn {
+    min-width: 120px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.modal-confirm .btn-cancel-modal {
+    background: #e0e0e0;
+    color: #333;
+    border: none;
+}
+
+.modal-confirm .btn-cancel-modal:hover {
+    background: #d0d0d0;
+    transform: translateY(-2px);
+}
+
+.modal-confirm .btn-confirm-modal {
+    background: red;
+    color: white;
+    border: none;
+}
+
+.modal-confirm .btn-confirm-modal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.modal-confirm .btn-danger-modal {
+    background: red;
+    color: white;
+    border: none;
+}
+
+.modal-confirm .btn-danger-modal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+}
