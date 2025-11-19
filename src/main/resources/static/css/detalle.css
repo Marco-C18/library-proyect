@@ -91,19 +91,21 @@ body {
   margin-top: 1.5rem;
 }
 
-.prestamo-button {
-  background-color: #007bff;
-  border-color: #007bff;
+.btn-prestamo-button {
+  background-color: #2196f3;
   color: white;
   font-size: 1.2rem;
   padding: 0.75rem 2.5rem;
-  border-radius: 50px;
   margin-top: 2rem;
   transition: background-color 0.3s;
+  border: none;
+  border-radius: 40px;
 }
 
-.prestamo-button:hover {
-  background-color: #0056b3;
+.btn-prestamo-button:hover {
+  background-color: transparent;
+  border: 2px solid #2196f3;
+  color:#2196f3;
 }
 
 /* --- Sección de Sugerencias --- */
@@ -199,4 +201,97 @@ body {
   .footer {
     padding: 1rem 1rem 0.5rem 1rem;
   }
+}
+
+/* Alertas personalizadas */
+.alert-custom {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    min-width: 350px;
+    max-width: 500px;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    animation: slideInRight 0.4s ease-out;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.alert-success-custom {
+    background: #2196f3;
+    color: white;
+}
+
+.alert-error-custom {
+    background: red;
+    color: white;
+}
+
+.alert-custom .alert-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.alert-custom .alert-content {
+    flex: 1;
+}
+
+.alert-custom .alert-title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.alert-custom .alert-message {
+    font-size: 14px;
+    opacity: 0.95;
+}
+
+.alert-custom .alert-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert-custom .alert-close:hover {
+    opacity: 1;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
+.alert-custom.hiding {
+    animation: slideOutRight 0.4s ease-in forwards;
 }

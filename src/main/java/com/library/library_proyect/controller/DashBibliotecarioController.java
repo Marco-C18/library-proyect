@@ -1,6 +1,9 @@
 package com.library.library_proyect.controller;
 
 import java.io.File;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,8 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.library.library_proyect.model.CategoriaLibro;
 import com.library.library_proyect.model.Libros;
+import com.library.library_proyect.model.Prestamo;
 import com.library.library_proyect.services.CatalogoService;
+import com.library.library_proyect.services.PrestamoService;
 
 @Controller
 @RequestMapping("/bibliotecario/dashboard")
@@ -17,6 +23,9 @@ public class DashBibliotecarioController {
 
     @Autowired
     private CatalogoService catalogoService;
+
+    @Autowired
+    private PrestamoService prestamoService;
 
     @ModelAttribute("libro")
     public Libros setupLibroForm() {
@@ -31,6 +40,29 @@ public class DashBibliotecarioController {
 
         model.addAttribute("seccion", seccion);
 
+        // Cargar préstamos pendientes si está en la sección de aprobaciones
+        if (seccion.equals("aprobaciones")) {
+
+            List<Prestamo> prestamos = prestamoService.obtenerPendientesAprobacion();
+
+            System.out
+                    .println("📋 Préstamos pendientes encontrados: " + (prestamos != null ? prestamos.size() : "NULL"));
+
+            if (prestamos != null && !prestamos.isEmpty()) {
+                for (Prestamo p : prestamos) {
+                    System.out.println("  - ID: " + p.getIdPrestamo() +
+                            " | Libro: " + p.getLibro().getTitulo() +
+                            " | Usuario: " + p.getUsuario().getNombre() +
+                            " | Estado: " + p.getEstado());
+                }
+            } else {
+                System.out.println("❌ No hay préstamos pendientes");
+            }
+
+            model.addAttribute("prestamos", prestamos);
+            System.out.println("========================================");
+        }
+
         System.out.println("📗 Entrando a DashBibliotecarioController /{seccion}");
 
         return "dashboards/dash_bibliotecario";
@@ -41,7 +73,15 @@ public class DashBibliotecarioController {
         return "redirect:/bibliotecario/dashboard/inicio";
     }
 
-    // --- El método GET /libros/agregar y su lógica se eliminó ---
+    @GetMapping("/categorias-disponibles")
+    @ResponseBody
+    public Map<String, String> getCategoriasDisponibles() {
+        Map<String, String> categorias = new LinkedHashMap<>();
+        for (CategoriaLibro cat : CategoriaLibro.values()) {
+            categorias.put(cat.name(), cat.getDisplayName());
+        }
+        return categorias;
+    }
 
     @PostMapping("/libros/guardar")
     public String guardarNuevoLibro(@ModelAttribute("libro") Libros libro) {
@@ -58,10 +98,7 @@ public class DashBibliotecarioController {
                 String uniqueFilename = System.currentTimeMillis() + "_" + originalFilename;
                 String filePath = uploadsDir + uniqueFilename;
 
-                // Guardar archivo físicamente
                 file.transferTo(new File(filePath));
-
-                // Guardar nombre en la BD
                 libro.setImagen(uniqueFilename);
             }
 
@@ -71,6 +108,20 @@ public class DashBibliotecarioController {
             e.printStackTrace();
             return "redirect:/bibliotecario/dashboard/libros?error=true";
         }
+    }
+
+    // Aprobar préstamo
+    @PostMapping("/aprobar/{idPrestamo}")
+    public String aprobarPrestamo(@PathVariable Long idPrestamo) {
+        prestamoService.aprobarPrestamo(idPrestamo);
+        return "redirect:/bibliotecario/dashboard/aprobaciones?approved=true";
+    }
+
+    // Rechazar préstamo
+    @PostMapping("/rechazar/{idPrestamo}")
+    public String rechazarPrestamo(@PathVariable Long idPrestamo) {
+        prestamoService.rechazarPrestamo(idPrestamo);
+        return "redirect:/bibliotecario/dashboard/aprobaciones?rejected=true";
     }
 
     private boolean esSeccionValida(String seccion) {
