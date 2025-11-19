@@ -33,36 +33,26 @@
                             <h4>CATEGORIAS</h4>
                         </div>
                         <div class="card-body">
-                            <ul class="list-unstyled">
-                                <li class="category-item">
-                                    <input type="checkbox" id="literatura" class="form-check-input me-2">
-                                    <label for="literatura">Literatura</label>
-                                </li>
-                                <li class="category-item">
-                                    <input type="checkbox" id="informatica" class="form-check-input me-2">
-                                    <label for="informatica">Informatica</label>
-                                </li>
-                                <li class="category-item">
-                                    <input type="checkbox" id="matematicas" class="form-check-input me-2">
-                                    <label for="matematicas">Matematicas</label>
-                                </li>
-                                <li class="category-item">
-                                    <input type="checkbox" id="historia" class="form-check-input me-2">
-                                    <label for="historia">Historia</label>
-                                </li>
-                                <li class="category-item">
-                                    <input type="checkbox" id="ciencias" class="form-check-input me-2">
-                                    <label for="ciencias">Ciencias</label>
-                                </li>
-                                <li class="category-item">
-                                    <input type="checkbox" id="idiomas" class="form-check-input me-2">
-                                    <label for="idiomas">Idiomas</label>
-                                </li>
-                                <li class="category-item">
-                                    <input type="checkbox" id="todas" class="form-check-input me-2">
-                                    <label for="todas">Todas</label>
-                                </li>
-                            </ul>
+                            <form id="filterForm" th:action="@{/catalogo}" method="get">
+                                <ul class="list-unstyled">
+
+                                    <li class="category-item" th:each="categoria : ${categorias}">
+                                        <input type="checkbox" name="cat" th:id="${categoria.name().toLowerCase()}"
+                                            class="form-check-input me-2 category-checkbox"
+                                            th:value="${categoria.name()}"
+                                            th:checked="${#lists.contains(categoriasActivas, categoria.name())}">
+
+                                        <label th:for="${categoria.name().toLowerCase()}"
+                                            th:text="${categoria.displayName}"></label>
+                                    </li>
+
+                                    <li class="category-item">
+                                        <input type="checkbox" id="todas" class="form-check-input me-2" disabled
+                                            th:checked="${categoriasActivas == null or categoriasActivas.isEmpty()}">
+                                        <label for="todas">Todas</label>
+                                    </li>
+                                </ul>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -95,6 +85,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- <script src="home.js"></script> -->
     <script th:src="@{/js/home.js}"></script>
+    <script>
+    // Selecciona todos los checkboxes que tienen la clase 'category-checkbox'
+    const checkboxes = document.querySelectorAll('.category-checkbox');
+    const filterForm = document.getElementById('filterForm');
+
+    // Añadimos un evento a cada checkbox
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            // Cuando el estado del checkbox cambia, automáticamente envía el formulario GET
+            filterForm.submit();
+        });
+    });
+</script>
 </body>
 
 </html>
