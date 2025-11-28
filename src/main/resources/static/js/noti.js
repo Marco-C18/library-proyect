@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
       contador++;
     });
 
-    // 🔸 LIBROS DEVUELTOS
+    //  LIBROS DEVUELTOS
     const devueltos = Array.from(document.querySelectorAll(".history-card"))
       .filter(card => card.textContent.includes("Devuelto"));
     devueltos.forEach(card => {

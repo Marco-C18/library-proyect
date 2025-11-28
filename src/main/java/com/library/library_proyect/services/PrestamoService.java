@@ -114,6 +114,10 @@ public class PrestamoService {
     );
     }
 
+    public boolean libroEstaPrestado(Long idLibro) {
+    return prestamoRepository.existsByLibroIdLibroAndEstado(idLibro, EstadoPrestamo.APROBADO);
+}
+
     public List<Prestamo> obtenerRecienAprobados(Usuario usuario) {
     LocalDate fechaLimite = LocalDate.now().minusDays(2);
     
@@ -123,4 +127,83 @@ public class PrestamoService {
         fechaLimite
     );
 }
+
+    public long countByEstado(String estadoTexto) {
+        EstadoPrestamo estado = EstadoPrestamo.valueOf(estadoTexto);
+        return prestamoRepository.countByEstado(estado);
+    }
+
+    public List<Prestamo> obtenerUltimosPrestamos(int cantidad) {
+    return prestamoRepository.findTop5ByOrderByFechaSolicitudDesc();
+    }
+
+    public List<Prestamo> obtenerPrestamosVencidos() {
+    LocalDate hoy = LocalDate.now();
+    return prestamoRepository.prestamosVencidos(
+            EstadoPrestamo.APROBADO,
+            hoy
+    );
+    }
+
+    public List<Prestamo> obtenerPrestamosPorVencer(int dias) {
+    LocalDate hoy = LocalDate.now();
+    LocalDate limite = hoy.plusDays(dias);
+
+    return prestamoRepository.prestamosPorVencer(
+            EstadoPrestamo.APROBADO,
+            hoy,
+            limite
+    );
+    }
+
+    public List<Prestamo> obtenerPrestamosVenceEn(LocalDate fecha) {
+    return prestamoRepository.prestamosPorVencer(
+            EstadoPrestamo.APROBADO,
+            fecha,
+            fecha
+    );
+    }
+
+    // MÉTODOS PARA EL DASHBOARD 
+
+    // Total de préstamos
+    public long totalPrestamos() {
+        return prestamoRepository.count();
+    }
+
+    // Cantidad de préstamos por estado
+    public long prestamosPorEstado(EstadoPrestamo estado) {
+        return prestamoRepository.countByEstado(estado);
+    }
+
+    // Últimos préstamos (TOP 5)
+    public List<Prestamo> ultimosPrestamos() {
+        return prestamoRepository.findTop5ByOrderByFechaSolicitudDesc();
+    }
+
+    // Préstamos vencidos
+    public List<Prestamo> prestamosVencidos() {
+        LocalDate hoy = LocalDate.now();
+        return prestamoRepository.prestamosVencidos(EstadoPrestamo.APROBADO, hoy);
+    }
+
+    // Préstamos por vencer en X días
+    public List<Prestamo> prestamosPorVencer(int dias) {
+        LocalDate hoy = LocalDate.now();
+        LocalDate limite = hoy.plusDays(dias);
+
+        return prestamoRepository.prestamosPorVencer(
+                EstadoPrestamo.APROBADO,
+                hoy,
+                limite
+        );
+    }
+
+    // Préstamos pendientes (para aprobación de bibliotecario)
+    public List<Prestamo> obtenerPendientes() {
+        return prestamoRepository.findByEstado(EstadoPrestamo.PENDIENTE);
+    }
+
+
+
 }

@@ -4,5 +4,6 @@ public enum EstadoPrestamo {
     PENDIENTE,      
     APROBADO,       
     RECHAZADO,      
-    DEVUELTO        
+    DEVUELTO,
+    VENCIDO        
 }
