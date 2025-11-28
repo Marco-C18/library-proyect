@@ -6,33 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BiblioTech - Inicio</title>
     <link rel="stylesheet" href="/css/home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <!-- <div th:replace="fragments/navbar :: navbar"></div> -->
-    <nav id="navbar" th:fragment="navbar">
-        <div class="logo">
-            <span>Biblio</span><span>Tech</span>
-        </div>
-        <ul class="nav-links" id="navLinks">
-            <li><a th:href="@{/}" class="active">Inicio</a></li>
-            <li><a th:href="@{/catalogo}">Catálogo</a></li>
-            <li><a th:href="@{/estudiante/dashboard/inicio}">DashBoard</a></li>
-        </ul>
-        <div class="user-section">
-            <div class="user-avatar">
-                <i class="fas fa-user"></i>
-            </div>
-            <span>Diego</span>
-        </div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
-
+    <div th:replace="fragments/navbar :: navbar"></div>
+    
     <section class="hero">
         <div class="hero-content">
             <h1>Encuentra y alquila<br>tus libros de estudio<br>fácilmente</h1>
@@ -41,7 +19,7 @@
         </div>
         <div class="hero-image">
             <div class="hero-overlay">
-                
+
             </div>
         </div>
     </section>
@@ -95,11 +73,7 @@
         <div class="books-grid">
             <div class="book-card">
                 <div class="book-cover">
-                    <div class="book-cover-text">
-                        <p>GEN ARSB</p>
-                        <p>Y</p>
-                        <p>GEALDEL</p>
-                    </div>
+                    <img th:src="@{/img/libros/anios_soledad_portada.jpg}" alt="">
                 </div>
                 <h3>Cien años de soledad</h3>
                 <p>Gabriel García Marquez</p>
@@ -107,34 +81,26 @@
             </div>
             <div class="book-card">
                 <div class="book-cover">
-                    <div class="book-cover-text">
-                        <p>GEN ARSB</p>
-                        <p>Y</p>
-                        <p>GEALDEL</p>
-                    </div>
+                    <img th:src="@{/img/libros/codigo_daVinci_portada.jpg}" alt="">
                 </div>
-                <h3>Cien años de soledad</h3>
-                <p>Gabriel García Marquez</p>
+                <h3>El código Da Vinci</h3>
+                <p>Dan Brown</p>
                 <button class="book-button">Ver más</button>
             </div>
             <div class="book-card">
                 <div class="book-cover">
-                    <img src="/img/cien_años.jpg" alt="">
+                    <img th:src="@{/img/libros/quijote_portada.jpg}" alt="">
                 </div>
-                <h3>Cien años de soledad</h3>
-                <p>Gabriel García Marquez</p>
+                <h3>Don Quijote de la Mancha</h3>
+                <p>Miguel de Cervantes</p>
                 <button class="book-button">Ver más</button>
             </div>
             <div class="book-card">
                 <div class="book-cover">
-                    <div class="book-cover-text">
-                        <p>GEN ARSB</p>
-                        <p>Y</p>
-                        <p>GEALDEL</p>
-                    </div>
+                    <img th:src="@{/img/libros/crimen_castigo_portada.jpg}" alt="">
                 </div>
-                <h3>Cien años de soledad</h3>
-                <p>Gabriel García Marquez</p>
+                <h3>Crimen y castigo</h3>
+                <p>Fiódor Dostoievski</p>
                 <button class="book-button">Ver más</button>
             </div>
         </div>

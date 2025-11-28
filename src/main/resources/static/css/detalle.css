@@ -1,0 +1,297 @@
+body {
+  background-color: #f7f9fc;
+  font-family: Arial, sans-serif;
+}
+
+/* --- Barra Separadora --- */
+.nav-line {
+  border: 0;
+  height: 1px;
+  background-color: #ddd;
+  margin: 0;
+}
+
+/* --- Contenedor Principal --- */
+.main-content {
+  padding: 3rem 0;
+}
+
+/* Wrapper para el contenido principal con ancho limitado y centrado */
+.content-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* --- Sección de Detalle del Libro --- */
+.book-details-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  /* Este padding es el ancho base que queremos replicar */
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 992px) {
+  .book-details-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.book-cover-detail {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.book-info-detail {
+  text-align: center;
+}
+
+@media (min-width: 992px) {
+  .book-info-detail {
+    text-align: left;
+  }
+}
+
+.book-info-detail h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.book-info-detail p.author {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.meta-info span {
+  display: inline-block;
+  background-color: #f0f0f0;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #666;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.book-description {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+  margin-top: 1.5rem;
+}
+
+.btn-prestamo-button {
+  background-color: #2196f3;
+  color: white;
+  font-size: 1.2rem;
+  padding: 0.75rem 2.5rem;
+  margin-top: 2rem;
+  transition: background-color 0.3s;
+  border: none;
+  border-radius: 40px;
+}
+
+.btn-prestamo-button:hover {
+  background-color: transparent;
+  border: 2px solid #2196f3;
+  color:#2196f3;
+}
+
+/* --- Sección de Sugerencias --- */
+.sugerencia-container {
+  margin-top: 4rem;
+  /* APLICAMOS EL MISMO PADDING HORIZONTAL PARA ALINEAR CON EL CONTENIDO DE ARRIBA */
+  padding: 0 2rem;
+}
+
+.sugerencia-container h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  /* Alinea el título a la izquierda, igual que el título "Cien años de soledad" de arriba */
+  text-align: left;
+}
+
+/* Estilos de las tarjetas de libros para las sugerencias */
+.book-card-sugerencia {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 0.5rem;
+  /* Reducimos el padding de la tarjeta para dar más espacio a la imagen */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  height: 100%;
+  text-align: center;
+}
+
+/* Estilo de la imagen dentro de sugerencias */
+.book-cover-sugerido {
+  width: 100%;
+  /* Establece una altura fija o usa object-fit: contain si las imágenes tienen proporciones muy diferentes */
+  height: 250px;
+  object-fit: contain;
+  /* Asegura que la imagen se vea completa dentro del espacio */
+  border-radius: 5px;
+  /* No necesitamos el borde que tenías antes si la imagen ya tiene un borde en sí misma */
+}
+
+.book-card-sugerencia:hover {
+  transform: translateY(-5px);
+}
+
+.book-card-sugerencia .book-cover {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.book-card-sugerencia .book-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.book-card-sugerencia .book-author {
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+/* Medias queries para responsividad */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    padding-bottom: 1rem;
+  }
+
+  .footer-logo,
+  .footer-text,
+  .social-icons {
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .social-icons {
+    margin-left: 0;
+  }
+
+  .footer::before {
+    left: 1rem;
+    right: 1rem;
+    bottom: 3.5rem;
+  }
+
+  .footer {
+    padding: 1rem 1rem 0.5rem 1rem;
+  }
+}
+
+/* Alertas personalizadas */
+.alert-custom {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    min-width: 350px;
+    max-width: 500px;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    animation: slideInRight 0.4s ease-out;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.alert-success-custom {
+    background: #2196f3;
+    color: white;
+}
+
+.alert-error-custom {
+    background: red;
+    color: white;
+}
+
+.alert-custom .alert-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.alert-custom .alert-content {
+    flex: 1;
+}
+
+.alert-custom .alert-title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.alert-custom .alert-message {
+    font-size: 14px;
+    opacity: 0.95;
+}
+
+.alert-custom .alert-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert-custom .alert-close:hover {
+    opacity: 1;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
+.alert-custom.hiding {
+    animation: slideOutRight 0.4s ease-in forwards;
+}

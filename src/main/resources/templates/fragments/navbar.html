@@ -1,0 +1,67 @@
+<nav id="navbar" th:fragment="navbar">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <script src="/js/noti.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <div class="logo">
+        <span>Biblio</span><span>Tech</span>
+    </div>
+    <ul class="nav-links" id="navLinks">
+        <li>
+            <a th:href="@{/}" th:classappend="${activePage == 'home'} ? ' active' : ''">Inicio</a>
+        </li>
+        <li>
+            <a th:href="@{/catalogo}" th:classappend="${activePage == 'catalogo'} ? ' active' : ''">Catálogo</a>
+        </li>
+        <!-- Mostrar Dashboard según el tipo de usuario -->
+        <li th:if="${session.usuarioTipo == 'ESTUDIANTE'}">
+            <a th:href="@{/estudiante/dashboard/inicio}"
+                th:classappend="${activePage == 'dashboardEstudiante'} ? ' active' : ''">Mi Dashboard</a>
+        </li>
+        <li th:if="${session.usuarioTipo == 'BIBLIOTECARIO'}">
+            <a th:href="@{/bibliotecario/dashboard/inicio}"
+                th:classappend="${activePage == 'dashboardBibliotecario'} ? ' active' : ''">Dashboard</a>
+        </li>
+    </ul>
+
+    <div class="user-section">
+        <!-- Menú de usuario mejorado -->
+        <div class="user-menu-container">
+            <div class="user-info" id="userMenuToggle">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span class="user-name" th:text="${session.usuarioNombre != null ? session.usuarioNombre : 'Usuario'}">Usuario</span>
+                <i class="fas fa-chevron-down dropdown-arrow"></i>
+            </div>
+
+            <!-- Dropdown del usuario -->
+            <div class="user-dropdown" id="userDropdown">
+                <div class="user-dropdown-header">
+                    <div class="user-avatar-large">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <p class="user-dropdown-name" th:text="${session.usuarioNombre != null ? session.usuarioNombre : 'Usuario'}">Usuario</p>
+                        <p class="user-dropdown-type" th:text="${session.usuarioTipo != null ? (session.usuarioTipo == 'ESTUDIANTE' ? 'Estudiante' : 'Bibliotecario') : 'Usuario'}">Tipo</p>
+                    </div>
+                </div>
+                <div class="user-dropdown-divider"></div>
+                <a href="/logout" class="user-dropdown-item logout-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <script src="/js/navbar.js"></script>
+</nav>

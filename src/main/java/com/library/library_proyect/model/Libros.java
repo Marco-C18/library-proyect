@@ -1,17 +1,12 @@
 package com.library.library_proyect.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+import org.springframework.web.multipart.MultipartFile;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Libros")
 public class Libros {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idLibro")
@@ -26,20 +21,22 @@ public class Libros {
     @Column(name = "anio", length = 45)
     private Integer anio;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "categoria", length = 45)
-    private String categoria;
+    private CategoriaLibro categoria;
 
     @Column(name = "paginas", length = 45)
     private Integer paginas;
 
-    @Column(name = "descripcion", length = 245)
+    @Column(name = "descripcion", length = 1024)
     private String descripcion;
 
     @Column(name = "imagen")
     private String imagen;
 
+    @Transient
+    private MultipartFile file;
 
-    //getters and setters
     public Long getIdLibro() {
         return idLibro;
     }
@@ -72,12 +69,12 @@ public class Libros {
         this.anio = anio;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public CategoriaLibro getCategoria() {
+    return categoria;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCategoria(CategoriaLibro categoria) {
+    this.categoria = categoria;
     }
 
     public Integer getPaginas() {
@@ -103,6 +100,13 @@ public class Libros {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
 
 }
