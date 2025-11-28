@@ -27,6 +27,9 @@ public interface PrestamoRepository extends JpaRepository<Prestamo, Long> {
 
     boolean existsByUsuarioAndLibroAndEstadoIn(Usuario usuario, Libros libro, List<EstadoPrestamo> estados);
 
+    boolean existsByLibroIdLibroAndEstado(Long idLibro, EstadoPrestamo estado);
+
+
     @Query("SELECT COUNT(p) FROM Prestamo p WHERE p.usuario = :usuario " +
             "AND p.estado = :estado " +
             "AND p.fechaDevolucion BETWEEN :hoy AND :limiteVencimiento")
@@ -54,4 +57,26 @@ public interface PrestamoRepository extends JpaRepository<Prestamo, Long> {
             @Param("usuario") Usuario usuario,
             @Param("estado") EstadoPrestamo estado,
             @Param("fechaLimite") LocalDate fechaLimite);
+
+// DASHBOARD DE BIBLIOTECARIO
+
+        long countByEstado(EstadoPrestamo estado);
+
+        List<Prestamo> findTop5ByOrderByFechaSolicitudDesc();
+
+        // Prestamos vencidos
+        @Query("SELECT p FROM Prestamo p WHERE p.estado = :estado AND p.fechaDevolucion < :hoy")
+        List<Prestamo> prestamosVencidos(
+                @Param("estado") EstadoPrestamo estado,
+                @Param("hoy") LocalDate hoy
+        );
+
+        // Prestamos por vencer
+        @Query("SELECT p FROM Prestamo p WHERE p.estado = :estado AND p.fechaDevolucion BETWEEN :hoy AND :limite")
+        List<Prestamo> prestamosPorVencer(
+                @Param("estado") EstadoPrestamo estado,
+                @Param("hoy") LocalDate hoy,
+                @Param("limite") LocalDate limite
+        );
+
 }

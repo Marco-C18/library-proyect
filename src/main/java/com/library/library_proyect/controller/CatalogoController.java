@@ -27,12 +27,10 @@ public class CatalogoController {
     ) {
         List<Libros> libros;
         
-        // 1. INICIALIZACIÓN CLAVE: Aseguramos que categoriasActivas sea siempre una lista (no null)
         List<String> categoriasActivas = (categoriasSeleccionadas != null) 
                                         ? categoriasSeleccionadas 
-                                        : Collections.emptyList(); // Si es null, usa una lista vacía
+                                        : Collections.emptyList(); 
         
-        // 2. Verifica si se seleccionó alguna categoría (la lista ahora puede estar vacía, pero no null)
         if (!categoriasActivas.isEmpty()) {
             
             List<CategoriaLibro> categoriasEnum = categoriasActivas.stream()
@@ -43,17 +41,13 @@ public class CatalogoController {
             libros = catalogoService.obtenerLibrosPorCategorias(categoriasEnum);
             
         } else {
-            // 3. Si no hay parámetros (lista vacía), muestra todos los libros
             libros = catalogoService.obtenerLibros();
         }
 
-        // 4. Lógica existente:
         model.addAttribute("libros", libros);
         
-        // Cargar todos los enums para la vista
         model.addAttribute("categorias", CategoriaLibro.values()); 
         
-        // 5. Pasamos la lista activa (que ahora nunca es null)
         model.addAttribute("categoriasActivas", categoriasActivas);
         
         model.addAttribute("activePage", "catalogo");

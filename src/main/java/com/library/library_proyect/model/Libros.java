@@ -37,6 +37,15 @@ public class Libros {
     @Transient
     private MultipartFile file;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "categoria_enum", length = 45)
+    private CategoriaLibro categorias; 
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoriaEntidad; 
+
+
     public Long getIdLibro() {
         return idLibro;
     }
