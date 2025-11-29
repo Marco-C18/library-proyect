@@ -6,18 +6,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.library.library_proyect.model.Categoria;
-import com.library.library_proyect.model.CategoriaLibro;
 import com.library.library_proyect.model.Libros;
 
 @Repository
 public interface CatalogoRepository extends JpaRepository<Libros, Long> {
     
-    List<Libros> findByCategorias(Categoria categoria);
-
-     List<Libros> findByCategoria(CategoriaLibro categoria);
+    // ✅ Buscar libros por categoría (Entidad)
+    List<Libros> findByCategoria(Categoria categoria);
     
+    // Para sugerencias
     List<Libros> findTop4ByIdLibroNotOrderByIdLibroDesc(Long idLibro);
     
-    List<Libros> findByCategoriaIn(List<CategoriaLibro> categorias);
+    // Para filtros múltiples
+    List<Libros> findByCategoriaIn(List<Categoria> categorias);
+    
+    // Contar libros por categoría
+    long countByCategoria(Categoria categoria);
 }
-

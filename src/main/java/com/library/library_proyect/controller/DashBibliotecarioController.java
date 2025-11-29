@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.library.library_proyect.model.CategoriaLibro;
 import com.library.library_proyect.model.EstadoPrestamo;
 import com.library.library_proyect.model.Libros;
-import com.library.library_proyect.model.Prestamo;
 import com.library.library_proyect.model.Categoria;
 import com.library.library_proyect.services.CatalogoService;
 import com.library.library_proyect.services.CategoriaService;
@@ -42,19 +41,29 @@ public class DashBibliotecarioController {
 
     public static class CategoriaForm {
         private String nombre;
-        public CategoriaForm() {}
-        public String getNombre() { return nombre; }
-        public void setNombre(String nombre) { this.nombre = nombre; }
+
+        public CategoriaForm() {
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public void setNombre(String nombre) {
+            this.nombre = nombre;
+        }
     }
 
-    /* ======================
-     *  DASHBOARD GENERAL
-     * ====================== */
+    /*
+     * ======================
+     * DASHBOARD GENERAL
+     * ======================
+     */
     @GetMapping("/{seccion}")
     public String mostrarDashboard(@PathVariable String seccion,
-                                   @RequestParam(required = false) String filtro,
-                                   Model model,
-                                   HttpServletRequest request) {
+            @RequestParam(required = false) String filtro,
+            Model model,
+            HttpServletRequest request) {
 
         if (!esSeccionValida(seccion)) {
             return "redirect:/bibliotecario/dashboard/inicio";
@@ -75,11 +84,11 @@ public class DashBibliotecarioController {
 
         // LIBROS
         if (seccion.equals("libros")) {
-        model.addAttribute("libros", catalogoService.obtenerLibros());
-        model.addAttribute("prestamoService", prestamoService);
+            model.addAttribute("libros", catalogoService.obtenerLibros());
+            model.addAttribute("prestamoService", prestamoService);
 
-        List<Categoria> categoriasDb = categoriaService.obtenerTodas();
-        model.addAttribute("categoriasDb", categoriasDb);
+            List<Categoria> categoriasDb = categoriaService.obtenerTodas();
+            model.addAttribute("categoriasDb", categoriasDb);
         }
 
         // REPORTES
@@ -129,9 +138,11 @@ public class DashBibliotecarioController {
                 || seccion.equals("aprobaciones");
     }
 
-    /* ======================
-     *  LIBROS
-     * ====================== */
+    /*
+     * ======================
+     * LIBROS
+     * ======================
+     */
     @PostMapping("/libros/guardar")
     public String guardarNuevoLibro(@ModelAttribute("libro") Libros libro) {
         try {
@@ -139,7 +150,8 @@ public class DashBibliotecarioController {
             if (file != null && !file.isEmpty()) {
                 String uploadsDir = new File("src/main/resources/static/img/libros/").getAbsolutePath() + "/";
                 File uploadsFolder = new File(uploadsDir);
-                if (!uploadsFolder.exists()) uploadsFolder.mkdirs();
+                if (!uploadsFolder.exists())
+                    uploadsFolder.mkdirs();
                 String uniqueFilename = System.currentTimeMillis() + "_" + file.getOriginalFilename();
                 file.transferTo(new File(uploadsDir + uniqueFilename));
                 libro.setImagen(uniqueFilename);
@@ -155,26 +167,29 @@ public class DashBibliotecarioController {
     @GetMapping("/libros/editar/{id}")
     public String editarLibroForm(@PathVariable Long id, Model model) {
         Libros libro = catalogoService.obtenerLibroPorId(id);
-        if (libro == null) return "redirect:/bibliotecario/dashboard/libros?notfound=true";
+        if (libro == null)
+            return "redirect:/bibliotecario/dashboard/libros?notfound=true";
         model.addAttribute("libro", libro);
-            List<Categoria> categoriasDb = categoriaService.obtenerTodas();
-            model.addAttribute("categoriasDb", categoriasDb);
+        List<Categoria> categoriasDb = categoriaService.obtenerTodas();
+        model.addAttribute("categoriasDb", categoriasDb);
 
-            model.addAttribute("seccion", "libros");
-            return "dashboards/forms/editar_libro";
-        }
+        model.addAttribute("seccion", "libros");
+        return "dashboards/forms/editar_libro";
+    }
 
     @PostMapping("/libros/editar/{id}")
     public String editarLibroGuardar(@PathVariable Long id, @ModelAttribute("libro") Libros datosNuevos) {
         Libros libro = catalogoService.obtenerLibroPorId(id);
-        if (libro == null) return "redirect:/bibliotecario/dashboard/libros?notfound=true";
+        if (libro == null)
+            return "redirect:/bibliotecario/dashboard/libros?notfound=true";
 
         MultipartFile file = datosNuevos.getFile();
         if (file != null && !file.isEmpty()) {
             try {
                 String uploadsDir = new File("src/main/resources/static/img/libros/").getAbsolutePath() + "/";
                 File folder = new File(uploadsDir);
-                if (!folder.exists()) folder.mkdirs();
+                if (!folder.exists())
+                    folder.mkdirs();
                 String nombreNuevo = System.currentTimeMillis() + "_" + file.getOriginalFilename();
                 file.transferTo(new File(uploadsDir + nombreNuevo));
                 libro.setImagen(nombreNuevo);
@@ -203,110 +218,113 @@ public class DashBibliotecarioController {
     @ResponseBody
     public Map<String, Object> obtenerLibroJson(@PathVariable Long id) {
         Libros libro = catalogoService.obtenerLibroPorId(id);
-        if (libro == null) return Map.of("ok", false, "message", "no encontrado");
+        if (libro == null)
+            return Map.of("ok", false, "message", "no encontrado");
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("ok", true);
         map.put("idLibro", libro.getIdLibro());
         map.put("titulo", libro.getTitulo());
         map.put("autor", libro.getAutor());
         map.put("anio", libro.getAnio());
-        map.put("categoria", libro.getCategoria() != null ? libro.getCategoria().name() : "");
-        map.put("categoriaDisplay", libro.getCategoria() != null ? libro.getCategoria().getDisplayName() : "");
+        map.put("categoria", libro.getCategoria() != null ? libro.getCategoria().getId() : "");
+
+        map.put("categoriaDisplay", libro.getCategoria() != null ? libro.getCategoria().getNombre() : "");
+
         map.put("paginas", libro.getPaginas());
         map.put("descripcion", libro.getDescripcion());
         map.put("imagen", libro.getImagen());
         return map;
     }
 
-    /* ======================
-     *  CATEGORÍAS 
-     * ====================== */
-  @GetMapping("/categorias")
-public String mostrarCategorias(Model model, HttpServletRequest request) {
-
-    for (CategoriaLibro catEnum : CategoriaLibro.values()) {
-        if (!categoriaService.existePorNombre(catEnum.getDisplayName())) {
-            Categoria nueva = new Categoria();
-            nueva.setNombre(catEnum.getDisplayName());
-            categoriaService.guardar(nueva);
-        }
+    /*
+     * ======================
+     * GESTIÓN DE CATEGORÍAS
+     * ======================
+     */
+    @GetMapping("/categorias")
+    public String mostrarCategorias(Model model) {
+        List<Categoria> categorias = categoriaService.obtenerTodas();
+        model.addAttribute("categoriasDb", categorias);
+        model.addAttribute("categoria", new Categoria());
+        model.addAttribute("seccion", "categorias");
+        return "dashboards/dash_bibliotecario";
     }
-
-    List<Categoria> categoriasDb = categoriaService.obtenerTodas();
-    model.addAttribute("categoriasDb", categoriasDb);
-
-    model.addAttribute("categoria", new Categoria());
-    model.addAttribute("seccion", "categorias");
-
-    if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
-        return "dashboards/dash_bibliotecario :: main-content";
-    }
-
-    return "dashboards/dash_bibliotecario";
-}
 
     @PostMapping("/categorias/guardar-db")
-    public String guardarCategoriaDb(@ModelAttribute("categoria") Categoria categoria,
-                                     RedirectAttributes ra) {
+    public String guardarCategoria(@ModelAttribute("categoria") Categoria categoria,
+            RedirectAttributes ra) {
+        if (categoria.getNombre() == null || categoria.getNombre().trim().isEmpty()) {
+            ra.addFlashAttribute("errorCategoria", "El nombre de la categoría no puede estar vacío.");
+            return "redirect:/bibliotecario/dashboard/categorias";
+        }
+
         if (categoriaService.existePorNombre(categoria.getNombre())) {
             ra.addFlashAttribute("errorCategoria", "La categoría ya existe.");
-        } else {
-            categoriaService.guardar(categoria);
-            ra.addFlashAttribute("successCategoria", "Categoría creada correctamente.");
+            return "redirect:/bibliotecario/dashboard/categorias";
         }
+
+        categoriaService.guardar(categoria);
+        ra.addFlashAttribute("successCategoria", "Categoría creada correctamente.");
         return "redirect:/bibliotecario/dashboard/categorias";
     }
 
     @PostMapping("/categorias/editar-db/{id}")
-    public String editarCategoriaDb(@PathVariable Long id,
-                                    @ModelAttribute("categoria") Categoria datosNuevos,
-                                    RedirectAttributes ra) {
-        Categoria cat = categoriaService.obtenerPorId(id).orElse(null);
-        if (cat != null) {
-            cat.setNombre(datosNuevos.getNombre());
-            categoriaService.guardar(cat);
-            ra.addFlashAttribute("successCategoria", "Categoría actualizada correctamente.");
-        } else {
+    public String editarCategoria(@PathVariable Long id,
+            @RequestParam("nombre") String nuevoNombre,
+            RedirectAttributes ra) {
+        Optional<Categoria> categoriaOpt = categoriaService.obtenerPorId(id);
+
+        if (categoriaOpt.isEmpty()) {
             ra.addFlashAttribute("errorCategoria", "Categoría no encontrada.");
+            return "redirect:/bibliotecario/dashboard/categorias";
         }
+
+        if (nuevoNombre == null || nuevoNombre.trim().isEmpty()) {
+            ra.addFlashAttribute("errorCategoria", "El nombre no puede estar vacío.");
+            return "redirect:/bibliotecario/dashboard/categorias";
+        }
+
+        Categoria categoria = categoriaOpt.get();
+
+        // Verificar si el nuevo nombre ya existe (y no es la misma categoría)
+        if (!categoria.getNombre().equals(nuevoNombre) && categoriaService.existePorNombre(nuevoNombre)) {
+            ra.addFlashAttribute("errorCategoria", "Ya existe una categoría con ese nombre.");
+            return "redirect:/bibliotecario/dashboard/categorias";
+        }
+
+        categoria.setNombre(nuevoNombre);
+        categoriaService.guardar(categoria);
+        ra.addFlashAttribute("successCategoria", "Categoría actualizada correctamente.");
         return "redirect:/bibliotecario/dashboard/categorias";
     }
 
     @PostMapping("/categorias/eliminar-db/{id}")
-public String eliminarCategoriaDb(@PathVariable Long id, RedirectAttributes ra) {
-    Categoria cat = categoriaService.obtenerPorId(id).orElse(null);
-    if (cat == null) {
-        ra.addFlashAttribute("errorCategoria", "Categoría no encontrada.");
+    public String eliminarCategoria(@PathVariable Long id, RedirectAttributes ra) {
+        Optional<Categoria> categoriaOpt = categoriaService.obtenerPorId(id);
+
+        if (categoriaOpt.isEmpty()) {
+            ra.addFlashAttribute("errorCategoria", "Categoría no encontrada.");
+            return "redirect:/bibliotecario/dashboard/categorias";
+        }
+
+        Categoria categoria = categoriaOpt.get();
+
+        // Verificar si tiene libros asociados
+        if (categoriaService.tieneLibrosAsociados(categoria)) {
+            long cantidad = categoriaService.contarLibrosPorCategoria(categoria);
+            ra.addFlashAttribute("errorCategoria",
+                    "No se puede eliminar: la categoría tiene " + cantidad + " libro(s) asociado(s).");
+            return "redirect:/bibliotecario/dashboard/categorias";
+        }
+
+        categoriaService.eliminar(id);
+        ra.addFlashAttribute("successCategoria", "Categoría eliminada correctamente.");
         return "redirect:/bibliotecario/dashboard/categorias";
     }
 
-    try {
-        CategoriaLibro catEnum = CategoriaLibro.valueOf(cat.getNombre());
-
-        List<Libros> libros = catalogoService.obtenerLibrosPorCategoria(catEnum);
-
-        if (!libros.isEmpty()) {
-            ra.addFlashAttribute("errorCategoria", "No se puede eliminar: la categoría tiene libros asociados.");
-        } else {
-            ra.addFlashAttribute("errorCategoria", "No se puede eliminar: la categoría es parte del enum y no puede borrarse.");
-        }
-
-    } catch (IllegalArgumentException e) {
-        if (catalogoService.obtenerLibrosPorCategoria(cat).isEmpty()) {
-            categoriaService.eliminar(id);
-            ra.addFlashAttribute("successCategoria", "Categoría eliminada correctamente.");
-        } else {
-            ra.addFlashAttribute("errorCategoria", "No se puede eliminar: la categoría tiene libros asociados.");
-        }
-    }
-
-    return "redirect:/bibliotecario/dashboard/categorias";
-}
-
-
-    @GetMapping("/categorias-disponibles-db")
+    @GetMapping("/categorias-disponibles")
     @ResponseBody
-    public Map<Long, String> getCategoriasDisponiblesDb() {
+    public Map<Long, String> getCategoriasDisponibles() {
         Map<Long, String> categorias = new LinkedHashMap<>();
         List<Categoria> lista = categoriaService.obtenerTodas();
         for (Categoria cat : lista) {
@@ -315,66 +333,11 @@ public String eliminarCategoriaDb(@PathVariable Long id, RedirectAttributes ra) 
         return categorias;
     }
 
-    @GetMapping("/categorias-disponibles")
-    @ResponseBody
-    public Map<String, String> getCategoriasDisponibles() {
-        Map<String, String> categorias = new LinkedHashMap<>();
-        for (CategoriaLibro cat : CategoriaLibro.values()) {
-            categorias.put(cat.name(), cat.getDisplayName());
-        }
-        return categorias;
-    }
-
-    @PostMapping("/categorias/reasignar")
-    public String reasignarCategoria(@RequestParam("from") String categoriaFrom,
-                                     @RequestParam("to") String categoriaTo,
-                                     RedirectAttributes ra) {
-        try {
-            CategoriaLibro from = CategoriaLibro.valueOf(categoriaFrom);
-            CategoriaLibro to = CategoriaLibro.valueOf(categoriaTo);
-
-            if (from == to) {
-                ra.addFlashAttribute("categoriaMsg", "Seleccione categorías diferentes para reasignar.");
-                return "redirect:/bibliotecario/dashboard/categorias";
-            }
-
-            catalogoService.reasignarCategoria(from, to);
-            ra.addFlashAttribute("categoriaMsg", "Libros reasignados correctamente.");
-        } catch (IllegalArgumentException ex) {
-            ra.addFlashAttribute("categoriaMsg", "Categoría inválida.");
-        } catch (Exception ex) {
-            ra.addFlashAttribute("categoriaMsg", "Error al reasignar: " + ex.getMessage());
-        }
-        return "redirect:/bibliotecario/dashboard/categorias";
-    }
-
-    @PostMapping("/categorias/eliminar")
-    public String eliminarCategoriaEndpoint(@RequestParam("categoria") String categoria,
-                                            RedirectAttributes ra) {
-        try {
-            CategoriaLibro cat = CategoriaLibro.valueOf(categoria);
-            List<Libros> libros = catalogoService.obtenerLibrosPorCategoria(cat);
-            if (!libros.isEmpty()) {
-                ra.addFlashAttribute("categoriaMsg", "No se puede eliminar: la categoría tiene libros asociados.");
-            } else {
-                ra.addFlashAttribute("categoriaMsg", "No hay libros en la categoría. La categoría es parte del enum y no puede eliminarse.");
-            }
-        } catch (IllegalArgumentException ex) {
-            ra.addFlashAttribute("categoriaMsg", "Categoría inválida.");
-        }
-        return "redirect:/bibliotecario/dashboard/categorias";
-    }
-
-    @PostMapping("/categorias/guardar")
-    public String guardarCategoria(@ModelAttribute("categoria") CategoriaForm categoria,
-                                   RedirectAttributes ra) {
-        ra.addFlashAttribute("errorCategoria", "Las categorías no se pueden crear porque están definidas como ENUM.");
-        return "redirect:/bibliotecario/dashboard/categorias";
-    }
-
-    /* ======================
-     *  APROBACIONES
-     * ====================== */
+    /*
+     * ======================
+     * APROBACIONES
+     * ======================
+     */
     @PostMapping("/aprobar/{idPrestamo}")
     public String aprobarPrestamo(@PathVariable Long idPrestamo) {
         prestamoService.aprobarPrestamo(idPrestamo);
