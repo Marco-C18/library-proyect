@@ -21,7 +21,6 @@ public class Libros {
     @Column(name = "anio")
     private Integer anio;
 
-    // ✅ SOLO CATEGORIA ENTIDAD
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
@@ -38,7 +37,6 @@ public class Libros {
     @Transient
     private MultipartFile file;
 
-    // GETTERS Y SETTERS
     public Long getIdLibro() {
         return idLibro;
     }

@@ -16,7 +16,6 @@
 
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
             <div class="col-md-3 col-lg-2 sidebar">
                 <div class="sidebar-menu">
                     <a href="/estudiante/dashboard/inicio" class="menu-item"
@@ -51,17 +50,13 @@
                 </div>
             </div>
 
-            <!-- Main Content -->
             <div class="col-md-9 col-lg-10 main-content">
-
-                <!-- CONTENIDO: INICIO -->
                 <div th:if="${seccion == 'inicio'}">
                     <div class="content-header">
                         <h2>Hola, <strong th:text="${session.usuarioNombre}"></strong></h2>
                         <p class="text-muted">Bienvenido a tu biblioteca digital</p>
                     </div>
 
-                    <!-- Cards de Resumen -->
                     <div class="row g-4 mb-4">
                         <div class="col-md-6 col-lg-3">
                             <div class="stats-card">
@@ -104,7 +99,6 @@
                         </div>
                     </div>
 
-                    <!-- Sección de Acciones Rápidas -->
                     <div class="quick-actions-section">
                         <h4 class="mb-3">Acciones Rápidas</h4>
                         <div class="row g-3">
@@ -129,18 +123,15 @@
                         </div>
                     </div>
 
-                    <!-- Últimas Notificaciones -->
                     <div class="notifications-section mt-4">
                         <h4 class="mb-3">Notificaciones Recientes</h4>
 
-                        <!-- Mensaje si no hay notificaciones -->
                         <div th:if="${(notificacionesProximoVencer == null or notificacionesProximoVencer.isEmpty()) 
                   and (notificacionesAprobadas == null or notificacionesAprobadas.isEmpty())}"
                             class="alert alert-info">
                             No tienes notificaciones recientes.
                         </div>
 
-                        <!-- Notificaciones de devolución próxima -->
                         <div th:each="prestamo : ${notificacionesProximoVencer}" class="notification-item">
                             <div class="notification-icon-wrapper warning">
                                 <i class="fas fa-exclamation-triangle"></i>
@@ -160,7 +151,6 @@
                             </div>
                         </div>
 
-                        <!-- Notificaciones de solicitudes aprobadas -->
                         <div th:each="prestamo : ${notificacionesAprobadas}" class="notification-item">
                             <div class="notification-icon-wrapper success">
                                 <i class="fas fa-check-circle"></i>
@@ -180,7 +170,6 @@
                     </div>
                 </div>
 
-                <!-- CONTENIDO: PRÉSTAMOS ACTIVOS -->
                 <div th:if="${seccion == 'prestamos-activos'}">
                     <div class="content-header">
                         <h2>Hola, <strong th:text="${session.usuarioNombre}"></strong></h2>
@@ -198,12 +187,10 @@
                             </div>
                         </div>
 
-                        <!-- Mensaje si no hay préstamos -->
                         <div th:if="${prestamosActivos == null or prestamosActivos.isEmpty()}" class="alert alert-info">
                             No tienes préstamos activos en este momento.
                         </div>
 
-                        <!-- Lista de préstamos -->
                         <div th:each="prestamo : ${prestamosActivos}" class="loan-card mb-3">
                             <div class="loan-book-info">
                                 <img th:src="@{'/img/libros/' + ${prestamo.libro.imagen}}"
@@ -226,7 +213,6 @@
                     </div>
                 </div>
 
-                <!-- CONTENIDO: SOLICITUD DE PRÉSTAMO -->
                 <div th:if="${seccion == 'solicitud-prestamo'}">
                     <div class="content-header">
                         <h2>Hola, <strong th:text="${session.usuarioNombre}"></strong></h2>
@@ -243,12 +229,10 @@
                             </div>
                         </div>
 
-                        <!-- Mensaje si no hay solicitudes -->
                         <div th:if="${solicitudes == null or solicitudes.isEmpty()}" class="alert alert-info">
                             No tienes solicitudes pendientes en este momento.
                         </div>
 
-                        <!-- Lista de solicitudes -->
                         <div th:each="prestamo : ${solicitudes}" class="request-card mb-3">
                             <div class="request-book-info">
                                 <img th:src="@{'/img/libros/' + ${prestamo.libro.imagen}}"
@@ -273,7 +257,6 @@
                     </div>
                 </div>
 
-                <!-- CONTENIDO: CONFIRMACIÓN DE PRÉSTAMO -->
                 <div th:if="${seccion == 'confirmacion-prestamo'}">
                     <div class="content-header">
                         <h2>Hola, <strong th:text="${session.usuarioNombre}"></strong></h2>
@@ -291,12 +274,10 @@
                             </div>
                         </div>
 
-                        <!-- Mensaje si no hay confirmaciones -->
                         <div th:if="${confirmaciones == null or confirmaciones.isEmpty()}" class="alert alert-info">
                             No tienes confirmaciones en este momento.
                         </div>
 
-                        <!-- Lista de confirmaciones -->
                         <div th:each="prestamo : ${confirmaciones}" class="confirmation-card mb-3">
                             <div class="confirmation-book-info">
                                 <img th:src="@{'/img/libros/' + ${prestamo.libro.imagen}}"
@@ -332,7 +313,6 @@
                     </div>
                 </div>
 
-                <!-- CONTENIDO: HISTORIAL DE PRÉSTAMO -->
                 <div th:if="${seccion == 'historial-prestamo'}">
                     <div class="content-header">
                         <h2>Hola, <strong th:text="${session.usuarioNombre}"></strong></h2>
@@ -350,12 +330,10 @@
                             </div>
                         </div>
 
-                        <!-- Mensaje si no hay historial -->
                         <div th:if="${historial == null or historial.isEmpty()}" class="alert alert-info">
                             No tienes historial de préstamos.
                         </div>
 
-                        <!-- Lista de historial -->
                         <div th:each="prestamo : ${historial}" class="history-card mb-3">
                             <div class="history-book-info">
                                 <img th:src="@{'/img/libros/' + ${prestamo.libro.imagen}}"
@@ -367,20 +345,20 @@
                                 </div>
                             </div>
                             <div class="history-status">
-                                <!-- DEVUELTO -->
+
                                 <th:block th:if="${prestamo.estado.name() == 'DEVUELTO'}">
                                     <span class="status-text-returned">Devuelto</span>
                                     <i class="fas fa-check-circle status-icon-returned"></i>
                                 </th:block>
-                                <!-- EN LECTURA (APROBADO) -->
+
                                 <th:block th:if="${prestamo.estado.name() == 'APROBADO'}">
                                     <span class="status-text-reading">En lectura</span>
                                 </th:block>
-                                <!-- PENDIENTE -->
+
                                 <th:block th:if="${prestamo.estado.name() == 'PENDIENTE'}">
                                     <span class="status-text-pending">Pendiente</span>
                                 </th:block>
-                                <!-- RECHAZADO -->
+
                                 <th:block th:if="${prestamo.estado.name() == 'RECHAZADO'}">
                                     <span class="status-text-rejected" style="color: #dc3545;">Rechazado</span>
                                 </th:block>
@@ -400,7 +378,6 @@
             </div>
         </div>
 
-        <!-- Modal de confirmación para cancelar solicitud -->
         <div class="modal fade modal-confirm" id="confirmCancelarSolicitud" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -426,7 +403,6 @@
             </div>
         </div>
 
-        <!-- Modal de confirmación para cancelar confirmación -->
         <div class="modal fade modal-confirm" id="confirmCancelarConfirmacion" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -459,28 +435,24 @@
         let idPrestamoACancelar = null;
         let idPrestamoConfACancelar = null;
 
-        // Mostrar modal de confirmación para cancelar solicitud
         function mostrarConfirmacionCancelar(idPrestamo) {
             idPrestamoACancelar = idPrestamo;
             const modal = new bootstrap.Modal(document.getElementById('confirmCancelarSolicitud'));
             modal.show();
         }
 
-        // Confirmar cancelación de solicitud
         document.getElementById('btnConfirmarCancelar').addEventListener('click', function () {
             if (idPrestamoACancelar) {
                 document.getElementById('formCancelar' + idPrestamoACancelar).submit();
             }
         });
 
-        // Mostrar modal de confirmación para cancelar confirmación
         function mostrarConfirmacionCancelarConfirmacion(idPrestamo) {
             idPrestamoConfACancelar = idPrestamo;
             const modal = new bootstrap.Modal(document.getElementById('confirmCancelarConfirmacion'));
             modal.show();
         }
 
-        // Confirmar cancelación de confirmación
         document.getElementById('btnConfirmarCancelarConfirmacion').addEventListener('click', function () {
             if (idPrestamoConfACancelar) {
                 document.getElementById('formCancelarConf' + idPrestamoConfACancelar).submit();

@@ -54,11 +54,6 @@ public class DashBibliotecarioController {
         }
     }
 
-    /*
-     * ======================
-     * DASHBOARD GENERAL
-     * ======================
-     */
     @GetMapping("/{seccion}")
     public String mostrarDashboard(@PathVariable String seccion,
             @RequestParam(required = false) String filtro,
@@ -117,7 +112,7 @@ public class DashBibliotecarioController {
             model.addAttribute("prestamos", prestamoService.obtenerPendientes());
         }
 
-        // Fragmento AJAX
+        // FRAGMENTO
         if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
             return "dashboards/dash_bibliotecario :: main-content";
         }
@@ -138,11 +133,6 @@ public class DashBibliotecarioController {
                 || seccion.equals("aprobaciones");
     }
 
-    /*
-     * ======================
-     * LIBROS
-     * ======================
-     */
     @PostMapping("/libros/guardar")
     public String guardarNuevoLibro(@ModelAttribute("libro") Libros libro) {
         try {
@@ -236,11 +226,6 @@ public class DashBibliotecarioController {
         return map;
     }
 
-    /*
-     * ======================
-     * GESTIÓN DE CATEGORÍAS
-     * ======================
-     */
     @GetMapping("/categorias")
     public String mostrarCategorias(Model model) {
         List<Categoria> categorias = categoriaService.obtenerTodas();
@@ -333,11 +318,6 @@ public class DashBibliotecarioController {
         return categorias;
     }
 
-    /*
-     * ======================
-     * APROBACIONES
-     * ======================
-     */
     @PostMapping("/aprobar/{idPrestamo}")
     public String aprobarPrestamo(@PathVariable Long idPrestamo) {
         prestamoService.aprobarPrestamo(idPrestamo);

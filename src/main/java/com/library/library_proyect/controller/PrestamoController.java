@@ -22,7 +22,6 @@ public class PrestamoController {
     @Autowired
     private CatalogoService catalogoService;
 
-    // Solicitar préstamo
     @PostMapping("/solicitar")
     public String solicitarPrestamo(
             @RequestParam Long idLibro,
@@ -42,7 +41,6 @@ public class PrestamoController {
                 return "redirect:/catalogo";
             }
 
-            // ✨ VALIDACIÓN: Verificar si ya tiene una solicitud activa
             if (prestamoService.tienePrestamoActivo(usuario, libro)) {
                 redirectAttributes.addFlashAttribute("error",
                         "Ya tienes una solicitud pendiente o un préstamo activo de este libro.");
@@ -66,14 +64,12 @@ public class PrestamoController {
         }
     }
 
-    // Cancelar solicitud
     @PostMapping("/cancelar/{idPrestamo}")
     public String cancelarSolicitud(@PathVariable Long idPrestamo) {
         prestamoService.cancelarSolicitud(idPrestamo);
         return "redirect:/estudiante/dashboard/solicitud-prestamo?cancelled=true";
     }
 
-    // Cancelar confirmación
     @PostMapping("/cancelar-confirmacion/{idPrestamo}")
     public String cancelarConfirmacion(@PathVariable Long idPrestamo) {
         prestamoService.cancelarSolicitud(idPrestamo);

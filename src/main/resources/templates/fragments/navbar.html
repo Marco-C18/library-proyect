@@ -15,6 +15,7 @@
         <li>
             <a th:href="@{/catalogo}" th:classappend="${activePage == 'catalogo'} ? ' active' : ''">Catálogo</a>
         </li>
+
         <!-- Mostrar Dashboard según el tipo de usuario -->
         <li th:if="${session.usuarioTipo == 'ESTUDIANTE'}">
             <a th:href="@{/estudiante/dashboard/inicio}"
@@ -27,25 +28,27 @@
     </ul>
 
     <div class="user-section">
-        <!-- Menú de usuario mejorado -->
         <div class="user-menu-container">
             <div class="user-info" id="userMenuToggle">
                 <div class="user-avatar">
                     <i class="fas fa-user"></i>
                 </div>
-                <span class="user-name" th:text="${session.usuarioNombre != null ? session.usuarioNombre : 'Usuario'}">Usuario</span>
+                <span class="user-name"
+                    th:text="${session.usuarioNombre != null ? session.usuarioNombre : 'Usuario'}">Usuario</span>
                 <i class="fas fa-chevron-down dropdown-arrow"></i>
             </div>
 
-            <!-- Dropdown del usuario -->
             <div class="user-dropdown" id="userDropdown">
                 <div class="user-dropdown-header">
                     <div class="user-avatar-large">
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="user-details">
-                        <p class="user-dropdown-name" th:text="${session.usuarioNombre != null ? session.usuarioNombre : 'Usuario'}">Usuario</p>
-                        <p class="user-dropdown-type" th:text="${session.usuarioTipo != null ? (session.usuarioTipo == 'ESTUDIANTE' ? 'Estudiante' : 'Bibliotecario') : 'Usuario'}">Tipo</p>
+                        <p class="user-dropdown-name"
+                            th:text="${session.usuarioNombre != null ? session.usuarioNombre : 'Usuario'}">Usuario</p>
+                        <p class="user-dropdown-type"
+                            th:text="${session.usuarioTipo != null ? (session.usuarioTipo == 'ESTUDIANTE' ? 'Estudiante' : 'Bibliotecario') : 'Usuario'}">
+                            Tipo</p>
                     </div>
                 </div>
                 <div class="user-dropdown-divider"></div>

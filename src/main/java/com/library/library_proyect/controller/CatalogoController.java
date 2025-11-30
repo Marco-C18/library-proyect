@@ -20,41 +20,39 @@ public class CatalogoController {
 
     @Autowired
     private CatalogoService catalogoService;
-    
+
     @Autowired
     private CategoriaService categoriaService;
 
     @GetMapping("/catalogo")
     public String catalogo(
-        Model model,
-        @RequestParam(required = false, name = "cat") List<Long> categoriasSeleccionadas 
-    ) {
+            Model model,
+            @RequestParam(required = false, name = "cat") List<Long> categoriasSeleccionadas) {
         List<Libros> libros;
-        
-        List<Long> categoriasActivas = (categoriasSeleccionadas != null) 
-                                        ? categoriasSeleccionadas 
-                                        : Collections.emptyList(); 
-        
+
+        List<Long> categoriasActivas = (categoriasSeleccionadas != null)
+                ? categoriasSeleccionadas
+                : Collections.emptyList();
+
         if (!categoriasActivas.isEmpty()) {
             // Convertir IDs a objetos Categoria
             List<Categoria> categoriasEntidad = categoriasActivas.stream()
-                .map(id -> categoriaService.obtenerPorId(id).orElse(null))
-                .filter(cat -> cat != null)
-                .collect(Collectors.toList());
+                    .map(id -> categoriaService.obtenerPorId(id).orElse(null))
+                    .filter(cat -> cat != null)
+                    .collect(Collectors.toList());
 
             libros = catalogoService.obtenerLibrosPorCategorias(categoriasEntidad);
-            
+
         } else {
             libros = catalogoService.obtenerLibros();
         }
 
         model.addAttribute("libros", libros);
-        
-        // ✅ Cargar todas las categorías desde la BD
-        model.addAttribute("categorias", categoriaService.obtenerTodas()); 
-        
+
+        model.addAttribute("categorias", categoriaService.obtenerTodas());
+
         model.addAttribute("categoriasActivas", categoriasActivas);
-        
+
         model.addAttribute("activePage", "catalogo");
 
         return "catalogo";

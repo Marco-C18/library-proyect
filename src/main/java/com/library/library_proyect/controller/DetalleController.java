@@ -16,19 +16,19 @@ public class DetalleController {
 
     @Autowired
     private CatalogoService catalogoService;
-    
+
     @GetMapping("/detalleLibro/{id}")
-    public String mostrarDetalleLibro(@PathVariable Long id,Model model){
+    public String mostrarDetalleLibro(@PathVariable Long id, Model model) {
         Libros detalleLibro = catalogoService.obtenerLibroPorId(id);
         if (detalleLibro != null) {
             // Se pasa el ID del libro actual al método del servicio
             List<Libros> sugeridos = catalogoService.obtenerLibrosSugeridos(id);
-            
+
             model.addAttribute("detalleLibro", detalleLibro);
             model.addAttribute("sugeridos", sugeridos);
             return "detalle";
         } else {
-            return "redirect:/catalogo"; 
+            return "redirect:/catalogo";
         }
     }
 }

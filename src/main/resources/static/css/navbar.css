@@ -1,4 +1,3 @@
-/* PANEL DE NOTIFICACIONES */
 .notification-dropdown {
   display: none;
   position: absolute;
@@ -77,8 +76,6 @@
   background-color: #007bff;
   border-radius: 50%;
 }
-
-/* ========== MENÚ DE USUARIO ========== */
 
 .user-menu-container {
   position: relative;

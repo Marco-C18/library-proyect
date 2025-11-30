@@ -155,7 +155,11 @@ body {
 
 input[type="radio"]:checked + .tipo-btn {
   border-color: #1e88fa;
-  background: linear-gradient(135deg, rgba(30, 136, 250, 0.1) 0%, rgba(123, 186, 255, 0.15) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(30, 136, 250, 0.1) 0%,
+    rgba(123, 186, 255, 0.15) 100%
+  );
 }
 
 input[type="radio"]:checked + .tipo-btn i {

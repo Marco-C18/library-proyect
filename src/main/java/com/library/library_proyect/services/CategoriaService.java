@@ -14,7 +14,7 @@ public class CategoriaService {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
-    
+
     @Autowired
     private CatalogoRepository catalogoRepository;
 
@@ -38,12 +38,10 @@ public class CategoriaService {
         return categoriaRepository.existsByNombre(nombre);
     }
 
-    // ✅ Verificar si tiene libros asociados
     public boolean tieneLibrosAsociados(Categoria categoria) {
         return catalogoRepository.countByCategoria(categoria) > 0;
     }
 
-    // ✅ Contar libros por categoría
     public long contarLibrosPorCategoria(Categoria categoria) {
         return catalogoRepository.countByCategoria(categoria);
     }

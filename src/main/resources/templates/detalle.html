@@ -13,7 +13,6 @@
 </head>
 
 <body>
-    <!-- Alerta de éxito -->
     <div th:if="${success}" class="alert-custom alert-success-custom" id="alertSuccess">
         <div class="alert-icon">
             <i class="bi bi-check-circle-fill"></i>
@@ -27,7 +26,6 @@
         </button>
     </div>
 
-    <!-- Alerta de error -->
     <div th:if="${error}" class="alert-custom alert-error-custom" id="alertError">
         <div class="alert-icon">
             <i class="bi bi-exclamation-circle-fill"></i>
@@ -56,7 +54,8 @@
 
                     <div class="meta-info">
                         <span th:text="${detalleLibro.anio}"></span>
-                        <span th:text="${detalleLibro.categoria != null ? detalleLibro.categoria.nombre : 'Sin categoría'}"></span>
+                        <span
+                            th:text="${detalleLibro.categoria != null ? detalleLibro.categoria.nombre : 'Sin categoría'}"></span>
                         <span th:text="${detalleLibro.paginas} + ' páginas'"></span>
                     </div>
 
@@ -85,7 +84,6 @@
 
         </div>
 
-        <!-- Modal Solicitar Préstamo -->
         <div class="modal fade" id="solicitarPrestamoModal" tabindex="-1" aria-labelledby="solicitarPrestamoLabel"
             aria-hidden="true">
             <div class="modal-dialog">
@@ -126,9 +124,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Script para alertas -->
     <script>
-        // Cerrar alerta manualmente
         function closeAlert(alertId) {
             const alert = document.getElementById(alertId);
             if (alert) {
@@ -139,7 +135,6 @@
             }
         }
 
-        // Auto-cerrar después de 5 segundos
         window.addEventListener('DOMContentLoaded', function () {
             const alerts = document.querySelectorAll('.alert-custom');
             alerts.forEach(alert => {
@@ -149,13 +144,10 @@
             });
         });
 
-        // Cerrar el modal después de enviar el formulario
         document.addEventListener('DOMContentLoaded', function () {
             const modal = document.getElementById('solicitarPrestamoModal');
             if (modal) {
-                modal.addEventListener('hidden.bs.modal', function () {
-                    // El modal se cierra automáticamente después del submit
-                });
+                modal.addEventListener('hidden.bs.modal', function () { });
             }
         });
     </script>

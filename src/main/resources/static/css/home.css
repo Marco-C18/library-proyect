@@ -365,17 +365,17 @@ nav {
     flex: 0 0 150px;
     padding: 1.5rem;
   }
-  
+
   .category-icon {
     width: 60px;
     height: 60px;
     font-size: 1.5rem;
   }
-  
+
   .category-item h3 {
     font-size: 1rem;
   }
-  
+
   .category-carousel {
     gap: 20px;
     animation: scroll 40s linear infinite;
@@ -487,7 +487,6 @@ nav {
   transform: scale(1.05);
 }
 
-/* How It Works */
 .how-it-works {
   padding: 5rem 5%;
   text-align: center;

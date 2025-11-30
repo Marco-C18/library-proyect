@@ -32,7 +32,6 @@ public class DashEstudianteController {
         model.addAttribute("seccion", seccion);
         model.addAttribute("activePage", "dashboardEstudiante");
 
-        // Cargar datos según la sección
         switch (seccion) {
             case "inicio":
                 cargarDatosInicio(model, usuario);
@@ -67,7 +66,7 @@ public class DashEstudianteController {
         // Notificaciones
         List<Prestamo> notificacionesProximoVencer = prestamoService.obtenerProximosAVencer(usuario);
         List<Prestamo> notificacionesAprobadas = prestamoService.obtenerRecienAprobados(usuario);
-        
+
         model.addAttribute("cantidadPrestamosActivos", prestamosActivos);
         model.addAttribute("cantidadSolicitudesPendientes", solicitudesPendientes);
         model.addAttribute("cantidadProximosAVencer", proximosAVencer);

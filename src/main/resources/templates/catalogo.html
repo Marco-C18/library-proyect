@@ -37,19 +37,16 @@
                             <form id="filterForm" th:action="@{/catalogo}" method="get">
                                 <ul class="list-unstyled">
 
-                                    <!-- Recorre las categorías -->
                                     <li class="category-item" th:each="cat : ${categorias}">
                                         <input class="form-check-input me-2 category-checkbox" type="checkbox"
-                                            name="cat" th:id="'cat-' + ${cat.id}"
-                                        th:value="${cat.id}"
-                                        th:checked="${categoriasActivas.contains(cat.id)}">
+                                            name="cat" th:id="'cat-' + ${cat.id}" th:value="${cat.id}"
+                                            th:checked="${categoriasActivas.contains(cat.id)}">
 
                                         <label class="form-check-label" th:for="'cat-' + ${cat.id}"
                                             th:text="${cat.nombre}">
                                         </label>
                                     </li>
 
-                                    <!-- Checkbox 'Todas' -->
                                     <li class="category-item">
                                         <input type="checkbox" id="todas" class="form-check-input me-2" disabled
                                             th:checked="${categoriasActivas == null or categoriasActivas.isEmpty()}">
@@ -91,17 +88,16 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- <script src="home.js"></script> -->
     <script th:src="@{/js/home.js}"></script>
+
     <script>
-        // Selecciona todos los checkboxes que tienen la clase 'category-checkbox'
         const checkboxes = document.querySelectorAll('.category-checkbox');
         const filterForm = document.getElementById('filterForm');
 
-        // Añadimos un evento a cada checkbox
         checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', function () {
-                // Cuando el estado del checkbox cambia, automáticamente envía el formulario GET
                 filterForm.submit();
             });
         });

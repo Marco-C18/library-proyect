@@ -19,10 +19,6 @@ public class CatalogoService {
     @Autowired
     private CatalogoRepository catalogoRepository;
 
-    // ======================
-    // LIBROS
-    // ======================
-
     public Libros guardarLibro(Libros libro) {
         return catalogoRepository.save(libro);
     }
@@ -43,19 +39,13 @@ public class CatalogoService {
         catalogoRepository.deleteById(id);
     }
 
-    // ✅ Obtener libros por categoría (Entidad)
     public List<Libros> obtenerLibrosPorCategoria(Categoria categoria) {
         return catalogoRepository.findByCategoria(categoria);
     }
 
-    // ✅ Obtener libros por múltiples categorías (Entidad)
     public List<Libros> obtenerLibrosPorCategorias(List<Categoria> categorias) {
         return catalogoRepository.findByCategoriaIn(categorias);
     }
-
-    // ======================
-    // CATEGORÍAS
-    // ======================
 
     public List<Categoria> obtenerTodasCategorias() {
         return categoriaRepository.findAll();

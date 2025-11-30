@@ -18,7 +18,6 @@ public class PrestamoService {
     @Autowired
     private PrestamoRepository prestamoRepository;
 
-    // Crear solicitud de préstamo
     public Prestamo solicitarPrestamo(Usuario usuario, Libros libro, LocalDate fechaDevolucion) {
         Prestamo prestamo = new Prestamo();
         prestamo.setUsuario(usuario);
@@ -28,7 +27,6 @@ public class PrestamoService {
         return prestamoRepository.save(prestamo);
     }
 
-    // Aprobar préstamo
     public void aprobarPrestamo(Long idPrestamo) {
         Prestamo prestamo = prestamoRepository.findById(idPrestamo).orElseThrow();
         prestamo.setEstado(EstadoPrestamo.APROBADO);
@@ -36,14 +34,12 @@ public class PrestamoService {
         prestamoRepository.save(prestamo);
     }
 
-    // Rechazar préstamo
     public void rechazarPrestamo(Long idPrestamo) {
         Prestamo prestamo = prestamoRepository.findById(idPrestamo).orElseThrow();
         prestamo.setEstado(EstadoPrestamo.RECHAZADO);
         prestamoRepository.save(prestamo);
     }
 
-    // Devolver libro
     public void devolverLibro(Long idPrestamo) {
         Prestamo prestamo = prestamoRepository.findById(idPrestamo).orElseThrow();
         prestamo.setEstado(EstadoPrestamo.DEVUELTO);
@@ -51,39 +47,32 @@ public class PrestamoService {
         prestamoRepository.save(prestamo);
     }
 
-    // Obtener solicitudes pendientes (estudiante)
     public List<Prestamo> obtenerSolicitudesPendientes(Usuario usuario) {
         return prestamoRepository.findByUsuarioAndEstado(usuario, EstadoPrestamo.PENDIENTE);
     }
 
-    // Obtener confirmaciones (estudiante)
     public List<Prestamo> obtenerConfirmaciones(Usuario usuario) {
         return prestamoRepository.findByUsuarioAndEstadoIn(
                 usuario,
                 Arrays.asList(EstadoPrestamo.APROBADO, EstadoPrestamo.RECHAZADO));
     }
 
-    // Obtener préstamos activos (estudiante)
     public List<Prestamo> obtenerPrestamosActivos(Usuario usuario) {
         return prestamoRepository.findByUsuarioAndEstado(usuario, EstadoPrestamo.APROBADO);
     }
 
-    // Obtener historial completo (estudiante)
     public List<Prestamo> obtenerHistorial(Usuario usuario) {
         return prestamoRepository.findByUsuarioOrderByFechaSolicitudDesc(usuario);
     }
 
-    // Obtener préstamos pendientes para aprobar (bibliotecario)
     public List<Prestamo> obtenerPendientesAprobacion() {
         return prestamoRepository.findByEstado(EstadoPrestamo.PENDIENTE);
     }
 
-    // Cancelar solicitud (estudiante)
     public void cancelarSolicitud(Long idPrestamo) {
         prestamoRepository.deleteById(idPrestamo);
     }
 
-    // Verificar si el usuario ya tiene una solicitud activa de este libro
     public boolean tienePrestamoActivo(Usuario usuario, Libros libro) {
         List<EstadoPrestamo> estadosActivos = Arrays.asList(
                 EstadoPrestamo.PENDIENTE,
@@ -103,30 +92,28 @@ public class PrestamoService {
     }
 
     public List<Prestamo> obtenerProximosAVencer(Usuario usuario) {
-    LocalDate hoy = LocalDate.now();
-    LocalDate limiteVencimiento = hoy.plusDays(3);
-    
-    return prestamoRepository.findProximosAVencer(
-        usuario, 
-        EstadoPrestamo.APROBADO, 
-        hoy, 
-        limiteVencimiento
-    );
+        LocalDate hoy = LocalDate.now();
+        LocalDate limiteVencimiento = hoy.plusDays(3);
+
+        return prestamoRepository.findProximosAVencer(
+                usuario,
+                EstadoPrestamo.APROBADO,
+                hoy,
+                limiteVencimiento);
     }
 
     public boolean libroEstaPrestado(Long idLibro) {
-    return prestamoRepository.existsByLibroIdLibroAndEstado(idLibro, EstadoPrestamo.APROBADO);
-}
+        return prestamoRepository.existsByLibroIdLibroAndEstado(idLibro, EstadoPrestamo.APROBADO);
+    }
 
     public List<Prestamo> obtenerRecienAprobados(Usuario usuario) {
-    LocalDate fechaLimite = LocalDate.now().minusDays(2);
-    
-    return prestamoRepository.findRecienAprobados(
-        usuario, 
-        EstadoPrestamo.APROBADO, 
-        fechaLimite
-    );
-}
+        LocalDate fechaLimite = LocalDate.now().minusDays(2);
+
+        return prestamoRepository.findRecienAprobados(
+                usuario,
+                EstadoPrestamo.APROBADO,
+                fechaLimite);
+    }
 
     public long countByEstado(String estadoTexto) {
         EstadoPrestamo estado = EstadoPrestamo.valueOf(estadoTexto);
@@ -134,60 +121,50 @@ public class PrestamoService {
     }
 
     public List<Prestamo> obtenerUltimosPrestamos(int cantidad) {
-    return prestamoRepository.findTop5ByOrderByFechaSolicitudDesc();
+        return prestamoRepository.findTop5ByOrderByFechaSolicitudDesc();
     }
 
     public List<Prestamo> obtenerPrestamosVencidos() {
-    LocalDate hoy = LocalDate.now();
-    return prestamoRepository.prestamosVencidos(
-            EstadoPrestamo.APROBADO,
-            hoy
-    );
+        LocalDate hoy = LocalDate.now();
+        return prestamoRepository.prestamosVencidos(
+                EstadoPrestamo.APROBADO,
+                hoy);
     }
 
     public List<Prestamo> obtenerPrestamosPorVencer(int dias) {
-    LocalDate hoy = LocalDate.now();
-    LocalDate limite = hoy.plusDays(dias);
+        LocalDate hoy = LocalDate.now();
+        LocalDate limite = hoy.plusDays(dias);
 
-    return prestamoRepository.prestamosPorVencer(
-            EstadoPrestamo.APROBADO,
-            hoy,
-            limite
-    );
+        return prestamoRepository.prestamosPorVencer(
+                EstadoPrestamo.APROBADO,
+                hoy,
+                limite);
     }
 
     public List<Prestamo> obtenerPrestamosVenceEn(LocalDate fecha) {
-    return prestamoRepository.prestamosPorVencer(
-            EstadoPrestamo.APROBADO,
-            fecha,
-            fecha
-    );
+        return prestamoRepository.prestamosPorVencer(
+                EstadoPrestamo.APROBADO,
+                fecha,
+                fecha);
     }
 
-    // MÉTODOS PARA EL DASHBOARD 
-
-    // Total de préstamos
     public long totalPrestamos() {
         return prestamoRepository.count();
     }
 
-    // Cantidad de préstamos por estado
     public long prestamosPorEstado(EstadoPrestamo estado) {
         return prestamoRepository.countByEstado(estado);
     }
 
-    // Últimos préstamos (TOP 5)
     public List<Prestamo> ultimosPrestamos() {
         return prestamoRepository.findTop5ByOrderByFechaSolicitudDesc();
     }
 
-    // Préstamos vencidos
     public List<Prestamo> prestamosVencidos() {
         LocalDate hoy = LocalDate.now();
         return prestamoRepository.prestamosVencidos(EstadoPrestamo.APROBADO, hoy);
     }
 
-    // Préstamos por vencer en X días
     public List<Prestamo> prestamosPorVencer(int dias) {
         LocalDate hoy = LocalDate.now();
         LocalDate limite = hoy.plusDays(dias);
@@ -195,15 +172,11 @@ public class PrestamoService {
         return prestamoRepository.prestamosPorVencer(
                 EstadoPrestamo.APROBADO,
                 hoy,
-                limite
-        );
+                limite);
     }
 
-    // Préstamos pendientes (para aprobación de bibliotecario)
     public List<Prestamo> obtenerPendientes() {
         return prestamoRepository.findByEstado(EstadoPrestamo.PENDIENTE);
     }
-
-
 
 }

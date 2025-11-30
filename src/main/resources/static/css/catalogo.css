@@ -17,7 +17,6 @@ body {
   padding: 2rem 0;
 }
 
-/* Wrapper para el contenido principal con ancho limitado y centrado */
 .content-wrapper {
   max-width: 1400px;
   margin: 0 auto;
@@ -57,7 +56,6 @@ body {
 }
 
 /* --- Barra de Búsqueda --- */
-/* Contenedor para centrar el buscador */
 .search-bar-container {
   max-width: 800px;
   margin: 0 auto 2rem auto;
@@ -120,7 +118,6 @@ body {
   padding: 0.5rem;
 }
 
-/* Estilo de la cinta "NUEVO" */
 .ribbon-new {
   position: absolute;
   top: -1px;
@@ -130,21 +127,6 @@ body {
   overflow: hidden;
   z-index: 10;
 }
-
-/*         .ribbon-new::before, .ribbon-new::after {
-            content: "";
-            position: absolute;
-            display: block;
-            border-style: solid;
-            border-color: transparent transparent #ffc107 transparent;
-            z-index: 10;
-        }
-
-        .ribbon-new::before {
-            border-width: 30px 30px 0 0;
-            top: 0;
-            left: 0;
-        } */
 
 .ribbon-new::after {
   border-width: 0 30px 30px 0;
@@ -171,7 +153,6 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Medias queries para responsividad */
 @media (max-width: 768px) {
   .footer-content {
     flex-direction: column;

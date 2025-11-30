@@ -10,16 +10,12 @@ import com.library.library_proyect.model.Libros;
 
 @Repository
 public interface CatalogoRepository extends JpaRepository<Libros, Long> {
-    
-    // ✅ Buscar libros por categoría (Entidad)
+
     List<Libros> findByCategoria(Categoria categoria);
-    
-    // Para sugerencias
+
     List<Libros> findTop4ByIdLibroNotOrderByIdLibroDesc(Long idLibro);
-    
-    // Para filtros múltiples
+
     List<Libros> findByCategoriaIn(List<Categoria> categorias);
-    
-    // Contar libros por categoría
+
     long countByCategoria(Categoria categoria);
 }
