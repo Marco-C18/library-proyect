@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -10,394 +11,407 @@
   <link rel="stylesheet" href="/css/home.css">
   <link rel="stylesheet" href="/css/dashboards/dash_bibliotecario.css">
   <style>
-    .modal .form-label { font-weight:600; }
+    .modal .form-label {
+      font-weight: 600;
+    }
   </style>
 </head>
+
 <body>
-<div class="container-fluid">
-  <div class="row">
+  <div class="container-fluid">
+    <div class="row">
 
-    <!-- SIDEBAR -->
-    <div class="col-md-3 col-lg-2 sidebar">
-      <div class="sidebar-menu">
-        <a th:href="@{/bibliotecario/dashboard/{s}(s='inicio')}"
-           class="menu-item nav-link" data-section="inicio"
-           th:classappend="${seccion == 'inicio'} ? ' active' : ''">
-          <i class="fas fa-home"></i><span>Dashboard</span>
-        </a>
+      <!-- SIDEBAR -->
+      <div class="col-md-3 col-lg-2 sidebar">
+        <div class="sidebar-menu">
+          <a th:href="@{/bibliotecario/dashboard/{s}(s='inicio')}" class="menu-item nav-link" data-section="inicio"
+            th:classappend="${seccion == 'inicio'} ? ' active' : ''">
+            <i class="fas fa-home"></i><span>Dashboard</span>
+          </a>
 
-        <a th:href="@{/bibliotecario/dashboard/{s}(s='libros')}"
-           class="menu-item nav-link" data-section="libros"
-           th:classappend="${seccion == 'libros'} ? ' active' : ''">
-          <i class="fas fa-book"></i><span>Gestión de libros</span>
-        </a>
+          <a th:href="@{/bibliotecario/dashboard/{s}(s='libros')}" class="menu-item nav-link" data-section="libros"
+            th:classappend="${seccion == 'libros'} ? ' active' : ''">
+            <i class="fas fa-book"></i><span>Gestión de libros</span>
+          </a>
 
-        <a th:href="@{/bibliotecario/dashboard/{s}(s='categorias')}"
-           class="menu-item nav-link" data-section="categorias"
-           th:classappend="${seccion == 'categorias'} ? ' active' : ''">
-          <i class="fas fa-th-large"></i><span>Gestión de categorías</span>
-        </a>
+          <a th:href="@{/bibliotecario/dashboard/{s}(s='categorias')}" class="menu-item nav-link"
+            data-section="categorias" th:classappend="${seccion == 'categorias'} ? ' active' : ''">
+            <i class="fas fa-th-large"></i><span>Gestión de categorías</span>
+          </a>
 
-        <a th:href="@{/bibliotecario/dashboard/{s}(s='reportes')}"
-           class="menu-item nav-link" data-section="reportes"
-           th:classappend="${seccion == 'reportes'} ? ' active' : ''">
-          <i class="fas fa-exclamation-triangle"></i><span>Reportes</span>
-        </a>
+          <a th:href="@{/bibliotecario/dashboard/{s}(s='reportes')}" class="menu-item nav-link" data-section="reportes"
+            th:classappend="${seccion == 'reportes'} ? ' active' : ''">
+            <i class="fas fa-exclamation-triangle"></i><span>Reportes</span>
+          </a>
 
-        <a th:href="@{/bibliotecario/dashboard/{s}(s='aprobaciones')}"
-           class="menu-item nav-link" data-section="aprobaciones"
-           th:classappend="${seccion == 'aprobaciones'} ? ' active' : ''">
-          <i class="fas fa-award"></i><span>Aprobaciones</span>
-        </a>
+          <a th:href="@{/bibliotecario/dashboard/{s}(s='aprobaciones')}" class="menu-item nav-link"
+            data-section="aprobaciones" th:classappend="${seccion == 'aprobaciones'} ? ' active' : ''">
+            <i class="fas fa-award"></i><span>Aprobaciones</span>
+          </a>
 
-        <a th:href="@{/}" class="menu-item"><i class="fas fa-home"></i><span>Volver al inicio</span></a>
-      </div>
-    </div>
-
-    <div class="col-md-9 col-lg-10 main-content" id="main-content" th:fragment="main-content">
-
-
-
-      <!-- ALERTAS (renderizadas por servidor según params) -->
-      <div class="alert-container mb-4">
-        <div th:if="${param.success}" class="alert-custom success-alert"><i class="fas fa-check-circle"></i> Libro registrado correctamente.</div>
-        <div th:if="${param.error}" class="alert-custom error-alert"><i class="fas fa-times-circle"></i> Ocurrió un error al guardar el libro.</div>
-        <div th:if="${param.edit_success}" class="alert-custom success-alert"><i class="fas fa-check-circle"></i> Libro actualizado correctamente.</div>
-        <div th:if="${param.delete_success}" class="alert-custom success-alert"><i class="fas fa-check-circle"></i> Libro eliminado correctamente.</div>
-        <div th:if="${param.notfound}" class="alert-custom error-alert"><i class="fas fa-exclamation-circle"></i> El libro solicitado no existe.</div>
-        <div th:if="${param.approved}" class="alert-custom success-alert"><i class="fas fa-check-circle"></i> Préstamo aprobado correctamente.</div>
-        <div th:if="${param.rejected}" class="alert-custom error-alert"><i class="fas fa-times-circle"></i> Préstamo rechazado correctamente.</div>
+          <a th:href="@{/}" class="menu-item"><i class="fas fa-home"></i><span>Volver al inicio</span></a>
+        </div>
       </div>
 
-      <!-- =========================
+      <div class="col-md-9 col-lg-10 main-content" id="main-content" th:fragment="main-content">
+
+
+
+        <!-- ALERTAS (renderizadas por servidor según params) -->
+        <div class="alert-container mb-4">
+          <div th:if="${param.success}" class="alert-custom success-alert"><i class="fas fa-check-circle"></i> Libro
+            registrado correctamente.</div>
+          <div th:if="${param.error}" class="alert-custom error-alert"><i class="fas fa-times-circle"></i> Ocurrió un
+            error al guardar el libro.</div>
+          <div th:if="${param.edit_success}" class="alert-custom success-alert"><i class="fas fa-check-circle"></i>
+            Libro actualizado correctamente.</div>
+          <div th:if="${param.delete_success}" class="alert-custom success-alert"><i class="fas fa-check-circle"></i>
+            Libro eliminado correctamente.</div>
+          <div th:if="${param.notfound}" class="alert-custom error-alert"><i class="fas fa-exclamation-circle"></i> El
+            libro solicitado no existe.</div>
+          <div th:if="${param.approved}" class="alert-custom success-alert"><i class="fas fa-check-circle"></i> Préstamo
+            aprobado correctamente.</div>
+          <div th:if="${param.rejected}" class="alert-custom error-alert"><i class="fas fa-times-circle"></i> Préstamo
+            rechazado correctamente.</div>
+        </div>
+
+        <!-- =========================
            SECTION: INICIO
            Renderizado por servidor SOLO si seccion=='inicio'
            ========================= -->
-      <div th:if="${seccion == 'inicio'}" id="section-inicio">
-        <div class="content-header"><h1 class="fw-bold display-6">Dashboard bibliotecario</h1></div>
+        <div th:if="${seccion == 'inicio'}" id="section-inicio">
+          <div class="content-header">
+            <h1 class="fw-bold display-6">Dashboard bibliotecario</h1>
+          </div>
 
-        <div class="row g-4 mb-4 metric-cards">
-          <div class="col-md-4 col-lg-3">
-            <div class="metric-card">
-              <div class="metric-label">Total de libros</div>
-              <div class="metric-number" th:text="${totalPrestamos}">0</div>
-            </div>
-          </div>
-          <div class="col-md-4 col-lg-3">
-            <div class="metric-card">
-              <div class="metric-label">Pendientes</div>
-              <div class="metric-number" th:text="${pendientes}">0</div>
-            </div>
-          </div>
-          <div class="col-md-4 col-lg-3">
-            <div class="metric-card">
-              <div class="metric-label">Aprobados</div>
-              <div class="metric-number" th:text="${aprobados}">0</div>
-            </div>
-          </div>
-        </div>
-
-        <h3 class="fw-bold mb-3">Últimos préstamos</h3>
-        <div class="prestamos-encabezado">
-          <div class="fw-semibold text-secondary">Libro</div>
-          <div class="fw-semibold text-secondary text-center">Estado</div>
-          <div class="fw-semibold text-secondary text-center">Devolución</div>
-        </div>
-        <div class="prestamos-lista">
-          <div class="prestamo-item" th:each="p : ${ultimosPrestamos}">
-            <div class="prestamo-info">
-              <img th:src="@{'/img/libros/' + ${p.libro.imagen}}" alt="portada" class="img-fluid rounded">
-              <div class="prestamo-detalles">
-                <h5 th:text="${p.libro.titulo}"></h5>
-                <p th:text="${p.libro.autor}"></p>
-                <span th:text="${p.libro.anio}"></span>
+          <div class="row g-4 mb-4 metric-cards">
+            <div class="col-md-4 col-lg-3">
+              <div class="metric-card">
+                <div class="metric-label">Total de libros</div>
+                <div class="metric-number" th:text="${totalPrestamos}">0</div>
               </div>
             </div>
-            <div class="prestamo-estado" th:text="${p.estado}">Estado</div>
-            <div class="prestamo-devolucion" th:text="${#temporals.format(p.fechaDevolucion,'dd/MM/yyyy')}">fecha</div>
+            <div class="col-md-4 col-lg-3">
+              <div class="metric-card">
+                <div class="metric-label">Pendientes</div>
+                <div class="metric-number" th:text="${pendientes}">0</div>
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+              <div class="metric-card">
+                <div class="metric-label">Aprobados</div>
+                <div class="metric-number" th:text="${aprobados}">0</div>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="fw-bold mb-3">Últimos préstamos</h3>
+          <div class="prestamos-encabezado">
+            <div class="fw-semibold text-secondary">Libro</div>
+            <div class="fw-semibold text-secondary text-center">Estado</div>
+            <div class="fw-semibold text-secondary text-center">Devolución</div>
+          </div>
+          <div class="prestamos-lista">
+            <div class="prestamo-item" th:each="p : ${ultimosPrestamos}">
+              <div class="prestamo-info">
+                <img th:src="@{'/img/libros/' + ${p.libro.imagen}}" alt="portada" class="img-fluid rounded">
+                <div class="prestamo-detalles">
+                  <h5 th:text="${p.libro.titulo}"></h5>
+                  <p th:text="${p.libro.autor}"></p>
+                  <span th:text="${p.libro.anio}"></span>
+                </div>
+              </div>
+              <div class="prestamo-estado" th:text="${p.estado}">Estado</div>
+              <div class="prestamo-devolucion" th:text="${#temporals.format(p.fechaDevolucion,'dd/MM/yyyy')}">fecha
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- =========================
+        <!-- =========================
            SECTION: LIBROS
            Renderizado por servidor SOLO si seccion=='libros'
            ========================= -->
-      <div th:if="${seccion == 'libros'}" id="section-libros">
+        <div th:if="${seccion == 'libros'}" id="section-libros">
 
-        <div class="content-header d-flex justify-content-between align-items-center">
-          <h2 class="fw-bold">Gestión de libros</h2>
-          <div>
-            <button id="btn-new-book" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar libro</button>
+          <div class="content-header d-flex justify-content-between align-items-center">
+            <h2 class="fw-bold">Gestión de libros</h2>
+            <div>
+              <button id="btn-new-book" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar libro</button>
+            </div>
           </div>
-        </div>
 
-        <!-- LISTA / CARDS -->
-        <div class="libros-lista mt-3">
-          <div class="libro-item" th:each="l : ${libros}">
-            <div class="libro-info">
-              <img th:src="@{'/img/libros/' + ${l.imagen}}" alt="portada" class="img-fluid rounded" style="width:60px;height:90px;object-fit:cover;">
-              <div class="libro-detalles">
-                <h5 th:text="${l.titulo}">Título</h5>
-                <p th:text="${l.autor}">Autor</p>
-                <span th:text="${l.anio}">Año</span>
-                <p>Páginas: <span th:text="${l.paginas}">0</span></p>
+          <!-- LISTA / CARDS -->
+          <div class="libros-lista mt-3">
+            <div class="libro-item" th:each="l : ${libros}">
+              <div class="libro-info">
+                <img th:src="@{'/img/libros/' + ${l.imagen}}" alt="portada" class="img-fluid rounded"
+                  style="width:60px;height:90px;object-fit:cover;">
+                <div class="libro-detalles">
+                  <h5 th:text="${l.titulo}">Título</h5>
+                  <p th:text="${l.autor}">Autor</p>
+                  <span th:text="${l.anio}">Año</span>
+                  <p>Páginas: <span th:text="${l.paginas}">0</span></p>
+
+                </div>
 
               </div>
 
-            </div>
+              <div class="col-md-6 mb-3">
+  <label class="form-label">Categoría</label>
+  <input type="text" class="form-control" th:value="${l.categoria.nombre}" disabled>
+</div>
 
-            <div class="libro-categoria" th:text="${l.categoria != null ? l.categoria.getDisplayName() : '—'}">Categoria</div>
-            <div class="libro-estado"
-                th:text="${prestamoService.libroEstaPrestado(l.idLibro) ? 'No disponible' : 'Disponible'}">
-            </div>
 
-            <div class="libro-acciones">
-              <button class="btn btn-sm btn-outline-warning btn-edit" type="button"
-                      data-id="" th:attr="data-id=${l.idLibro}" title="Editar">
-                <i class="fa fa-edit"></i>
-              </button>
+              <div class="libro-acciones">
+                <button class="btn btn-sm btn-outline-warning btn-edit" type="button" data-id=""
+                  th:attr="data-id=${l.idLibro}" title="Editar">
+                  <i class="fa fa-edit"></i>
+                </button>
 
-              <a th:href="@{/bibliotecario/dashboard/libros/eliminar/{id}(id=${l.idLibro})}"
-                 class="btn btn-sm btn-outline-danger"
-                 onclick="return confirm('¿Eliminar libro?');" title="Eliminar">
-                <i class="fa fa-trash"></i>
-              </a>
+                <a th:href="@{/bibliotecario/dashboard/libros/eliminar/{id}(id=${l.idLibro})}"
+                  class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Eliminar libro?');" title="Eliminar">
+                  <i class="fa fa-trash"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-     <!-- =========================
+        <!-- =========================
      SECTION: CATEGORÍAS
      ========================= -->
-<div th:if="${seccion == 'categorias'}" id="section-categorias">
-  <div class="content-header d-flex justify-content-between align-items-center">
-    <h2 class="fw-bold">Gestión de categorías</h2>
-  </div>
+        <div th:if="${seccion == 'categorias'}" id="section-categorias">
+          <div class="content-header d-flex justify-content-between align-items-center">
+            <h2 class="fw-bold">Gestión de categorías</h2>
+          </div>
 
-  <!-- FORMULARIO CREAR NUEVA CATEGORÍA -->
-  <div class="card p-3 mb-3">
-    <form th:action="@{/bibliotecario/dashboard/categorias/guardar-db}" th:object="${categoria}" method="post">
-      <div th:if="${errorCategoria}" class="alert alert-warning" th:text="${errorCategoria}"></div>
-      <div th:if="${successCategoria}" class="alert alert-success" th:text="${successCategoria}"></div>
+          <!-- FORMULARIO CREAR NUEVA CATEGORÍA -->
+          <div class="card p-3 mb-3">
+            <form th:action="@{/bibliotecario/dashboard/categorias/guardar-db}" th:object="${categoria}" method="post">
+              <div th:if="${errorCategoria}" class="alert alert-warning" th:text="${errorCategoria}"></div>
+              <div th:if="${successCategoria}" class="alert alert-success" th:text="${successCategoria}"></div>
 
-      <div class="row g-2 align-items-end">
-        <div class="col-md-6">
-          <label class="form-label">Nombre</label>
-          <input class="form-control" th:field="*{nombre}" placeholder="Nueva categoría">
+              <div class="row g-2 align-items-end">
+                <div class="col-md-6">
+                  <label class="form-label">Nombre</label>
+                  <input class="form-control" th:field="*{nombre}" placeholder="Nueva categoría">
+                </div>
+                <div class="col-md-2">
+                  <button class="btn btn-primary" type="submit">Crear</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- LISTA DE CATEGORÍAS -->
+          <div class="categorias-lista">
+            <div class="categoria-item d-flex align-items-center mb-2" th:each="cat : ${categoriasDb}">
+              <div class="categoria-nombre me-3" style="width:220px;" th:text="${cat.nombre}">Nombre</div>
+
+              <!-- BOTONES EDITAR / BORRAR -->
+              <div class="categoria-acciones ms-auto d-flex gap-2">
+                <!-- EDITAR -->
+                <form th:action="@{/bibliotecario/dashboard/categorias/editar-db/{id}(id=${cat.id})}" method="post"
+                  class="d-flex gap-2">
+                  <input name="nombre" th:value="${cat.nombre}" class="form-control form-control-sm"
+                    style="width:150px;">
+                  <button class="btn btn-sm btn-warning" type="submit">Editar</button>
+                </form>
+
+                <!-- ELIMINAR -->
+                <form th:action="@{/bibliotecario/dashboard/categorias/eliminar-db/{id}(id=${cat.id})}" method="post"
+                  onsubmit="return confirm('¿Eliminar categoría?');">
+                  <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
+                </form>
+
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-md-2">
-          <button class="btn btn-primary" type="submit">Crear</button>
-        </div>
-      </div>
-    </form>
-  </div>
-
-  <!-- LISTA DE CATEGORÍAS -->
-  <div class="categorias-lista">
-    <div class="categoria-item d-flex align-items-center mb-2" th:each="cat : ${categoriasDb}">
-      <div class="categoria-nombre me-3" style="width:220px;" th:text="${cat.nombre}">Nombre</div>
-
-      <!-- BOTONES EDITAR / BORRAR -->
-      <div class="categoria-acciones ms-auto d-flex gap-2">
-        <!-- EDITAR -->
-        <form th:action="@{/bibliotecario/dashboard/categorias/editar-db/{id}(id=${cat.id})}" method="post" class="d-flex gap-2">
-          <input name="nombre" th:value="${cat.nombre}" class="form-control form-control-sm" style="width:150px;">
-          <button class="btn btn-sm btn-warning" type="submit">Editar</button>
-        </form>
-
-        <!-- ELIMINAR -->
-        <form th:action="@{/bibliotecario/dashboard/categorias/eliminar-db/{id}(id=${cat.id})}" method="post"
-              onsubmit="return confirm('¿Eliminar categoría?');">
-          <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
-        </form>
-
-      </div>
-    </div>
-  </div>
-</div>
 
 
-<!-- =========================
+        <!-- =========================
      SECTION: REPORTES
      ========================= -->
-<div th:if="${seccion == 'reportes'}" id="section-reportes">
-  <div class="content-header d-flex justify-content-between align-items-center">
-    <h2 class="fw-bold">Reportes</h2>
-  </div>
+        <div th:if="${seccion == 'reportes'}" id="section-reportes">
+          <div class="content-header d-flex justify-content-between align-items-center">
+            <h2 class="fw-bold">Reportes</h2>
+          </div>
 
-  <div class="reportes-filtros mb-3">
-    <button class="btn btn-filtro azul"
-            th:classappend="${activeReport == 'vencidos'} ? ' active' : ''"
-            onclick="location.href='[[@{/bibliotecario/dashboard/reportes(filtro='vencidos')}]]'">
-      Vencidos
-    </button>
+          <div class="reportes-filtros mb-3">
+            <button class="btn btn-filtro azul" th:classappend="${activeReport == 'vencidos'} ? ' active' : ''"onclick="location.href='[[@{/bibliotecario/dashboard/reportes(filtro='vencidos')}]]'">
+              Vencidos
+            </button>
 
-    <button class="btn btn-filtro verde"
-            th:classappend="${activeReport == 'porvencer'} ? ' active' : ''"
-            onclick="location.href='[[@{/bibliotecario/dashboard/reportes(filtro='porvencer')}]]'">
-      Por vencer
-    </button>
+            <button class="btn btn-filtro verde" th:classappend="${activeReport == 'porvencer'} ? ' active' : ''"onclick="location.href='[[@{/bibliotecario/dashboard/reportes(filtro='porvencer')}]]'">
+              Por vencer
+            </button>
 
 
-  </div>
+          </div>
 
-  <div class="reporte-lista">
-    <div th:if="${vencidos != null and !vencidos.isEmpty()}">
-      <h5>Vencidos</h5>
-      <div class="reporte-item" th:each="v : ${vencidos}">
-        <img class="reporte-img" th:src="@{'/img/libros/' + ${v.libro.imagen}}" alt="">
-        <div class="ms-3">
-          <h5 th:text="${v.libro.titulo}"></h5>
-          <p class="m-0" th:text="${v.usuario.nombre}">Usuario</p>
+          <div class="reporte-lista">
+            <div th:if="${vencidos != null and !vencidos.isEmpty()}">
+              <h5>Vencidos</h5>
+              <div class="reporte-item" th:each="v : ${vencidos}">
+                <img class="reporte-img" th:src="@{'/img/libros/' + ${v.libro.imagen}}" alt="">
+                <div class="ms-3">
+                  <h5 th:text="${v.libro.titulo}"></h5>
+                  <p class="m-0" th:text="${v.usuario.nombre}">Usuario</p>
+                </div>
+                <div class="ms-auto">
+                  <small th:text="${#temporals.format(v.fechaDevolucion,'dd/MM/yyyy')}"></small>
+                </div>
+              </div>
+            </div>
+
+            <div th:if="${porVencer != null and !porVencer.isEmpty()}" class="mt-4">
+              <h5>Por vencer</h5>
+              <div class="reporte-item" th:each="p : ${porVencer}">
+                <img class="reporte-img" th:src="@{'/img/libros/' + ${p.libro.imagen}}" alt="">
+                <div class="ms-3">
+                  <h5 th:text="${p.libro.titulo}"></h5>
+                  <p class="m-0" th:text="${p.usuario.nombre}">Usuario</p>
+                </div>
+                <div class="ms-auto">
+                  <small th:text="${#temporals.format(p.fechaDevolucion,'dd/MM/yyyy')}"></small>
+                </div>
+              </div>
+            </div>
+
+            <div th:if="${(vencidos == null or vencidos.isEmpty()) and (porVencer == null or porVencer.isEmpty())}">
+              <div class="alert alert-info">No hay préstamos para mostrar según el filtro seleccionado.</div>
+            </div>
+          </div>
         </div>
-        <div class="ms-auto">
-          <small th:text="${#temporals.format(v.fechaDevolucion,'dd/MM/yyyy')}"></small>
-        </div>
-      </div>
-    </div>
-
-    <div th:if="${porVencer != null and !porVencer.isEmpty()}" class="mt-4">
-      <h5>Por vencer</h5>
-      <div class="reporte-item" th:each="p : ${porVencer}">
-        <img class="reporte-img" th:src="@{'/img/libros/' + ${p.libro.imagen}}" alt="">
-        <div class="ms-3">
-          <h5 th:text="${p.libro.titulo}"></h5>
-          <p class="m-0" th:text="${p.usuario.nombre}">Usuario</p>
-        </div>
-        <div class="ms-auto">
-          <small th:text="${#temporals.format(p.fechaDevolucion,'dd/MM/yyyy')}"></small>
-        </div>
-      </div>
-    </div>
-
-    <div th:if="${(vencidos == null or vencidos.isEmpty()) and (porVencer == null or porVencer.isEmpty())}">
-      <div class="alert alert-info">No hay préstamos para mostrar según el filtro seleccionado.</div>
-    </div>
-  </div>
-</div>
 
 
-      <!-- =========================
+        <!-- =========================
            SECTION: APROBACIONES
            (ya tenías esta sección; la dejamos igual)
            ========================= -->
-      <div th:if="${seccion == 'aprobaciones'}" id="section-aprobaciones" class="aprobaciones-section">
-        <div class="content-header"><h2 class="fw-bold">Aprobaciones</h2></div>
+        <div th:if="${seccion == 'aprobaciones'}" id="section-aprobaciones" class="aprobaciones-section">
+          <div class="content-header">
+            <h2 class="fw-bold">Aprobaciones</h2>
+          </div>
 
-        <div class="aprobaciones-encabezado">
-          <span class="fw-semibold">Libro</span>
-          <span class="fw-semibold">Estudiante</span>
-          <span class="fw-semibold">Devolución</span>
-          <span class="fw-semibold">Aprobación</span>
-        </div>
+          <div class="aprobaciones-encabezado">
+            <span class="fw-semibold">Libro</span>
+            <span class="fw-semibold">Estudiante</span>
+            <span class="fw-semibold">Devolución</span>
+            <span class="fw-semibold">Aprobación</span>
+          </div>
 
-        <div th:if="${prestamos == null or prestamos.isEmpty()}" class="alert alert-info mt-3">No hay solicitudes pendientes de aprobación.</div>
+          <div th:if="${prestamos == null or prestamos.isEmpty()}" class="alert alert-info mt-3">No hay solicitudes
+            pendientes de aprobación.</div>
 
-        <div class="aprobaciones-lista">
-          <div class="aprobacion-item" th:each="prestamo: ${prestamos}">
-            <div class="aprobacion-info">
-              <img th:src="@{'/img/libros/' + ${prestamo.libro.imagen}}">
-              <div>
-                <h5 th:text="${prestamo.libro.titulo}"></h5>
-                <p th:text="${prestamo.libro.autor}"></p>
-                <span th:text="${prestamo.libro.anio}"></span>
+          <div class="aprobaciones-lista">
+            <div class="aprobacion-item" th:each="prestamo: ${prestamos}">
+              <div class="aprobacion-info">
+                <img th:src="@{'/img/libros/' + ${prestamo.libro.imagen}}">
+                <div>
+                  <h5 th:text="${prestamo.libro.titulo}"></h5>
+                  <p th:text="${prestamo.libro.autor}"></p>
+                  <span th:text="${prestamo.libro.anio}"></span>
+                </div>
+              </div>
+
+              <div class="aprobacion-estudiante" th:text="${prestamo.usuario.nombre}"></div>
+              <div class="aprobacion-devolucion" th:text="${#temporals.format(prestamo.fechaDevolucion,'dd/MM/yyyy')}">
+              </div>
+
+              <div class="aprobacion-botones">
+                <form th:action="@{/bibliotecario/dashboard/aprobar/{id}(id=${prestamo.idPrestamo})}" method="post"
+                  style="display:inline;">
+                  <button class="btn-aprobar"><i class="fa-solid fa-check"></i></button>
+                </form>
+                <form th:action="@{/bibliotecario/dashboard/rechazar/{id}(id=${prestamo.idPrestamo})}" method="post"
+                  style="display:inline;">
+                  <button class="btn-rechazar"><i class="fa-solid fa-xmark"></i></button>
+                </form>
               </div>
             </div>
-
-            <div class="aprobacion-estudiante" th:text="${prestamo.usuario.nombre}"></div>
-            <div class="aprobacion-devolucion" th:text="${#temporals.format(prestamo.fechaDevolucion,'dd/MM/yyyy')}"></div>
-
-            <div class="aprobacion-botones">
-              <form th:action="@{/bibliotecario/dashboard/aprobar/{id}(id=${prestamo.idPrestamo})}" method="post" style="display:inline;">
-                <button class="btn-aprobar"><i class="fa-solid fa-check"></i></button>
-              </form>
-              <form th:action="@{/bibliotecario/dashboard/rechazar/{id}(id=${prestamo.idPrestamo})}" method="post" style="display:inline;">
-                <button class="btn-rechazar"><i class="fa-solid fa-xmark"></i></button>
-              </form>
-            </div>
           </div>
         </div>
-      </div>
 
-    </div> <!-- main-content -->
-  </div> <!-- row -->
-</div> <!-- container -->
+      </div> <!-- main-content -->
+    </div> <!-- row -->
+  </div> <!-- container -->
 
-<!-- MODAL: Crear / Editar Libro -->
-<div class="modal fade" id="bookModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <form id="bookForm" th:object="${libro}" enctype="multipart/form-data" method="post">
-        <div class="modal-header">
-          <h5 class="modal-title" id="bookModalTitle">Registrar libro</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <div id="modal-alerts"></div>
+  <!-- MODAL: Crear / Editar Libro -->
+  <div class="modal fade" id="bookModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <form id="bookForm" th:object="${libro}" enctype="multipart/form-data" method="post">
+          <div class="modal-header">
+            <h5 class="modal-title" id="bookModalTitle">Registrar libro</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div id="modal-alerts"></div>
 
-          <input type="hidden" id="book-id" name="idLibro">
+            <input type="hidden" id="book-id" name="idLibro">
 
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label">Título</label>
-              <input id="book-titulo" name="titulo" class="form-control">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label">Autor</label>
-              <input id="book-autor" name="autor" class="form-control">
-            </div>
-            <div class="col-md-4">
-              <label class="form-label">Año</label>
-              <input id="book-anio" name="anio" type="number" class="form-control">
-            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Título</label>
+                <input id="book-titulo" name="titulo" class="form-control">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Autor</label>
+                <input id="book-autor" name="autor" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Año</label>
+                <input id="book-anio" name="anio" type="number" class="form-control">
+              </div>
 
-            <div class="col-md-4">
-              <label class="form-label">Páginas</label>
-              <input id="book-paginas" type="number" th:field="*{paginas}" class="form-control" placeholder="Número de páginas">
-            </div>
+              <div class="col-md-4">
+                <label class="form-label">Páginas</label>
+                <input id="book-paginas" type="number" th:field="*{paginas}" class="form-control"
+                  placeholder="Número de páginas">
+              </div>
 
-            <div class="col-md-8">
-              <label class="form-label">Categoría</label>
-             <select id="book-categoria" name="categoria.id" class="form-select" required>
-            <option value="" disabled>Seleccione categoría</option>
-            <option th:each="c : ${categoriasDb}"
-                    th:value="${c.id}"
-                    th:text="${c.nombre}"
+              <div class="col-md-8">
+                <label class="form-label">Categoría</label>
+                <select id="book-categoria" name="categoria.id" class="form-select" required>
+                  <option value="" disabled>Seleccione categoría</option>
+                  <option th:each="c : ${categoriasDb}" th:value="${c.id}" th:text="${c.nombre}"
                     th:selected="${libro.categoria != null} ? ${libro.categoria.id} == ${c.id} : false">
-            </option>
-          </select>
+                  </option>
+                </select>
 
-            </div>
-            <div class="col-12">
-              <label class="form-label">Imagen</label>
-              <input id="book-file" name="file" type="file" class="form-control">
-              <small class="text-muted">Opcional. Si subes, reemplaza la anterior.</small>
-            </div>
-            <div class="col-12">
-              <label class="form-label">Descripción</label>
-              <textarea id="book-desc" name="descripcion" class="form-control" rows="3"></textarea>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Imagen</label>
+                <input id="book-file" name="file" type="file" class="form-control">
+                <small class="text-muted">Opcional. Si subes, reemplaza la anterior.</small>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Descripción</label>
+                <textarea id="book-desc" name="descripcion" class="form-control" rows="3"></textarea>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="modal-footer">
-          <button id="book-save-btn" type="submit" class="btn btn-success">Guardar</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        </div>
-      </form>
+          <div class="modal-footer">
+            <button id="book-save-btn" type="submit" class="btn btn-success">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- SCRIPTS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/js/bibliotecario.js"></script>
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/bibliotecario.js"></script>
 
 
-<script>
+  <script>
 
-</script>
+  </script>
 </body>
+
 </html>

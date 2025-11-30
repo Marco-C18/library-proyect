@@ -241,6 +241,7 @@ nav {
 .categories {
   padding: 5rem 5%;
   text-align: center;
+  overflow: hidden;
 }
 
 .categories h2 {
@@ -257,6 +258,22 @@ nav {
   margin: 0 auto;
 }
 
+.carousel-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.category-carousel {
+  display: flex;
+  gap: 30px;
+  animation: scroll 30s linear infinite;
+  width: fit-content;
+}
+
+.category-carousel:hover {
+  animation-play-state: paused;
+}
+
 .category-item {
   display: flex;
   flex-direction: column;
@@ -266,6 +283,12 @@ nav {
   transition: transform 0.3s;
   opacity: 0;
   animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.category-carousel .category-item {
+  flex: 0 0 200px;
+  opacity: 1;
+  animation: none;
 }
 
 .category-item:nth-child(1) {
@@ -318,6 +341,49 @@ nav {
 .category-item:hover .category-icon {
   transform: rotate(360deg);
   box-shadow: 0 10px 30px rgba(33, 150, 243, 0.4);
+}
+
+.category-item h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+}
+
+/* Animación del scroll infinito */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .category-carousel .category-item {
+    flex: 0 0 150px;
+    padding: 1.5rem;
+  }
+  
+  .category-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+  
+  .category-item h3 {
+    font-size: 1rem;
+  }
+  
+  .category-carousel {
+    gap: 20px;
+    animation: scroll 40s linear infinite;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
 }
 
 /* Featured Books */
@@ -590,6 +656,7 @@ footer {
   height: 40px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
+  text-decoration: none;
 }
 
 .social-links a:hover {

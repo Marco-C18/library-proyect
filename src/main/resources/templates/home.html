@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BiblioTech - Inicio</title>
     <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
     <div th:replace="fragments/navbar :: navbar"></div>
-    
+
     <section class="hero">
         <div class="hero-content">
             <h1>Encuentra y alquila<br>tus libros de estudio<br>fácilmente</h1>
@@ -27,42 +29,143 @@
     <!-- Categories Section -->
     <section class="categories">
         <h2>Categorías</h2>
-        <div class="category-grid">
-            <div class="category-item">
-                <div class="category-icon">
-                    <i class="fas fa-book"></i>
+        <div class="carousel-wrapper">
+            <div class="category-carousel">
+                <!-- Primera iteración de categorías -->
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                    <h3>Deportes</h3>
                 </div>
-                <h3>Literatura</h3>
-            </div>
-            <div class="category-item">
-                <div class="category-icon">
-                    <i class="fas fa-calculator"></i>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-scale-balanced"></i>
+                    </div>
+                    <h3>Derecho</h3>
                 </div>
-                <h3>Matemáticas</h3>
-            </div>
-            <div class="category-item">
-                <div class="category-icon">
-                    <i class="fas fa-landmark"></i>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-masks-theater"></i>
+                    </div>
+                    <h3>Drama</h3>
                 </div>
-                <h3>Historia</h3>
-            </div>
-            <div class="category-item">
-                <div class="category-icon">
-                    <i class="fas fa-flask"></i>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Filosofía</h3>
                 </div>
-                <h3>Ciencias</h3>
-            </div>
-            <div class="category-item">
-                <div class="category-icon">
-                    <i class="fas fa-language"></i>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3>Historia</h3>
                 </div>
-                <h3>Idiomas</h3>
-            </div>
-            <div class="category-item">
-                <div class="category-icon">
-                    <i class="fas fa-laptop-code"></i>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>Idiomas</h3>
                 </div>
-                <h3>Informática</h3>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Informática</h3>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Literatura</h3>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Mangas</h3>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <h3>Novelas</h3>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Psicología</h3>
+                </div>
+
+                <!-- Segunda iteración (duplicado para efecto infinito) -->
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                    <h3>Deportes</h3>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-scale-balanced"></i>
+                    </div>
+                    <h3>Derecho</h3>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-masks-theater"></i>
+                    </div>
+                    <h3>Drama</h3>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Filosofía</h3>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3>Historia</h3>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>Idiomas</h3>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Informática</h3>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Literatura</h3>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Mangas</h3>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <h3>Novelas</h3>
+                </div>
+                <div class="category-item">
+                    <div class="category-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Psicología</h3>
+                </div>
             </div>
         </div>
     </section>
@@ -135,47 +238,52 @@
     <section class="testimonials">
         <h2>Opiniones de estudiantes</h2>
         <div class="testimonials-container">
+
             <div class="testimonial-card">
                 <div class="testimonial-header">
                     <div class="testimonial-avatar">
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="testimonial-info">
-                        <h4>Piero Cotrina</h4>
-                        <p>Administración</p>
+                        <h4>Andrea Salazar</h4>
+                        <p>Ingeniería de Sistemas</p>
                     </div>
                 </div>
-                <p class="testimonial-text">"La biblioteca ofrece una excelente selección de libros y el proceso de
-                    alquiler es muy facil, ¡Totalmente recomendado!"</p>
+                <p class="testimonial-text">"Encontré exactamente el libro que necesitaba para mi proyecto. El servicio
+                    es rápido y muy ordenado."</p>
             </div>
+
             <div class="testimonial-card">
                 <div class="testimonial-header">
                     <div class="testimonial-avatar">
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="testimonial-info">
-                        <h4>Piero Cotrina</h4>
-                        <p>Administración</p>
+                        <h4>Luís Medina</h4>
+                        <p>Contabilidad</p>
                     </div>
                 </div>
-                <p class="testimonial-text">"La biblioteca ofrece una excelente selección de libros y el proceso de
-                    alquiler es muy facil, ¡Totalmente recomendado!"</p>
+                <p class="testimonial-text">"Siempre encuentro material útil para mis cursos. La plataforma es sencilla
+                    y cómoda de usar."</p>
             </div>
+
             <div class="testimonial-card">
                 <div class="testimonial-header">
                     <div class="testimonial-avatar">
                         <i class="fas fa-user"></i>
                     </div>
                     <div class="testimonial-info">
-                        <h4>Piero Cotrina</h4>
-                        <p>Administración</p>
+                        <h4>Camila Herrera</h4>
+                        <p>Derecho</p>
                     </div>
                 </div>
-                <p class="testimonial-text">"La biblioteca ofrece una excelente selección de libros y el proceso de
-                    alquiler es muy facil, ¡Totalmente recomendado!"</p>
+                <p class="testimonial-text">"Me encanta la variedad de libros disponibles. Solicitar un préstamo es
+                    súper rápido y práctico."</p>
             </div>
+
         </div>
     </section>
+
 
     <div th:replace="fragments/footer :: footer"></div>
 

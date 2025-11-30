@@ -18,14 +18,15 @@ public class Libros {
     @Column(name = "autor", length = 45)
     private String autor;
 
-    @Column(name = "anio", length = 45)
+    @Column(name = "anio")
     private Integer anio;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "categoria", length = 45)
-    private CategoriaLibro categoria;
+    // ✅ SOLO CATEGORIA ENTIDAD
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
 
-    @Column(name = "paginas", length = 45)
+    @Column(name = "paginas")
     private Integer paginas;
 
     @Column(name = "descripcion", length = 1024)
@@ -37,15 +38,7 @@ public class Libros {
     @Transient
     private MultipartFile file;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "categoria_enum", length = 45)
-    private CategoriaLibro categorias; 
-
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoriaEntidad; 
-
-
+    // GETTERS Y SETTERS
     public Long getIdLibro() {
         return idLibro;
     }
@@ -78,12 +71,12 @@ public class Libros {
         this.anio = anio;
     }
 
-    public CategoriaLibro getCategoria() {
-    return categoria;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setCategoria(CategoriaLibro categoria) {
-    this.categoria = categoria;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public Integer getPaginas() {
@@ -117,5 +110,4 @@ public class Libros {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-
 }

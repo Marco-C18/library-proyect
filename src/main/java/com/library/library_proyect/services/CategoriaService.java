@@ -3,7 +3,6 @@ package com.library.library_proyect.services;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.library.library_proyect.model.Categoria;
-import com.library.library_proyect.model.Libros;
 import com.library.library_proyect.repository.CatalogoRepository;
 import com.library.library_proyect.repository.CategoriaRepository;
 
@@ -13,14 +12,11 @@ import java.util.Optional;
 @Service
 public class CategoriaService {
 
-    private final CatalogoRepository catalogoRepository;
-
     @Autowired
     private CategoriaRepository categoriaRepository;
-
-    CategoriaService(CatalogoRepository catalogoRepository) {
-        this.catalogoRepository = catalogoRepository;
-    }
+    
+    @Autowired
+    private CatalogoRepository catalogoRepository;
 
     public List<Categoria> obtenerTodas() {
         return categoriaRepository.findAll();
@@ -42,19 +38,13 @@ public class CategoriaService {
         return categoriaRepository.existsByNombre(nombre);
     }
 
-    public boolean eliminarCategoria(Long id) {
-    Categoria categoria = categoriaRepository.findById(id).orElse(null);
-    if (categoria == null) return false;
-
-    // Desasociar libros antes de eliminar
-    List<Libros> libros = catalogoRepository.findByCategorias(categoria);
-    for (Libros l : libros) {
-        l.setCategoria(null);
-        catalogoRepository.save(l);
+    // ✅ Verificar si tiene libros asociados
+    public boolean tieneLibrosAsociados(Categoria categoria) {
+        return catalogoRepository.countByCategoria(categoria) > 0;
     }
 
-    categoriaRepository.delete(categoria);
-    return true;
-}
-
+    // ✅ Contar libros por categoría
+    public long contarLibrosPorCategoria(Categoria categoria) {
+        return catalogoRepository.countByCategoria(categoria);
+    }
 }
